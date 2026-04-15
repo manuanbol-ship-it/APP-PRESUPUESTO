@@ -20,6 +20,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .nav-item.active{background:rgba(200,241,53,.08);color:var(--accent);border-color:rgba(200,241,53,.2)}
 .nav-badge{margin-left:auto;font-family:var(--mono);font-size:10px;background:var(--surface2);color:var(--text3);padding:2px 6px;border-radius:20px}
 .nav-item.active .nav-badge{background:rgba(200,241,53,.15);color:var(--accent)}
+.flag-e{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;font-size:9px;font-weight:800;margin-left:4px;cursor:default;background:rgba(248,113,113,.18);color:var(--red);border:1px solid rgba(248,113,113,.35);flex-shrink:0;vertical-align:middle;line-height:1}
+.flag-w{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;font-size:9px;font-weight:800;margin-left:4px;cursor:default;background:rgba(251,191,36,.15);color:var(--yellow);border:1px solid rgba(251,191,36,.3);flex-shrink:0;vertical-align:middle;line-height:1}
+.issues-pill{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:20px;background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.3)}
 .sidebar-footer{padding:12px 16px;border-top:1px solid var(--border)}
 .k-display{font-family:var(--mono);font-size:11px;color:var(--text3)}
 .k-value{color:var(--accent);font-size:14px;font-weight:500}
@@ -238,6 +241,10 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <div class="nav-item" onclick="showTab('cert')"><span>📑</span> Certificaciones <span class="nav-badge" id="bdg-cert">0</span></div>
   </nav>
   <div class="sidebar-footer">
+    <div id="issues-summary" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);border-radius:8px;cursor:pointer" onclick="showTab('insumos')" title="Ver problemas detectados">
+      <div style="font-size:10px;color:var(--red);font-weight:700;font-family:var(--mono);letter-spacing:.04em">⚠ PROBLEMAS DETECTADOS</div>
+      <div id="issues-detail" style="font-size:10px;color:var(--text3);margin-top:3px;line-height:1.5"></div>
+    </div>
     <div class="k-display">Coeficiente K</div>
     <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
       <span class="k-value" id="k-display">1.32</span>
@@ -332,7 +339,10 @@ tr:hover td{background:rgba(255,255,255,.015)}
   <div class="topbar">
     <div><div class="topbar-title">Análisis de Precios Unitarios</div><div class="topbar-sub">Expandí para ver y editar recursos · ▸ colapsar/expandir</div></div>
     <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="srch-apu" placeholder="Buscar APU..." oninput="renderAPU()"></div>
-    <button class="btn btn-primary" onclick="openModalAPU(null)">+ APU</button>
+    <div style="display:flex;gap:0;position:relative">
+      <button class="btn btn-primary" style="border-radius:8px 0 0 8px;border-right:1px solid rgba(0,0,0,0.25)" onclick="openModalAPU(null)">+ Nuevo APU</button>
+      <button class="btn btn-primary" style="border-radius:0 8px 8px 0;padding:8px 10px" title="Duplicar APU existente" onclick="openDuplicateAPUPicker()">⊕</button>
+    </div>
   </div>
   <div class="content">
     <div class="filters">
@@ -598,6 +608,22 @@ tr:hover td{background:rgba(255,255,255,.015)}
   <div class="modal-actions">
     <button class="btn btn-ghost" onclick="closeModal('modal-insumo')">Cancelar</button>
     <button class="btn btn-primary" onclick="saveInsumo()">Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- ========== MODAL: DUPLICAR APU ========== -->
+<div class="modal-overlay" id="modal-dup-apu">
+<div class="modal" style="max-width:480px">
+  <div class="modal-title">📋 Duplicar APU existente</div>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.5">Elegí el APU que querés tomar como base. Se copiará con todos sus recursos — vos solo completás el código y la descripción del nuevo.</p>
+  <div class="form-group" style="margin-bottom:16px">
+    <label class="form-label">APU origen</label>
+    <input id="dup-apu-search" class="form-input" placeholder="Buscar por código o descripción..." oninput="filterDupAPUList()" style="margin-bottom:8px">
+    <div id="dup-apu-list" style="max-height:240px;overflow-y:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;"></div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-ghost" onclick="closeModal('modal-dup-apu')">Cancelar</button>
   </div>
 </div>
 </div>
@@ -1238,6 +1264,7 @@ const INIT_PRES = [
 
 // =================== STATE ===================
 let K = 1.32;
+let kComponents = { gg: 12, ben: 12, imp: 5, fin: 3 }; // componentes del K, guardados por obra
 let insumos = [], apus = [], presItems = [], bimItems = [], certificados = [];
 let planificacion = { start_date: '', duration_months: 6, periods: [] };
 let filterIns = 'all', filterApu = 'all';
@@ -1347,6 +1374,7 @@ function load(){
     if(s){
       const d=JSON.parse(s);
       K=d.K||1.32;
+      kComponents=d.kComponents||{ gg:12, ben:12, imp:5, fin:3 };
       insumos=d.insumos||[...INIT_INSUMOS];
       apus=d.apus||[...INIT_APUS];
       presItems=d.pres||[...INIT_PRES];
@@ -1370,16 +1398,106 @@ function load(){
   renderObrasUI();
 }
 
-function reset(){insumos=JSON.parse(JSON.stringify(INIT_INSUMOS));apus=JSON.parse(JSON.stringify(INIT_APUS));presItems=JSON.parse(JSON.stringify(INIT_PRES));bimItems=[];certificados=[];planificacion={start_date:'',duration_months:6,periods:[]};}
+function reset(){insumos=JSON.parse(JSON.stringify(INIT_INSUMOS));apus=JSON.parse(JSON.stringify(INIT_APUS));presItems=JSON.parse(JSON.stringify(INIT_PRES));bimItems=[];certificados=[];planificacion={start_date:'',duration_months:6,periods:[]};kComponents={gg:12,ben:12,imp:5,fin:3};}
 
 function save(){
   if(!currentObraId) return;
   try{
-    localStorage.setItem('pob_v52_data_' + currentObraId, JSON.stringify({K,insumos,apus,pres:presItems,bimItems,certificados,planificacion,planView}));
+    localStorage.setItem('pob_v52_data_' + currentObraId, JSON.stringify({K,kComponents,insumos,apus,pres:presItems,bimItems,certificados,planificacion,planView}));
   }catch(e){}
 }
 
-function updateBadges(){document.getElementById('bdg-ins').textContent=insumos.length;document.getElementById('bdg-apu').textContent=apus.length;document.getElementById('bdg-idx').textContent=apus.length;document.getElementById('bdg-bim').textContent=bimItems.length;document.getElementById('bdg-pres').textContent=presItems.length;}
+function updateBadges(){
+  document.getElementById('bdg-ins').textContent=insumos.length;
+  document.getElementById('bdg-apu').textContent=apus.length;
+  document.getElementById('bdg-idx').textContent=apus.length;
+  document.getElementById('bdg-bim').textContent=bimItems.length;
+  document.getElementById('bdg-pres').textContent=presItems.length;
+  updateIssuesSummary();
+}
+
+// =================== FLAGS DE DATOS INCOMPLETOS ===================
+
+// Devuelve array de flags [{type:'e'|'w', msg:'...'}] para un insumo
+function getInsFlags(ins){
+  const f=[];
+  if(!ins.price||ins.price===0) f.push({type:'w',msg:'Precio $0 — verificar'});
+  return f;
+}
+
+// Devuelve flags para un APU
+function getApuFlags(apu){
+  const f=[];
+  if(!apu.resources||apu.resources.length===0){f.push({type:'e',msg:'Sin recursos — costo $0'});return f;}
+  const zeroPrice=apu.resources.filter(r=>!r.price||r.price===0);
+  if(zeroPrice.length>0) f.push({type:'w',msg:`${zeroPrice.length} recurso(s) con precio $0: ${zeroPrice.map(r=>r.cod_recurso).join(', ')}`});
+  if(!apu.unit||!apu.unit.trim()) f.push({type:'w',msg:'Sin unidad de medida'});
+  return f;
+}
+
+// Devuelve flags para un presItem
+function getPresFlags(item, bItems){
+  const f=[];
+  const apuExiste=apus.find(a=>a.code===item.code);
+  if(!apuExiste){f.push({type:'e',msg:'APU "'+item.code+'" no encontrado — el ítem no tiene precio'});return f;}
+  if(apuTotal(apuExiste)===0) f.push({type:'e',msg:'APU "'+item.code+'" tiene costo $0'});
+  const hasBim=bItems&&bItems.length>0;
+  const qty=hasBim?bItems.reduce((s,b)=>s+(parseFloat(b.qtyTotal)||0),0):(item.cantidad||0);
+  if(qty===0) f.push({type:'w',msg:'Cantidad = 0'});
+  return f;
+}
+
+// Genera el HTML del badge de flags para incluir inline
+function flagBadgeHtml(flags){
+  if(!flags||!flags.length) return '';
+  // Mostrar el más severo primero
+  const hasErr=flags.some(f=>f.type==='e');
+  const cls=hasErr?'flag-e':'flag-w';
+  const icon=hasErr?'!':'?';
+  const tips=flags.map(f=>(f.type==='e'?'🔴 ':f.type==='w'?'⚠️ ':'')+f.msg).join('\n');
+  return `<span class="${cls}" title="${tips.replace(/"/g,"'")}">${icon}</span>`;
+}
+
+// Actualiza el panel de issues en la sidebar
+function updateIssuesSummary(){
+  let errs=0, warns=0;
+  const lines=[];
+  // Insumos
+  const insProbs=insumos.filter(i=>getInsFlags(i).length>0);
+  if(insProbs.length){warns+=insProbs.length;lines.push(`${insProbs.length} insumo(s) sin precio`);}
+  // APUs
+  let apuE=0,apuW=0;
+  apus.forEach(a=>{getApuFlags(a).forEach(f=>{if(f.type==='e')apuE++;else apuW++;});});
+  if(apuE) {errs+=apuE;lines.push(`${apuE} APU(s) sin recursos`);}
+  if(apuW) {warns+=apuW;lines.push(`${apuW} APU(s) con insumos $0`);}
+  // Presupuesto
+  let presE=0,presW=0;
+  presItems.filter(p=>p.visible!==false).forEach(p=>{
+    const bItems=bimItems.filter(b=>b.code===p.code);
+    getPresFlags(p,bItems).forEach(f=>{if(f.type==='e')presE++;else presW++;});
+  });
+  if(presE){errs+=presE;lines.push(`${presE} ítem(s) sin APU o precio`);}
+  if(presW){warns+=presW;lines.push(`${presW} ítem(s) con cantidad 0`);}
+
+  const summary=document.getElementById('issues-summary');
+  const detail=document.getElementById('issues-detail');
+  if(!summary||!detail) return;
+  if(errs+warns===0){summary.style.display='none';return;}
+  summary.style.display='block';
+  // Color según severidad
+  if(errs>0){
+    summary.style.background='rgba(248,113,113,.07)';
+    summary.style.borderColor='rgba(248,113,113,.25)';
+    summary.querySelector('div').style.color='var(--red)';
+    summary.querySelector('div').textContent=`⚠ ${errs} error(es), ${warns} aviso(s)`;
+  } else {
+    summary.style.background='rgba(251,191,36,.07)';
+    summary.style.borderColor='rgba(251,191,36,.25)';
+    summary.querySelector('div').style.color='var(--yellow)';
+    summary.querySelector('div').textContent=`⚠ ${warns} aviso(s)`;
+  }
+  detail.innerHTML=lines.map(l=>`· ${l}`).join('<br>');
+}
 
 // =================== FORMAT ===================
 const fmt=n=>n>0?'$ '+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:2}):'—';
@@ -1440,10 +1558,10 @@ function renderInsumos(){
     html+=`<tr>
       <td><span class="code-badge">${ins.code}</span></td>
       <td><span class="tipo-badge tipo-${ins.tipo}">${ins.tipo}</span></td>
-      <td class="desc-cell"><div class="desc-text">${ins.desc}</div></td>
+      <td class="desc-cell"><div class="desc-text">${ins.desc}${flagBadgeHtml(getInsFlags(ins))}</div></td>
       <td class="unit-cell">${ins.unit}</td>
       <td style="text-align:right">
-        <span class="price-cell" onclick="editPriceInline(${ri},this)" title="Clic para editar" style="cursor:pointer">${ins.price>0?fmtN(ins.price):'—'}</span>
+        <span class="price-cell" onclick="editPriceInline(${ri},this)" title="Clic para editar" style="cursor:pointer">${ins.price>0?fmtN(ins.price):'<span style="color:var(--yellow);font-size:11px">$0 ⚠</span>'}</span>
       </td>
       <td style="text-align:right;white-space:nowrap">
         <button class="btn-icon" onclick="openModalInsumo(${ri})" title="Editar">✏️</button>
@@ -1505,14 +1623,17 @@ function renderAPU(){
     const expanded=expandedAPU.has(apu.code);
     const normChapApu=normalizeChapter(apu.chapter);
     if(normChapApu!==lastChap){lastChap=normChapApu;html+=`<tr class="tr-chapter"><td colspan="7">📁 ${normChapApu}</td></tr>`;}
+    const apuFlags=getApuFlags(apu);
+    const apuFlagHtml=flagBadgeHtml(apuFlags);
     html+=`<tr style="cursor:pointer" onclick="toggleAPU('${apu.code}')">
       <td><button class="apu-toggle-btn">${expanded?'▾':'▸'}</button></td>
       <td><span class="code-badge">${apu.code}</span></td>
-      <td class="desc-cell"><div class="desc-text">${apu.desc}</div></td>
-      <td class="unit-cell">${apu.unit}</td>
-      <td style="text-align:right"><span class="price-cell">${total>0?fmtN(total):'—'}</span></td>
+      <td class="desc-cell"><div class="desc-text">${apu.desc}${apuFlagHtml}</div></td>
+      <td class="unit-cell">${apu.unit||'<span style="color:var(--yellow);font-size:10px">s/u</span>'}</td>
+      <td style="text-align:right"><span class="price-cell">${total>0?fmtN(total):'<span style="color:var(--red);font-size:11px">$0</span>'}</span></td>
       <td style="text-align:right"><span class="price-cell" style="color:var(--green)">${totalK>0?fmtN(totalK):'—'}</span></td>
       <td style="text-align:right;white-space:nowrap" onclick="event.stopPropagation()">
+        <button class="btn-icon" onclick="duplicateAPU(${ai})" title="Duplicar APU">📋</button>
         <button class="btn-icon" onclick="openModalAPU(${ai})" title="Editar APU">✏️</button>
         <button class="btn-icon" onclick="deleteAPU(${ai})" title="Eliminar" style="color:var(--red)">🗑</button>
       </td>
@@ -1640,9 +1761,59 @@ function saveAPU(){
   apus.sort((a,b)=>{ const cc=a.chapter.localeCompare(b.chapter); return cc!==0?cc:a.code.localeCompare(b.code); });
   syncAll();save();updateBadges();closeModal('modal-apu');renderAPU();toast(editingApuIdx!==null?'APU actualizado':'APU creado');
 }
+// ---- Duplicación de APU ----
+function openDuplicateAPUPicker() {
+  document.getElementById('dup-apu-search').value='';
+  filterDupAPUList();
+  openModal('modal-dup-apu');
+}
+
+function filterDupAPUList() {
+  const q=(document.getElementById('dup-apu-search').value||'').toLowerCase();
+  const list=document.getElementById('dup-apu-list');
+  const filtered=apus.filter(a=>!q||a.code.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q));
+  if(!filtered.length){list.innerHTML='<div style="padding:14px;color:var(--text3);font-size:12px;text-align:center">Sin resultados</div>';return;}
+  list.innerHTML=filtered.map((a,_,arr)=>{
+    const ai=apus.indexOf(a);
+    const total=apuTotal(a);
+    return `<div onclick="duplicateAPU(${ai})" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;transition:background .12s" onmouseenter="this.style.background='var(--surface2)'" onmouseleave="this.style.background='transparent'">
+      <span style="font-family:var(--mono);font-size:11px;color:var(--accent);min-width:60px">${a.code}</span>
+      <span style="font-size:12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.desc}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">${a.unit}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--green)">${total>0?fmtN(total):'$0'}</span>
+    </div>`;
+  }).join('');
+}
+
+function duplicateAPU(ai) {
+  closeModal('modal-dup-apu');
+  const src=apus[ai];
+  // Clonar el APU fuente con recursos copiados, pero código/desc vacíos para que el usuario complete
+  editingApuIdx=null; // es un APU nuevo
+  const apu={code:'',desc:'',unit:src.unit,chapter:src.chapter,resources:JSON.parse(JSON.stringify(src.resources))};
+  document.getElementById('modal-apu-title').textContent='Nuevo APU — duplicado de '+src.code;
+  document.getElementById('apu-code').value='';
+  document.getElementById('apu-desc').value='';
+  document.getElementById('apu-unit').value=apu.unit;
+  document.getElementById('apu-chapter').value=apu.chapter;
+  modalResources=apu.resources;
+  renderModalResources();
+  openModal('modal-apu');
+  // Foco en el campo código para que el usuario complete
+  setTimeout(()=>document.getElementById('apu-code').focus(),100);
+  toast('Recursos copiados de '+src.code+' · Completá código y descripción');
+}
+
 function deleteAPU(ai){
-  if(!confirm('¿Eliminar APU '+apus[ai].code+'?'))return;
-  apus.splice(ai,1);save();updateBadges();renderAPU();toast('APU eliminado');
+  const code=apus[ai].code;
+  const enPres=presItems.filter(p=>p.code===code);
+  const msg=enPres.length>0
+    ? `¿Eliminar APU ${code}?\n\n⚠️ Este APU está usado en ${enPres.length} ítem(s) del presupuesto.\nEsos ítems quedarán sin precio ($0) hasta que les asignes otro APU.\n\n¿Eliminar de todas formas?`
+    : `¿Eliminar APU ${code}?`;
+  if(!confirm(msg))return;
+  apus.splice(ai,1);
+  _apuCostCache=null; // invalidar caché para que Gantt y Planificación recalculen
+  save();updateBadges();renderAPU();toast('APU eliminado');
 }
 
 // =================== AUTOCOMPLETE INSUMO ===================
@@ -1733,7 +1904,8 @@ function renderPres(){
     const bItems = bimItems.filter(b => b.code === item.code);
     const hasBim = bItems.length > 0;
     const qty = hasBim ? bItems.reduce((s,b) => s+(parseFloat(b.qtyTotal)||0), 0) : (item.cantidad||0);
-    if(hasBim) presItems[ii].cantidad = qty;
+    // Sincronizar cantidad solo si cambió (sin disparar save innecesario en cada render)
+    if(hasBim && presItems[ii].cantidad !== qty){ presItems[ii].cantidad = qty; }
     const pu = getPU(item.code);
     const total = pu * qty;
     if(item.visible !== false) totalBruto += total;
@@ -1752,10 +1924,12 @@ function renderPres(){
       const toggleBtn = (hasBim && showBimInPresupuesto)
         ? `<button class="apu-toggle-btn" onclick="togglePresAPU('${item.code}')" style="margin-left:4px;font-size:15px;color:var(--accent)">${isExpanded?'▾':'▸'}</button>`
         : '';
+      const presFlags=!hidden?getPresFlags(item,bItems):[];
+      const presFlagHtml=flagBadgeHtml(presFlags);
       html += `<tr class="${qty>0&&!hidden?'tr-editing':''} ${hidden?'tr-disabled':''}">
         <td><button class="pres-toggle ${!hidden?'active':''}" onclick="togglePresItem(${ii})" title="${hidden?'Mostrar en obra':'Ocultar de obra'}">${hidden?'○':'●'}</button></td>
         <td><span class="code-badge" style="${hidden?'opacity:.5':''}">${item.code}</span>${toggleBtn}</td>
-        <td class="desc-cell"><div class="desc-text" style="${hidden?'text-decoration:line-through;opacity:.5':''}">${item.desc}</div></td>
+        <td class="desc-cell"><div class="desc-text" style="${hidden?'text-decoration:line-through;opacity:.5':''}">${item.desc}${presFlagHtml}</div></td>
         <td class="unit-cell">${item.unit}</td>
         <td style="text-align:right">
           ${hidden ? `<span class="unit-cell">—</span>` :
@@ -1764,7 +1938,7 @@ function renderPres(){
               : `<input class="qty-input" type="number" min="0" step="0.01" value="${qty||''}" placeholder="A mano..."
                   onchange="presItems[${ii}].cantidad=parseFloat(this.value)||0;save();renderPres()" style="width:105px;background:var(--surface2)">`)}
         </td>
-        <td style="text-align:right"><span class="price-cell" style="${hidden?'opacity:.4':''}">${pu>0?fmtN(pu):'—'}</span></td>
+        <td style="text-align:right"><span class="price-cell" style="${hidden?'opacity:.4':''}${pu===0&&!hidden?';color:var(--red)':''}">${pu>0?fmtN(pu):'<span style="color:var(--red);font-size:11px">$0</span>'}</span></td>
         <td style="text-align:right"><span class="price-cell ${total===0?'zero':''}" style="${total>0&&!hidden?'color:var(--green)':''}">${total>0&&!hidden?fmtN(total):'—'}</span></td>
         <td style="text-align:right;white-space:nowrap">
           <button class="btn-icon" onclick="deletePres(${ii})" title="Eliminar ítem" style="color:var(--red);font-size:12px">🗑</button>
@@ -1892,12 +2066,11 @@ function savePresItem(){
 
 // =================== K ===================
 function openModalK(){
-  // Reverse engineer K components approximately
-  const diff=K-1;
-  document.getElementById('k-gg').value=12;
-  document.getElementById('k-ben').value=12;
-  document.getElementById('k-imp').value=5;
-  document.getElementById('k-fin').value=3;
+  // Usar los componentes guardados de esta obra (no defaults hardcodeados)
+  document.getElementById('k-gg').value=kComponents.gg??12;
+  document.getElementById('k-ben').value=kComponents.ben??12;
+  document.getElementById('k-imp').value=kComponents.imp??5;
+  document.getElementById('k-fin').value=kComponents.fin??3;
   updateKPreview();
   openModal('modal-k');
 }
@@ -1908,6 +2081,13 @@ function updateKPreview(){
 function saveK(){
   const k=parseFloat(document.getElementById('k-preview').textContent)||1;
   K=Math.round(k*1000)/1000;
+  // Guardar componentes por obra para no perder la composición
+  kComponents={
+    gg:parseFloat(document.getElementById('k-gg').value)||0,
+    ben:parseFloat(document.getElementById('k-ben').value)||0,
+    imp:parseFloat(document.getElementById('k-imp').value)||0,
+    fin:parseFloat(document.getElementById('k-fin').value)||0
+  };
   document.getElementById('k-display').textContent=K;
   syncAll();save();closeModal('modal-k');
   if(currentTab==='indice')renderIndice();
@@ -3717,10 +3897,14 @@ function importObraJSON(e) {
       obrasList.push({ id, name, date: new Date().toISOString() });
       localStorage.setItem('pob_v52_data_' + id, JSON.stringify({
         K: data.K || 1.32,
+        kComponents: data.kComponents || null,
         insumos: data.insumos,
         apus: data.apus,
         pres: data.pres,
-        bimItems: data.bimItems || []
+        bimItems: data.bimItems || [],
+        certificados: data.certificados || [],
+        planificacion: data.planificacion || { start_date: '', duration_months: 6, periods: [] },
+        planView: data.planView || 'detail'
       }));
       saveObrasList();
       switchObra(id);
