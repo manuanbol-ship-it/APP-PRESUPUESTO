@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Presupuesto de Obra</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f0f11;--surface:#18181c;--surface2:#1f1f26;--border:#2a2a35;--border2:#3a3a4a;--accent:#c8f135;--accent2:#8b5cf6;--accent3:#38bdf8;--text:#e8e8f0;--text2:#9090a8;--text3:#5a5a72;--red:#f87171;--orange:#fb923c;--green:#4ade80;--yellow:#fbbf24;--M:#38bdf8;--MO:#a78bfa;--E:#fb923c;--SC:#4ade80;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;--display:'Syne',sans-serif}
+:root{--bg:#0f0f11;--surface:#18181c;--surface2:#1f1f26;--border:#2a2a35;--border2:#3a3a4a;--accent:#c8f135;--accent2:#8b5cf6;--accent3:#38bdf8;--text:#e8e8f0;--text2:#9090a8;--text3:#5a5a72;--red:#f87171;--orange:#fb923c;--green:#4ade80;--yellow:#fbbf24;--M:#38bdf8;--MO:#a78bfa;--E:#fb923c;--SC:#4ade80;--mono:'IBM Plex Mono',monospace;--sans:'Space Grotesk',sans-serif;--display:'Space Grotesk',sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 .app-shell{display:flex;height:100vh;overflow:hidden}
@@ -156,7 +156,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
 /* Dashboard Styles */
 .dash-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;padding:20px 0}
 .dash-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:8px}
-.dash-card-val{font-size:24px;font-family:var(--mono);font-weight:700;color:var(--text)}
+.dash-card-val{font-size:24px;font-family:var(--mono);font-weight:700;color:var(--text);overflow-wrap:break-word}
 .dash-card-lbl{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
 .dash-bar-wrap{width:100%;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;position:relative;margin-top:8px}
 .dash-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.6s ease}
@@ -171,31 +171,31 @@ tr:hover td{background:rgba(255,255,255,.015)}
   @page { margin: 12mm; size: A4 landscape; }
   @page :first { size: A4 landscape; }
   .print-header { display: flex; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
-  .print-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: #000; }
-  .print-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: #444; text-align: right; }
+  .print-title { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 800; color: #000; }
+  .print-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #444; text-align: right; }
   .print-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-  .print-table th { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #000; padding: 6px; text-align: left; color: #000; }
-  .print-table td { font-size: 11px; font-family: 'DM Sans', sans-serif; border-bottom: 1px solid #ccc; padding: 6px; page-break-inside: avoid; color: #000; }
-  .print-chap td { font-family: 'DM Mono', monospace; font-weight: 600; font-size: 11px; background: #eee !important; -webkit-print-color-adjust: exact; padding: 6px; margin-top: 10px; border-top: 1px solid #000; }
+  .print-table th { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #000; padding: 6px; text-align: left; color: #000; }
+  .print-table td { font-size: 11px; font-family: 'Space Grotesk', sans-serif; border-bottom: 1px solid #ccc; padding: 6px; page-break-inside: avoid; color: #000; }
+  .print-chap td { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 11px; background: #eee !important; -webkit-print-color-adjust: exact; padding: 6px; margin-top: 10px; border-top: 1px solid #000; }
   .print-total-row td { font-weight: bold; font-size: 14px; border-top: 2px solid #000; border-bottom: none; padding-top: 10px; }
   .print-desc { text-align: left; }
-  .print-number { text-align: right; font-family: 'DM Mono', monospace; }
+  .print-number { text-align: right; font-family: 'IBM Plex Mono', monospace; }
   /* Gantt print styles */
-  #print-gantt-area { font-family: 'DM Sans', sans-serif; }
+  #print-gantt-area { font-family: 'Space Grotesk', sans-serif; }
   .pg-header { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid #000; padding-bottom:8px; margin-bottom:14px; }
-  .pg-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; }
-  .pg-meta { font-family:'DM Mono',monospace; font-size:10px; color:#555; text-align:right; line-height:1.6; }
+  .pg-title { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:800; }
+  .pg-meta { font-family:'IBM Plex Mono',monospace; font-size:10px; color:#555; text-align:right; line-height:1.6; }
   .pg-kpi { display:flex; gap:16px; margin-bottom:14px; }
   .pg-kpi-item { border:1px solid #ccc; border-radius:4px; padding:6px 12px; flex:1; }
-  .pg-kpi-label { font-size:9px; text-transform:uppercase; color:#666; font-family:'DM Mono',monospace; }
-  .pg-kpi-value { font-size:15px; font-weight:700; font-family:'DM Mono',monospace; }
+  .pg-kpi-label { font-size:9px; text-transform:uppercase; color:#666; font-family:'IBM Plex Mono',monospace; }
+  .pg-kpi-value { font-size:15px; font-weight:700; font-family:'IBM Plex Mono',monospace; }
   .pg-table { width:100%; border-collapse:collapse; font-size:9px; }
-  .pg-table th { background:#111 !important; color:#fff !important; padding:5px 6px; text-align:center; font-family:'DM Mono',monospace; font-size:8px; border:1px solid #333; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pg-table th { background:#111 !important; color:#fff !important; padding:5px 6px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:8px; border:1px solid #333; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .pg-table th.pg-th-left { text-align:left; min-width:160px; }
   .pg-table td { padding:4px 6px; border:1px solid #ddd; vertical-align:middle; }
   .pg-table td.pg-name { font-size:9px; font-weight:600; max-width:160px; }
-  .pg-table td.pg-code { font-family:'DM Mono',monospace; font-size:8px; color:#666; }
-  .pg-chap td { background:#eee !important; font-weight:700; font-size:9px; font-family:'DM Mono',monospace; text-transform:uppercase; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pg-table td.pg-code { font-family:'IBM Plex Mono',monospace; font-size:8px; color:#666; }
+  .pg-chap td { background:#eee !important; font-weight:700; font-size:9px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .pg-cell-empty { background:#f8f8f8 !important; }
   .pg-cell-plan { background:#fffbe6 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .pg-cell-progress { background:#e8f5e9 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
@@ -205,7 +205,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
   .pg-bar-done { background:#2e7d32 !important; }
   .pg-bar-prog { background:#1565c0 !important; }
   .pg-bar-plan { background:#f9a825 !important; }
-  .pg-foot td { background:#222 !important; color:#fff !important; font-family:'DM Mono',monospace; font-size:8px; text-align:center; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pg-foot td { background:#222 !important; color:#fff !important; font-family:'IBM Plex Mono',monospace; font-size:8px; text-align:center; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 }
 #print-area { display: none; }
 #print-gantt-area { display: none; }
@@ -228,6 +228,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <div id="side-obra-name" style="color: var(--accent); font-weight: 600; font-size: 13px; max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-</div>
       <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 11px" onclick="openModalObras()">Cambiar</button>
     </div>
+    <div id="save-indicator" style="margin-top:6px;font-size:10px;font-family:var(--mono);color:var(--green);min-height:14px;text-align:right"></div>
   </div>
   <nav class="nav">
     <div class="nav-item active" onclick="showTab('guia')"><span>🏠</span> Dashboard & Guía</div>
@@ -239,11 +240,22 @@ tr:hover td{background:rgba(255,255,255,.015)}
     <div class="nav-item" onclick="showTab('plan')" style="color:var(--text2)"><span>📈</span> Planificación y Control</div>
     <div class="nav-item" onclick="showTab('presupuesto')"><span>💰</span> Presupuesto <span class="nav-badge" id="bdg-pres">0</span></div>
       <div class="nav-item" onclick="showTab('cert')"><span>📑</span> Certificaciones <span class="nav-badge" id="bdg-cert">0</span></div>
+      <div class="nav-item" onclick="showTab('pac')"><span>🎯</span> PAC / Productividad <span class="nav-badge" id="bdg-pac">0</span></div>
   </nav>
   <div class="sidebar-footer">
     <div id="issues-summary" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);border-radius:8px;cursor:pointer" onclick="showTab('insumos')" title="Ver problemas detectados">
       <div style="font-size:10px;color:var(--red);font-weight:700;font-family:var(--mono);letter-spacing:.04em">⚠ PROBLEMAS DETECTADOS</div>
       <div id="issues-detail" style="font-size:10px;color:var(--text3);margin-top:3px;line-height:1.5"></div>
+    </div>
+    <div id="backup-status" onclick="backupClick()" title="Respaldo automático a carpeta local (tip: elegí una carpeta dentro de Google Drive y se sube solo a la nube)" style="cursor:pointer;margin-bottom:10px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:10px;font-family:var(--mono);display:flex;align-items:center;gap:6px">
+      <span>🛡</span><span style="color:var(--text3)">Respaldo:</span><span id="backup-state" style="color:var(--text3)">…</span>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:6px">
+      <button class="btn btn-ghost btn-sm" onclick="openModalMeta()" title="Control top-down por m² — definí el pozo total y seguí cuánto queda" style="flex:1;font-size:10px;padding:6px 8px">🎯 Meta m²</button>
+      <button class="btn btn-ghost btn-sm" id="btn-modo-pres" onclick="toggleModoPresentacion()" title="Oculta todos los importes en pantalla — para compartir pantalla con el cliente o un subcontratista" style="flex:1;font-size:10px;padding:6px 8px;color:var(--text3)">👁 Modo presentación</button>
+    </div>
+    <div style="margin-bottom:10px">
+      <button class="btn btn-ghost btn-sm" id="btn-ocultar-apu" onclick="toggleOcultarDetalleApu()" title="Oculta la sección de presupuesto por APU del Dashboard (útil mientras no tenés todo detallado y trabajás solo con el pozo m²)" style="width:100%;font-size:10px;padding:6px 8px;color:var(--text3)">📊 Ocultar detalle por APU</button>
     </div>
     <div class="k-display">Coeficiente K</div>
     <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
@@ -278,6 +290,301 @@ tr:hover td{background:rgba(255,255,255,.015)}
 
 
 <!-- ===== TAB: CERTIFICADOS ===== -->
+<!-- ===== TAB: PAC / PRODUCTIVIDAD ===== -->
+<div id="tab-pac" class="tab-content">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">PAC — Porcentaje de Actividades Completadas</div>
+      <div class="topbar-sub">Productividad semanal y mensual por rubro · Lean Construction</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:3px">
+        <button id="pac-view-carga" onclick="setPacView('carga')" style="padding:5px 12px;border-radius:5px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:rgba(200,241,53,.15);color:var(--accent)">📋 Carga Semanal</button>
+        <button id="pac-view-dash" onclick="setPacView('dash')" style="padding:5px 12px;border-radius:5px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:transparent;color:var(--text3)">📊 Dashboard</button>
+      </div>
+      <button class="btn btn-primary" onclick="openModalPacTarea(null)">+ Tarea</button>
+      <button class="btn btn-ghost" onclick="openModalPacGen()" title="Crear tareas PAC desde los ítems planificados en el cronograma">⚡ Desde Plan</button>
+      <button class="btn btn-ghost" onclick="exportPacPDF()" title="Exportar reporte PDF">⬇ PDF</button>
+    </div>
+  </div>
+
+  <!-- Filtros de semana/mes -->
+  <div id="pac-filter-bar" style="display:flex;gap:10px;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--border);align-items:center;flex-wrap:wrap">
+    <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">VER:</span>
+    <select id="pac-filter-mes" class="form-input" style="width:110px;font-size:12px;padding:5px 8px" onchange="renderPAC()">
+      <option value="all">Todos los meses</option>
+    </select>
+    <select id="pac-filter-sem" class="form-input" style="width:130px;font-size:12px;padding:5px 8px" onchange="renderPAC()">
+      <option value="all">Todas las semanas</option>
+      <option value="1">Semana 1</option>
+      <option value="2">Semana 2</option>
+      <option value="3">Semana 3</option>
+      <option value="4">Semana 4</option>
+      <option value="5">Semana 5</option>
+    </select>
+    <select id="pac-filter-rubro" class="form-input" style="width:180px;font-size:12px;padding:5px 8px" onchange="renderPAC()">
+      <option value="all">Todos los rubros</option>
+    </select>
+    <input id="pac-search" class="form-input" placeholder="Buscar tarea..." style="width:180px;font-size:12px;padding:5px 8px" oninput="renderPAC()">
+  </div>
+
+  <!-- Vista Carga Semanal -->
+  <div id="pac-carga-wrap" class="content" style="padding-bottom:40px;overflow-y:auto">
+    <div id="pac-tabla-wrap"></div>
+  </div>
+
+  <!-- Vista Dashboard -->
+  <div id="pac-dash-wrap" class="content" style="display:none;padding-bottom:40px;overflow-y:auto">
+    <!-- KPIs principales -->
+    <div id="pac-kpis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px"></div>
+    <!-- Row 1: donut PAC + bar semanal -->
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:10px;font-weight:600">% ACTIVIDADES COMPLETADAS</div>
+        <canvas id="chart-pac-donut" height="200"></canvas>
+        <div id="pac-donut-label" style="text-align:center;margin-top:8px;font-size:11px;color:var(--text3)"></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:10px;font-weight:600">TAREAS COMPLETADAS POR SEMANA</div>
+        <canvas id="chart-pac-semanas" height="180"></canvas>
+      </div>
+    </div>
+    <!-- Row 2: por rubro + por contratista -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:10px;font-weight:600">CUMPLIMIENTO POR RUBRO/TAREA</div>
+        <canvas id="chart-pac-rubros" height="200"></canvas>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:10px;font-weight:600">CAUSAS DE NO CUMPLIMIENTO <span style="font-weight:400;opacity:.7">(período filtrado)</span></div>
+        <canvas id="chart-pac-causas" height="200"></canvas>
+      </div>
+    </div>
+    <!-- Row 3: Pareto acumulado + tareas crónicas -->
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:4px;font-weight:600">📉 PARETO DE CAUSAS — HISTÓRICO ACUMULADO</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:10px;opacity:.75">Todas las semanas de la obra · dónde atacar primero</div>
+        <canvas id="chart-pac-pareto" height="190"></canvas>
+        <div id="pac-pareto-conclusion" style="margin-top:10px;font-size:11px;line-height:1.6"></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:4px;font-weight:600">🔁 TAREAS CRÓNICAS</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:10px;opacity:.75">Arrastradas 2+ veces — el problema de fondo sigue sin resolverse</div>
+        <div id="pac-tabla-cronicas"></div>
+      </div>
+    </div>
+    <!-- Tablas -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:12px;font-weight:600">📌 HITOS Y RESTRICCIONES</div>
+        <div id="pac-tabla-hitos"></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:12px;font-weight:600">🔧 MEDIDAS CORRECTIVAS</div>
+        <div id="pac-tabla-correctivas"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TAREA PAC -->
+<div class="modal-overlay" id="modal-pac-tarea">
+<div class="modal" style="max-width:620px">
+  <div class="modal-title" id="pac-modal-title">Nueva Tarea PAC</div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Rubro</label>
+      <select class="form-input" id="pac-t-rubro"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Contratista / Responsable</label>
+      <input class="form-input" id="pac-t-contratista" placeholder="Ej: Empresa XYZ">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Descripción de la tarea</label>
+    <input class="form-input" id="pac-t-tarea" placeholder="Ej: Encofrado columnas PB">
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Mes de obra</label>
+      <select class="form-input" id="pac-t-mes"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Semana del mes</label>
+      <select class="form-input" id="pac-t-semana">
+        <option value="1">Semana 1</option><option value="2">Semana 2</option>
+        <option value="3">Semana 3</option><option value="4">Semana 4</option><option value="5">Semana 5</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Fecha plan inicio</label>
+      <input type="date" class="form-input" id="pac-t-fecha-plan-ini">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Fecha plan fin</label>
+      <input type="date" class="form-input" id="pac-t-fecha-plan-fin">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">¿Completada?</label>
+      <select class="form-input" id="pac-t-cumplimiento" onchange="togglePacCausa()">
+        <option value="">— Sin registrar —</option>
+        <option value="SI">✅ Sí — completada</option>
+        <option value="NO">❌ No — no completada</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Fecha real de finalización</label>
+      <input type="date" class="form-input" id="pac-t-fecha-real">
+    </div>
+  </div>
+  <div id="pac-causa-wrap" style="display:none">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Causa de no cumplimiento</label>
+        <select class="form-input" id="pac-t-causa">
+          <option value="">Seleccionar...</option>
+          <option value="CLIMA">🌧 Clima</option>
+          <option value="MATERIALES">📦 Falta de materiales</option>
+          <option value="MANO DE OBRA">👷 Mano de obra</option>
+          <option value="DISEÑO">📐 Diseño / planos</option>
+          <option value="EQUIPOS">🔧 Equipos / herramientas</option>
+          <option value="SUBCONTRATISTA">🤝 Subcontratista</option>
+          <option value="OTROS">❓ Otros</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Medida correctiva</label>
+        <input class="form-input" id="pac-t-correctiva" placeholder="Ej: Reprogramar para S3">
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">¿Es hito?</label>
+      <select class="form-input" id="pac-t-hito">
+        <option value="no">No</option><option value="si">Sí — es hito</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Restricciones</label>
+      <input class="form-input" id="pac-t-restricciones" placeholder="Ej: Pilar eléctrico pendiente">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">¿Es adicional / economía?</label>
+      <select class="form-input" id="pac-t-adicional">
+        <option value="no">No</option>
+        <option value="adicional">Adicional (+$)</option>
+        <option value="economia">Economía (−$)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Presupuesto ($)</label>
+      <input type="number" class="form-input" id="pac-t-presupuesto" placeholder="0">
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-ghost" onclick="closeModal('modal-pac-tarea')">Cancelar</button>
+    <button class="btn btn-primary" onclick="savePacTarea()">Guardar Tarea</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: PRESUPUESTO META (m² / pozo) -->
+<div class="modal-overlay" id="modal-meta">
+<div class="modal" style="max-width:560px">
+  <div class="modal-title">🎯 Presupuesto Meta — Costo por m²</div>
+  <p style="font-size:12px;color:var(--text2);margin-bottom:16px;line-height:1.6">Control <b>top-down</b>: definís el pozo total (m² × valor del m²) y la app te muestra cuánto ya tenés computado al detalle, cuánto queda de reserva para lo que todavía no definiste, y cuánto llevás gastado. Convive con el presupuesto por APU — no lo reemplaza.</p>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Superficie total (m²)</label>
+      <input type="number" class="form-input" id="meta-m2" step="0.01" min="0" placeholder="Ej: 320" oninput="updateMetaPreview()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Valor del m²</label>
+      <input type="number" class="form-input" id="meta-valor" step="0.01" min="0" placeholder="Ej: 850000" oninput="updateMetaPreview()">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Moneda</label>
+      <select class="form-input" id="meta-moneda" onchange="updateMetaPreview()">
+        <option value="ARS">ARS — Pesos (índice CAC)</option>
+        <option value="USD">USD — Dólares</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Fecha del valor</label>
+      <input type="date" class="form-input" id="meta-fecha">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Tipo de cambio (ARS por USD)</label>
+      <input type="number" class="form-input" id="meta-tc" step="1" min="0" placeholder="Ej: 1200 (opcional)" oninput="updateMetaPreview()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Valor del terreno (opcional)</label>
+      <input type="number" class="form-input" id="meta-terreno" step="0.01" min="0" placeholder="En la misma moneda del pozo" oninput="updateMetaPreview()">
+    </div>
+  </div>
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:4px">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:12px;color:var(--text3);font-family:var(--mono)">COSTO DE CONSTRUCCIÓN (m² × valor m²)</span>
+      <span style="font-family:var(--display);font-size:22px;font-weight:800;color:var(--accent)" id="meta-preview">$0</span>
+    </div>
+    <div id="meta-preview-usd" style="text-align:right;font-size:11px;color:var(--text3);margin-top:2px;font-family:var(--mono)"></div>
+    <div id="meta-preview-terreno" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:none">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3)"><span>+ Valor del terreno</span><span id="meta-preview-terreno-val" style="font-family:var(--mono)">$0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:3px"><span>= Inversión total del proyecto</span><span id="meta-preview-total-val" style="font-family:var(--mono);color:var(--text)">$0</span></div>
+      <div style="text-align:right;font-size:10px;color:var(--orange);margin-top:2px" id="meta-preview-incidencia"></div>
+    </div>
+  </div>
+  <p style="font-size:10px;color:var(--text3);margin-top:8px;line-height:1.5">💡 El valor del m² que publica la CAC/INDEC es <b>costo de construcción puro</b> — no incluye el terreno (que varía muchísimo según ubicación). Por eso el terreno se suma aparte para calcular la inversión total y su incidencia.</p>
+  <div id="meta-historial" style="margin-top:12px"></div>
+  <div class="modal-actions" style="justify-content:space-between">
+    <button class="btn btn-danger" id="meta-btn-off" onclick="desactivarMeta()" style="margin-right:auto">Desactivar</button>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-ghost" onclick="closeModal('modal-meta')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveMeta()">Guardar</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: GENERAR TAREAS PAC DESDE EL PLAN -->
+<div class="modal-overlay" id="modal-pac-gen">
+<div class="modal" style="max-width:580px">
+  <div class="modal-title">⚡ Generar tareas desde el Plan</div>
+  <p style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.5">Crea tareas PAC a partir de los ítems con <b>Plan Vigente</b> cargado en el cronograma del mes elegido. Las cantidades planificadas quedan en la descripción.</p>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Mes del plan</label>
+      <select class="form-input" id="pac-gen-mes" onchange="renderPacGenList()"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Asignar a semana</label>
+      <select class="form-input" id="pac-gen-semana">
+        <option value="1">Semana 1</option><option value="2">Semana 2</option>
+        <option value="3">Semana 3</option><option value="4">Semana 4</option><option value="5">Semana 5</option>
+      </select>
+    </div>
+  </div>
+  <div id="pac-gen-list" style="max-height:300px;overflow:auto;border:1px solid var(--border);border-radius:8px;padding:6px;margin-bottom:6px"></div>
+  <div class="modal-actions">
+    <button class="btn btn-ghost" onclick="closeModal('modal-pac-gen')">Cancelar</button>
+    <button class="btn btn-primary" onclick="generarTareasPAC()">Crear tareas seleccionadas</button>
+  </div>
+</div>
+</div>
+
 <div id="tab-cert" class="tab-content">
   <div class="topbar">
     <div><div class="topbar-title">Control y Certificaciones</div><div class="topbar-sub">Curva S y Emisión de Certificados de avance</div></div>
@@ -318,6 +625,8 @@ tr:hover td{background:rgba(255,255,255,.015)}
     </div>
     <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="srch-ins" placeholder="Buscar insumo..." oninput="renderInsumos()"></div>
     <button class="btn btn-primary" onclick="openModalInsumo(null)">+ Insumo</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('ins-csv-file').click()" title="Importar desde CSV (columnas: codigo, descripcion, unidad, precio, tipo, categoria)">📥 CSV</button>
+    <input type="file" id="ins-csv-file" accept=".csv,.txt" style="display:none" onchange="importInsumosCSV(event)">
   </div>
   <div class="content">
     <div class="filters">
@@ -500,6 +809,10 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <canvas id="chart-curva-multi" height="200"></canvas>
     </div>
 
+    <div id="plan-resumen-chart-wrap" style="padding:16px 0 8px;border-top:1px solid var(--border);margin-top:12px">
+      <div style="font-size:13px;color:var(--text2);margin-bottom:8px;font-weight:600">📊 Resumen Visual — Todo el período</div>
+      <canvas id="chart-plan-resumen" height="160"></canvas>
+    </div>
     </div><!-- /plan-detail-wrap -->
   </div>
 </div>
@@ -517,6 +830,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <input id="iva-pct" type="number" value="0" step="1" min="0" max="100" oninput="renderPres()" style="width:65px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-family:var(--mono);font-size:13px;color:var(--text);outline:none">
       <button class="btn btn-ghost btn-sm" onclick="openModalPresItem(null)">+ Ítem</button>
       <button class="btn btn-ghost btn-sm" onclick="exportPresPDF()">📄 PDF</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportComputoPDF()" title="Lista de materiales con cantidades totales, sin precios — para entregar al cliente que compra los materiales">📦 Cómputo</button>
       <button class="btn btn-ghost btn-sm" onclick="exportPres()">↓ CSV</button>
     </div>
   </div>
@@ -822,9 +1136,57 @@ tr:hover td{background:rgba(255,255,255,.015)}
     <span style="font-size:12px;color:var(--text3);font-family:var(--mono)">K RESULTANTE</span>
     <span style="font-family:var(--display);font-size:28px;font-weight:800;color:var(--accent)" id="k-preview">1.32</span>
   </div>
+  <div id="k-simulator" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:8px;font-size:12px;font-family:var(--mono)">
+    <div style="color:var(--text3);margin-bottom:8px;font-size:11px">📊 SIMULADOR EN VIVO</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <div style="color:var(--text3);font-size:10px">Total actual</div>
+        <div id="k-sim-cur" style="color:var(--text2);font-size:14px">—</div>
+      </div>
+      <div>
+        <div style="color:var(--text3);font-size:10px">Total con K nuevo</div>
+        <div id="k-sim-new" style="color:var(--accent);font-size:14px">—</div>
+      </div>
+      <div>
+        <div style="color:var(--text3);font-size:10px">Diferencia</div>
+        <div id="k-sim-diff" style="font-size:14px">—</div>
+      </div>
+      <div>
+        <div style="color:var(--text3);font-size:10px">Margen s/ costo directo</div>
+        <div id="k-sim-margin" style="color:var(--text2);font-size:14px">—</div>
+      </div>
+    </div>
+  </div>
   <div class="modal-actions">
     <button class="btn btn-ghost" onclick="closeModal('modal-k')">Cancelar</button>
     <button class="btn btn-primary" onclick="saveK()">Aplicar K</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== MODAL: CONFIRMACIÓN CUSTOM ===== -->
+<div class="modal-overlay" id="modal-confirm">
+<div class="modal" style="max-width:460px">
+  <div class="modal-title" id="cf-title">¿Confirmar acción?</div>
+  <div id="cf-body" style="font-size:13px;color:var(--text2);line-height:1.6;margin:12px 0 18px"></div>
+  <div class="modal-actions">
+    <button class="btn btn-ghost" id="cf-cancel">Cancelar</button>
+    <button class="btn btn-primary" id="cf-ok">Confirmar</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== MODAL: BÚSQUEDA GLOBAL (Ctrl+K) ===== -->
+<div class="modal-overlay" id="modal-search">
+<div class="modal" style="max-width:640px;padding:0;overflow:hidden">
+  <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+    <span style="font-size:18px">🔍</span>
+    <input id="gs-input" placeholder="Buscar insumo, APU o ítem del presupuesto..." oninput="renderGlobalSearch()" onkeydown="gsKey(event)" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:14px">
+    <span style="font-size:10px;color:var(--text3);font-family:var(--mono);padding:2px 6px;border:1px solid var(--border);border-radius:4px">ESC</span>
+  </div>
+  <div id="gs-results" style="max-height:50vh;overflow:auto;padding:6px 0"></div>
+  <div style="padding:8px 14px;border-top:1px solid var(--border);font-size:10px;color:var(--text3);font-family:var(--mono);display:flex;gap:14px">
+    <span>↑↓ navegar</span><span>⏎ abrir</span><span>ESC cerrar</span>
   </div>
 </div>
 </div>
@@ -1267,6 +1629,14 @@ let K = 1.32;
 let kComponents = { gg: 12, ben: 12, imp: 5, fin: 3 }; // componentes del K, guardados por obra
 let insumos = [], apus = [], presItems = [], bimItems = [], certificados = [];
 let planificacion = { start_date: '', duration_months: 6, periods: [] };
+// Presupuesto Meta ("modo pozo"): control top-down por m² × valor del m² (CAC)
+let presupuestoMeta = { activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0 };
+let modoPresentacion = false; // oculta importes en pantalla (para compartir con cliente/subcontratista)
+let ocultarDetalleApu = false; // oculta la sección de presupuesto bottom-up (por APU) — para cuando se trabaja solo con el pozo m²
+let pacTareas = [];   // Sistema PAC — tareas semanales de productividad
+let pacView = 'carga'; // 'carga' | 'dash'
+let editingPacIdx = null;
+let chartPacDonut = null, chartPacSemanas = null, chartPacRubros = null, chartPacCausas = null, chartPacPareto = null;
 let filterIns = 'all', filterApu = 'all';
 let expandedAPU = new Set();
 let editingInsIdx = null, editingApuIdx = null, editingPresIdx = null, editingBimIdx = null;
@@ -1341,15 +1711,15 @@ function switchObra(id) {
   saveObrasList();
   load();syncAll();
   renderObrasUI();
-  if(currentTab==='insumos')renderInsumos();
-  if(currentTab==='apu')renderAPU();
-  if(currentTab==='indice')renderIndice();
-  if(currentTab==='presupuesto')renderPres();
+  showTab(currentTab); // re-renderiza el tab activo, sea cual sea
   toast('Cambiado a ' + currentObraName);
 }
 
-function deleteObra(id) {
-  if(!confirm('¿Estás seguro de eliminar esta obra? No se puede deshacer.')) return;
+async function deleteObra(id) {
+  const ob=obrasList.find(o=>o.id===id);
+  const body=`Obra: <strong>${ob?.name||id}</strong><br><span style="color:var(--red);font-size:12px">Se borrarán TODOS los insumos, APUs, ítems, cronograma y certificados de esta obra. No se puede deshacer.</span><br><br>💡 Considerá exportar la obra a JSON antes de borrar.`;
+  const ok=await confirmAction({title:'Eliminar obra',body,okText:'Eliminar definitivamente',danger:true});
+  if(!ok) return;
   obrasList = obrasList.filter(o => o.id !== id);
   localStorage.removeItem('pob_v52_data_' + id);
   if(obrasList.length === 0) {
@@ -1361,10 +1731,7 @@ function deleteObra(id) {
   load();syncAll();
   renderObrasUI();
   if(document.getElementById('modal-obras').classList.contains('open')) openModalObras();
-  if(currentTab==='insumos')renderInsumos();
-  if(currentTab==='apu')renderAPU();
-  if(currentTab==='indice')renderIndice();
-  if(currentTab==='presupuesto')renderPres();
+  showTab(currentTab); // re-renderiza el tab activo, sea cual sea
   toast('Obra eliminada');
 }
 
@@ -1382,38 +1749,261 @@ function load(){
       certificados=d.certificados||[];
       planificacion=d.planificacion||{ start_date: '', duration_months: 6, periods: [] };
       planView=d.planView||'detail';
+      pacTareas=d.pacTareas||[];
+      pacView=d.pacView||'carga';
+      presupuestoMeta=d.presupuestoMeta||{ activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0 };
+      ocultarDetalleApu=d.ocultarDetalleApu||false;
       // Normalizar chapters de datos persistidos (limpia variantes de formato guardadas)
       presItems=presItems.map(p=>({...p,chapter:normalizeChapter(p.chapter)}));
       bimItems=bimItems.map(b=>({...b,chapter:normalizeChapter(b.chapter)}));
       apus=apus.map(a=>({...a,chapter:normalizeChapter(a.chapter)}));
+      _lastSavedState=s;
     } else {
       reset();
+      _lastSavedState=null;
     }
-  }catch(e){reset();}
-  
+  }catch(e){reset();_lastSavedState=null;}
+
+  // Al cambiar de obra se descarta el historial de deshacer (pertenece a la otra obra)
+  if(!_isRestoring){ _undoStack=[]; _redoStack=[]; }
+
   const ob = obrasList.find(o => o.id === currentObraId);
   if(ob) currentObraName = ob.name;
-  
+
   updateBadges();
   renderObrasUI();
 }
 
-function reset(){insumos=JSON.parse(JSON.stringify(INIT_INSUMOS));apus=JSON.parse(JSON.stringify(INIT_APUS));presItems=JSON.parse(JSON.stringify(INIT_PRES));bimItems=[];certificados=[];planificacion={start_date:'',duration_months:6,periods:[]};kComponents={gg:12,ben:12,imp:5,fin:3};}
+function reset(){insumos=JSON.parse(JSON.stringify(INIT_INSUMOS));apus=JSON.parse(JSON.stringify(INIT_APUS));presItems=JSON.parse(JSON.stringify(INIT_PRES));bimItems=[];certificados=[];planificacion={start_date:'',duration_months:6,periods:[]};kComponents={gg:12,ben:12,imp:5,fin:3};pacTareas=[];pacView='carga';presupuestoMeta={activo:false,m2:0,valorM2:0,moneda:'ARS',fecha:'',historial:[],valorTerreno:0,tipoCambio:0};ocultarDetalleApu=false;}
+
+let _saveErrorShown = false;
+// ---- Historial de deshacer (Ctrl+Z) ----
+let _undoStack = [], _redoStack = [], _lastSavedState = null, _isRestoring = false;
+const UNDO_MAX = 15;
 
 function save(){
   if(!currentObraId) return;
   try{
-    localStorage.setItem('pob_v52_data_' + currentObraId, JSON.stringify({K,kComponents,insumos,apus,pres:presItems,bimItems,certificados,planificacion,planView}));
-  }catch(e){}
+    const payload = JSON.stringify({K,kComponents,insumos,apus,pres:presItems,bimItems,certificados,planificacion,planView,pacTareas,pacView,presupuestoMeta,ocultarDetalleApu});
+    if(!_isRestoring && _lastSavedState!==null && payload!==_lastSavedState){
+      _undoStack.push(_lastSavedState);
+      if(_undoStack.length>UNDO_MAX) _undoStack.shift();
+      _redoStack.length = 0; // una edición nueva invalida el rehacer
+    }
+    localStorage.setItem('pob_v52_data_' + currentObraId, payload);
+    _lastSavedState = payload;
+    _lastSaveTs = Date.now();
+    updateSaveIndicator();
+    scheduleBackup();
+  }catch(e){
+    console.error('Error al guardar:', e);
+    if(!_saveErrorShown){
+      _saveErrorShown = true;
+      const quota = (e.name==='QuotaExceededError' || (e.code && e.code===22));
+      const msg = quota
+        ? '⚠️ Almacenamiento local LLENO. Tus últimos cambios NO se guardaron.\n\nExportá la obra como JSON YA para no perder datos, y borrá obras viejas desde el selector.'
+        : '⚠️ No se pudo guardar: ' + (e.message||e);
+      alert(msg);
+      setTimeout(()=>{_saveErrorShown=false;}, 30000);
+    }
+  }
+}
+let _lastSaveTs = 0;
+function updateSaveIndicator(){
+  const el = document.getElementById('save-indicator');
+  if(!el) return;
+  el.textContent = '✓ Guardado';
+  el.style.color = 'var(--green)';
+  clearTimeout(updateSaveIndicator._t);
+  updateSaveIndicator._t = setTimeout(()=>{ if(el) el.textContent=''; }, 1800);
+}
+
+function _applyState(stateStr){
+  _isRestoring = true;
+  try{
+    localStorage.setItem('pob_v52_data_' + currentObraId, stateStr);
+    load();
+    syncAll();
+    showTab(currentTab);
+  } finally {
+    _isRestoring = false;
+  }
+  _lastSavedState = stateStr;
+}
+
+function undoLast(){
+  if(_undoStack.length===0){ toast('Nada para deshacer'); return; }
+  const prev = _undoStack.pop();
+  if(_lastSavedState!==null) _redoStack.push(_lastSavedState);
+  _applyState(prev);
+  toast('↩ Deshecho' + (_undoStack.length>0 ? ` (${_undoStack.length} más en historial)` : ''));
+}
+
+function redoLast(){
+  if(_redoStack.length===0){ toast('Nada para rehacer'); return; }
+  const next = _redoStack.pop();
+  if(_lastSavedState!==null) _undoStack.push(_lastSavedState);
+  _applyState(next);
+  toast('↪ Rehecho');
+}
+
+document.addEventListener('keydown', e => {
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='z'){
+    const ae = document.activeElement;
+    // dentro de un campo de texto, dejar el undo nativo del navegador
+    if(ae && (ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||ae.isContentEditable)) return;
+    e.preventDefault();
+    if(e.shiftKey) redoLast(); else undoLast();
+  }
+});
+
+// =================== RESPALDO AUTOMÁTICO (File System Access API) ===================
+let backupDirHandle = null;
+let _backupTimer = null;
+
+// Mini-helper IndexedDB para persistir el handle de la carpeta entre sesiones
+// (localStorage no puede guardar handles; IndexedDB sí, vía structured clone)
+function _idbOpen(){
+  return new Promise((res,rej)=>{
+    const r = indexedDB.open('pob_backup', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('kv');
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+async function _idbSet(k,v){
+  const db = await _idbOpen();
+  return new Promise((res,rej)=>{
+    const tx = db.transaction('kv','readwrite');
+    tx.objectStore('kv').put(v,k);
+    tx.oncomplete = res; tx.onerror = () => rej(tx.error);
+  });
+}
+async function _idbGet(k){
+  const db = await _idbOpen();
+  return new Promise((res,rej)=>{
+    const rq = db.transaction('kv','readonly').objectStore('kv').get(k);
+    rq.onsuccess = () => res(rq.result); rq.onerror = () => rej(rq.error);
+  });
+}
+
+function updateBackupUI(state){
+  const el = document.getElementById('backup-state');
+  if(!el) return;
+  const states = {
+    off:       {txt:'clic para configurar', color:'var(--text3)'},
+    sinrespaldo:{txt:'⚠ sin respaldo hace días', color:'var(--orange)'},
+    pendiente: {txt:'clic para reactivar', color:'var(--orange)'},
+    ok:        {txt:'activo ✓', color:'var(--green)'},
+    error:     {txt:'error al escribir', color:'var(--red)'}
+  };
+  const s = states[state] || states.off;
+  el.textContent = s.txt;
+  el.style.color = s.color;
+}
+
+async function configurarRespaldo(){
+  if(!window.showDirectoryPicker){
+    alert('Tu navegador no soporta respaldo automático a carpeta.\n\nFunciona en Chrome, Edge o Brave.\n\nMientras tanto: usá "Exportar JSON" manualmente cada tanto.\n\n💡 Tip: si elegís una carpeta dentro de tu Google Drive, el respaldo se sube solo a la nube.');
+    return;
+  }
+  try{
+    const handle = await window.showDirectoryPicker({mode:'readwrite'});
+    backupDirHandle = handle;
+    await _idbSet('backupDir', handle);
+    updateBackupUI('ok');
+    writeBackupNow();
+    toast('🛡 Respaldo automático activado');
+  }catch(e){ /* usuario canceló el selector */ }
+}
+
+async function backupClick(){
+  if(!backupDirHandle){ configurarRespaldo(); return; }
+  try{
+    const perm = await backupDirHandle.queryPermission({mode:'readwrite'});
+    if(perm !== 'granted'){
+      const req = await backupDirHandle.requestPermission({mode:'readwrite'});
+      if(req === 'granted'){ updateBackupUI('ok'); writeBackupNow(); toast('🛡 Respaldo reactivado'); }
+      return;
+    }
+    // ya activo → ofrecer cambiar de carpeta
+    const ok = await confirmAction({title:'Respaldo automático', body:'El respaldo está <strong style="color:var(--green)">activo</strong>.<br><br>¿Querés elegir otra carpeta de destino?', okText:'Cambiar carpeta'});
+    if(ok) configurarRespaldo();
+  }catch(e){ configurarRespaldo(); }
+}
+
+function scheduleBackup(){
+  if(!backupDirHandle) return;
+  clearTimeout(_backupTimer);
+  _backupTimer = setTimeout(writeBackupNow, 4000); // debounce: agrupa ráfagas de cambios
+}
+
+async function _backupWriteFile(name, content){
+  const fh = await backupDirHandle.getFileHandle(name, {create:true});
+  const w = await fh.createWritable();
+  await w.write(content);
+  await w.close();
+}
+
+async function writeBackupNow(){
+  if(!backupDirHandle || !currentObraId) return;
+  try{
+    const perm = await backupDirHandle.queryPermission({mode:'readwrite'});
+    if(perm !== 'granted'){ updateBackupUI('pendiente'); return; }
+    const raw = localStorage.getItem('pob_v52_data_' + currentObraId);
+    if(!raw) return;
+    // incluir el nombre de obra para que el archivo sea importable directo
+    const d = JSON.parse(raw); d.name = currentObraName;
+    const payload = JSON.stringify(d);
+    const slug = (currentObraName||'obra').replace(/[^a-z0-9]/gi,'_').toLowerCase();
+    await _backupWriteFile(`respaldo_${slug}.json`, payload);
+    const day = new Date().toISOString().split('T')[0];
+    await _backupWriteFile(`respaldo_${slug}_${day}.json`, payload);
+    // conservar solo las últimas 10 versiones diarias
+    const dated = [];
+    for await (const entry of backupDirHandle.values()){
+      if(entry.kind==='file' && entry.name.startsWith(`respaldo_${slug}_`) && entry.name.endsWith('.json')) dated.push(entry.name);
+    }
+    dated.sort();
+    while(dated.length > 10){
+      const old = dated.shift();
+      try{ await backupDirHandle.removeEntry(old); }catch(e){}
+    }
+    localStorage.setItem('pob_backup_last_ts', String(Date.now()));
+    updateBackupUI('ok');
+  }catch(e){
+    console.error('Error de respaldo:', e);
+    updateBackupUI('error');
+  }
+}
+
+async function initBackup(){
+  try{
+    const h = await _idbGet('backupDir');
+    if(h){
+      backupDirHandle = h;
+      const perm = await h.queryPermission({mode:'readwrite'});
+      updateBackupUI(perm==='granted' ? 'ok' : 'pendiente');
+      if(perm==='granted') writeBackupNow();
+      return;
+    }
+  }catch(e){ /* sin handle guardado */ }
+  // Sin carpeta configurada: recordatorio si hace mucho que no hay respaldo ni export
+  const last = parseInt(localStorage.getItem('pob_backup_last_ts')||'0');
+  const days = (Date.now()-last)/86400000;
+  updateBackupUI((last===0 || days>7) ? 'sinrespaldo' : 'off');
 }
 
 function updateBadges(){
-  document.getElementById('bdg-ins').textContent=insumos.length;
-  document.getElementById('bdg-apu').textContent=apus.length;
-  document.getElementById('bdg-idx').textContent=apus.length;
-  document.getElementById('bdg-bim').textContent=bimItems.length;
-  document.getElementById('bdg-pres').textContent=presItems.length;
-  updateIssuesSummary();
+  const set=(id,val)=>{ const el=document.getElementById(id); if(el) el.textContent=val; };
+  set('bdg-ins',insumos.length);
+  set('bdg-apu',apus.length);
+  set('bdg-idx',apus.length);
+  set('bdg-bim',bimItems.length);
+  set('bdg-pres',presItems.length);
+  set('bdg-cert',certificados.length);
+  set('bdg-pac',pacTareas.length);
+  if(typeof updateIssuesSummary === 'function') updateIssuesSummary();
 }
 
 // =================== FLAGS DE DATOS INCOMPLETOS ===================
@@ -1500,8 +2090,17 @@ function updateIssuesSummary(){
 }
 
 // =================== FORMAT ===================
-const fmt=n=>n>0?'$ '+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:2}):'—';
-const fmtN=n=>Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:2});
+// Modo presentación: enmascara importes en pantalla. _forceMoney lo desactiva
+// temporalmente durante los export (los PDF/CSV siempre salen con valores reales).
+let _forceMoney = false;
+const _oculto = () => modoPresentacion && !_forceMoney;
+const fmt=n=>{
+  if(_oculto()) return '•••';
+  if(!n) return '—'; // solo el cero real (o NaN) muestra guión — un negativo es un valor válido
+  const sg = n<0 ? '-' : '';
+  return sg+'$ '+Math.abs(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:2});
+};
+const fmtN=n=>_oculto()?'•••':Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:2});
 // Normaliza chapter: "03  ——  ESTRUCTURA  —  [EL]=..." → "03 — ESTRUCTURA"
 function normalizeChapter(ch) {
   if(!ch) return ch;
@@ -1517,8 +2116,9 @@ function showTab(tab){
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active-tab'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active-tab');
-  const tabs=['guia','insumos','apu','indice','bim','oldschool','plan','presupuesto'];
-  document.querySelectorAll('.nav-item')[tabs.indexOf(tab)].classList.add('active');
+  const tabs=['guia','insumos','apu','indice','bim','oldschool','plan','presupuesto','cert','pac'];
+  const navItem=document.querySelectorAll('.nav-item')[tabs.indexOf(tab)];
+  if(navItem) navItem.classList.add('active');
   currentTab=tab;
   if(tab==='guia')renderDashboard();
   if(tab==='insumos')renderInsumos();
@@ -1529,6 +2129,7 @@ function showTab(tab){
   if(tab==='plan')renderPlanControl();
   if(tab==='presupuesto')renderPres();
   if(tab==='cert')renderCertificadosTab();
+  if(tab==='pac')renderPAC();
   document.getElementById('bdg-cert').textContent=certificados.length;
 }
 
@@ -1596,12 +2197,22 @@ function openModalInsumo(ri){
 function saveInsumo(){
   const ins={code:document.getElementById('ins-code').value.trim().toUpperCase(),tipo:document.getElementById('ins-tipo').value,desc:document.getElementById('ins-desc').value.trim(),unit:document.getElementById('ins-unit').value.trim(),price:parseFloat(document.getElementById('ins-price').value)||0,category:document.getElementById('ins-cat').value.trim().toUpperCase()||'GENERAL'};
   if(!ins.code||!ins.desc)return;
+  const dupIns=insumos.findIndex(i=>i.code===ins.code);
+  if(dupIns!==-1 && dupIns!==editingInsIdx){ alert('⚠ Ya existe un insumo con el código '+ins.code+'. Usá un código único.'); return; }
   if(editingInsIdx!==null)insumos[editingInsIdx]=ins;else insumos.push(ins);
   syncAll();save();updateBadges();closeModal('modal-insumo');renderInsumos();toast(editingInsIdx!==null?'Insumo actualizado':'Insumo agregado');
 }
-function deleteInsumo(ri){
-  if(!confirm('¿Eliminar el insumo '+insumos[ri].code+'?'))return;
-  insumos.splice(ri,1);save();updateBadges();renderInsumos();toast('Insumo eliminado');
+async function deleteInsumo(ri){
+  const ins=insumos[ri];
+  const usadoEn=apus.filter(a=>a.resources.some(r=>r.cod_recurso===ins.code));
+  const body=usadoEn.length>0
+    ? `<div style="background:rgba(239,68,68,0.08);border-left:3px solid var(--red);padding:10px 12px;margin-bottom:10px;border-radius:6px"><strong style="color:var(--red)">⚠ Impacto:</strong> usado en ${usadoEn.length} APU(s): ${usadoEn.slice(0,5).map(a=>a.code).join(', ')}${usadoEn.length>5?'…':''}<br>Esos APUs perderán este recurso de su cómputo.</div>Insumo: <strong>${ins.code}</strong> — ${ins.desc}`
+    : `Insumo: <strong>${ins.code}</strong> — ${ins.desc}<br><span style="color:var(--text3);font-size:12px">No se usa en ningún APU.</span>`;
+  const ok=await confirmAction({title:'Eliminar insumo',body,okText:'Eliminar',danger:true});
+  if(!ok)return;
+  insumos.splice(ri,1);
+  syncAll();
+  save();updateBadges();renderInsumos();toast('Insumo eliminado');
 }
 
 // =================== APU ===================
@@ -1756,6 +2367,8 @@ function saveAPU(){
   const code=document.getElementById('apu-code').value.trim();
   const desc=document.getElementById('apu-desc').value.trim();
   if(!code||!desc)return;
+  const dupApu=apus.findIndex(a=>a.code===code);
+  if(dupApu!==-1 && dupApu!==editingApuIdx){ alert('⚠ Ya existe un APU con el código '+code+'. Usá un código único.'); return; }
   const apu={code,desc,unit:document.getElementById('apu-unit').value.trim(),chapter:normalizeChapter(document.getElementById('apu-chapter').value),resources:modalResources};
   if(editingApuIdx!==null) apus[editingApuIdx]=apu; else apus.push(apu);
   apus.sort((a,b)=>{ const cc=a.chapter.localeCompare(b.chapter); return cc!==0?cc:a.code.localeCompare(b.code); });
@@ -1804,15 +2417,17 @@ function duplicateAPU(ai) {
   toast('Recursos copiados de '+src.code+' · Completá código y descripción');
 }
 
-function deleteAPU(ai){
-  const code=apus[ai].code;
+async function deleteAPU(ai){
+  const apu=apus[ai]; const code=apu.code;
   const enPres=presItems.filter(p=>p.code===code);
-  const msg=enPres.length>0
-    ? `¿Eliminar APU ${code}?\n\n⚠️ Este APU está usado en ${enPres.length} ítem(s) del presupuesto.\nEsos ítems quedarán sin precio ($0) hasta que les asignes otro APU.\n\n¿Eliminar de todas formas?`
-    : `¿Eliminar APU ${code}?`;
-  if(!confirm(msg))return;
+  const totalAfectado=enPres.reduce((s,p)=>{const bims=bimItems.filter(b=>b.code===p.code);const q=bims.length>0?bims.reduce((ss,b)=>ss+(parseFloat(b.qtyTotal)||0),0):(p.cantidad||0);return s+q*getPU(code);},0);
+  const body=enPres.length>0
+    ? `<div style="background:rgba(239,68,68,0.08);border-left:3px solid var(--red);padding:10px 12px;margin-bottom:10px;border-radius:6px"><strong style="color:var(--red)">⚠ Impacto:</strong> ${enPres.length} ítem(s) del presupuesto quedarán huérfanos.<br><span style="font-family:var(--mono);font-size:12px;color:var(--text3)">Total afectado: $${Math.round(totalAfectado).toLocaleString('es-AR')}</span></div>APU: <strong>${code}</strong> — ${apu.desc}`
+    : `APU: <strong>${code}</strong> — ${apu.desc}<br><span style="color:var(--text3);font-size:12px">No está usado en ningún ítem del presupuesto.</span>`;
+  const ok=await confirmAction({title:'Eliminar APU',body,okText:'Eliminar',danger:true});
+  if(!ok) return;
   apus.splice(ai,1);
-  _apuCostCache=null; // invalidar caché para que Gantt y Planificación recalculen
+  _apuCostCache=null;
   save();updateBadges();renderAPU();toast('APU eliminado');
 }
 
@@ -2054,7 +2669,7 @@ function savePresItem(){
   const rawChapter = document.getElementById('pres-chapter').value;
   const chapter = editingPresIdx!==null ? rawChapter : resolveChapter(selectedPresApu.code, rawChapter);
   const existingPres = editingPresIdx !== null ? presItems[editingPresIdx] : {};
-  const item={...existingPres, code:selectedPresApu.code,desc:selectedPresApu.desc,unit:selectedPresApu.unit,chapter,cantidad:parseFloat(document.getElementById('pres-qty').value)||0,visible:existingPres.visible!==undefined?existingPres.visible:true};
+  const item={...existingPres, code:selectedPresApu.code,desc:selectedPresApu.desc,unit:selectedPresApu.unit,chapter,cantidad:parseFloat(document.getElementById('pres-qty').value)||0,visible:existingPres.visible!==undefined?existingPres.visible:true,cronograma:existingPres.cronograma||{}};
   if(editingPresIdx!==null) {
     presItems[editingPresIdx]=item;
   } else {
@@ -2075,8 +2690,26 @@ function openModalK(){
   openModal('modal-k');
 }
 function updateKPreview(){
-  const k=1+(parseFloat(document.getElementById('k-gg').value||0)+parseFloat(document.getElementById('k-ben').value||0)+parseFloat(document.getElementById('k-imp').value||0)+parseFloat(document.getElementById('k-fin').value||0))/100;
-  document.getElementById('k-preview').textContent=k.toFixed(2);
+  const kNew=1+(parseFloat(document.getElementById('k-gg').value||0)+parseFloat(document.getElementById('k-ben').value||0)+parseFloat(document.getElementById('k-imp').value||0)+parseFloat(document.getElementById('k-fin').value||0))/100;
+  document.getElementById('k-preview').textContent=kNew.toFixed(2);
+  // Simulador: recalcular total con K actual vs K nuevo
+  let costoDirecto=0;
+  presItems.filter(p=>p.visible!==false).forEach(p=>{
+    const cu=getApuCostU(p.code);
+    const bims=bimItems.filter(b=>b.code===p.code);
+    const qty=bims.length>0?bims.reduce((s,b)=>s+(parseFloat(b.qtyTotal)||0),0):(p.cantidad||0);
+    costoDirecto+=cu*qty;
+  });
+  const totalCur=costoDirecto*K;
+  const totalNew=costoDirecto*kNew;
+  const diff=totalNew-totalCur;
+  const margen=costoDirecto>0?((totalNew-costoDirecto)/costoDirecto*100):0;
+  const fmtSim=v=>'$'+Math.round(v).toLocaleString('es-AR');
+  const setS=(id,txt,color)=>{const el=document.getElementById(id);if(el){el.textContent=txt;if(color)el.style.color=color;}};
+  setS('k-sim-cur',fmtSim(totalCur));
+  setS('k-sim-new',fmtSim(totalNew));
+  setS('k-sim-diff',(diff>=0?'+':'')+fmtSim(diff),diff>=0?'var(--green)':'var(--red)');
+  setS('k-sim-margin',margen.toFixed(1)+'%');
 }
 function saveK(){
   const k=parseFloat(document.getElementById('k-preview').textContent)||1;
@@ -2289,11 +2922,12 @@ function reasignarSaldo(type, id, fromMes, saldo) {
   if(!obj) return;
   const from = getPeriod(obj, fromMes);
   from.pv = from.ej; // cierra el período: plan vigente = lo ejecutado
+  from.reprog = (from.reprog||0) + saldo; // asienta el desvío: queda registrado que este mes no se cumplió
   const to = getPeriod(obj, fromMes + 1);
   to.pv = (to.pv||0) + saldo; // arrastra el saldo al mes siguiente
   if(to.pb === 0) to.pb = to.pv; // si no tenía plan base, lo iguala al vigente
   save(); renderPlanControl();
-  toast(`↪ Saldo de ${saldo.toFixed(2)} u. reprogramado al Mes ${fromMes + 2}`);
+  toast(`↪ ${saldo.toFixed(2)} u. reprogramadas al Mes ${fromMes + 2} — desvío asentado en Mes ${fromMes + 1}`);
 }
 
 function renderPlanControl() {
@@ -2311,7 +2945,7 @@ function renderPlanControl() {
 
   let html = '';
   // Acumuladores para el resumen EVM del período
-  let totPB=0, totPV=0, totEJ=0, totGR=0, totTEO=0;
+  let totPB=0, totPV=0, totEJ=0, totGR=0, totTEO=0, totReprog=0;
 
   const byChapter = {};
   presItems.forEach(p => {
@@ -2355,20 +2989,20 @@ function renderPlanControl() {
       const sinPlan = Math.max(0, qtyTotal - totalPlanned);
 
       // Agrega datos del período para este APU (BIM o general)
-      let sumPB=0, sumPV=0, sumEJ=0, sumGR=0;
+      let sumPB=0, sumPV=0, sumEJ=0, sumGR=0, sumReprog=0;
       if(bims.length > 0) {
         bims.forEach(b => {
           const per = getPeriod(b, mes);
-          sumPB += per.pb; sumPV += per.pv; sumEJ += per.ej; sumGR += per.gr;
+          sumPB += per.pb; sumPV += per.pv; sumEJ += per.ej; sumGR += per.gr; sumReprog += (per.reprog||0);
         });
       } else {
         const per = getPeriod(p, mes);
-        sumPB = per.pb; sumPV = per.pv; sumEJ = per.ej; sumGR = per.gr;
+        sumPB = per.pb; sumPV = per.pv; sumEJ = per.ej; sumGR = per.gr; sumReprog = per.reprog||0;
       }
       const sumTEO = sumEJ * costU;
       const sumSaldo = sumPV - sumEJ;
       const sumDevE = sumTEO - sumGR;
-      totPB+=sumPB; totPV+=sumPV; totEJ+=sumEJ; totGR+=sumGR; totTEO+=sumTEO;
+      totPB+=sumPB; totPV+=sumPV; totEJ+=sumEJ; totGR+=sumGR; totTEO+=sumTEO; totReprog+=sumReprog;
 
       const cDevE = sumDevE===0?'var(--text3)':(sumDevE>0?'var(--green)':'var(--red)');
       const cSaldo = sumSaldo<=0?'var(--green)':'var(--orange)';
@@ -2397,7 +3031,13 @@ function renderPlanControl() {
           ${bims.length>0 ? `<span style="color:var(--accent3)">${sumEJ.toFixed(2)}</span>` : `<input type="number" class="input" style="width:72px;text-align:right;color:var(--accent3);font-size:11px;background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.3)" value="${sumEJ}" onchange="updatePlanExec('pres','${p.code}',${mes},this.value)" onclick="event.stopPropagation()">`}
         </td>
         <td style="text-align:right;font-family:var(--mono);color:${cSaldo};font-size:12px; border-right:1px solid #333">
-          ${sumSaldo>0.001 ? sumSaldo.toFixed(2) : '<span style="color:var(--green)">✓</span>'}
+          ${sumSaldo>0.001
+            ? (bims.length>0
+                ? sumSaldo.toFixed(2)
+                : `<div style="display:flex;align-items:center;gap:4px;justify-content:flex-end"><span style="font-family:var(--mono);color:${cSaldo};font-size:11px">${sumSaldo.toFixed(2)}</span><button class="btn btn-ghost" style="padding:2px 6px;font-size:10px;color:var(--orange);border-color:rgba(251,146,60,.4)" onclick="reasignarSaldo('pres','${p.code}',${mes},${sumSaldo});event.stopPropagation()" title="Reprogramar saldo al Mes ${mes+2}">↪ M${mes+2}</button></div>`)
+            : (sumReprog>0.001
+                ? `<span style="background:rgba(251,146,60,.12);color:var(--orange);font-size:10px;padding:2px 7px;border-radius:5px;white-space:nowrap" title="⚠ Desvío asentado: este mes se planificaron ${sumReprog.toFixed(2)} u. que no se hicieron y pasaron al Mes ${mes+2}">↪ ${sumReprog.toFixed(2)} reprog.</span>`
+                : '<span style="color:var(--green)">✓</span>')}
         </td>
         <td style="text-align:right;font-family:var(--mono);color:var(--text2);font-size:12px">${fmt(sumTEO)}</td>
         <td style="text-align:right;">
@@ -2443,7 +3083,9 @@ function renderPlanControl() {
               ${saldo>0.001 ? `<div style="display:flex;align-items:center;gap:4px;justify-content:flex-end">
                 <span style="font-family:var(--mono);color:${cSal2};font-size:11px">${saldo.toFixed(2)}</span>
                 <button class="btn btn-ghost" style="padding:2px 6px;font-size:10px;color:var(--orange);border-color:rgba(251,146,60,.4)" onclick="reasignarSaldo('bim',${idx},${mes},${saldo});event.stopPropagation()" title="Reprogramar saldo al Mes ${mes+2}">↪ M${mes+2}</button>
-              </div>` : `<span style="color:var(--green);font-size:12px">✓</span>`}
+              </div>` : ((per.reprog||0)>0.001
+                ? `<span style="background:rgba(251,146,60,.12);color:var(--orange);font-size:10px;padding:2px 7px;border-radius:5px;white-space:nowrap" title="⚠ Desvío asentado: ${(per.reprog||0).toFixed(2)} u. planificadas este mes pasaron al Mes ${mes+2}">↪ ${(per.reprog||0).toFixed(2)} reprog.</span>`
+                : `<span style="color:var(--green);font-size:12px">✓</span>`)}
             </td>
             <td style="text-align:right;font-family:var(--mono);color:var(--text2);font-size:11px">${fmt(teo)}</td>
             <td style="text-align:right;">
@@ -2461,13 +3103,23 @@ function renderPlanControl() {
     const hasHidden = presItems.some(p => p.visible === false);
     const hasItems  = presItems.length > 0;
     const noStart   = !planificacion.start_date;
-    html = `<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text3)">
-      ${hasHidden && hasItems
-        ? '⚠ Todos los ítems están ocultos. Hacé clic en el ojo en la pestaña <b>Presupuesto</b> para mostrarlos.'
-        : hasItems
-          ? '🔍 Ningún ítem coincide con la búsqueda.'
-          : '📋 Aún no hay presupuesto para planificar. Cargá ítems en la pestaña <b>Presupuesto</b> primero.'}
-      ${noStart ? '<br><span style="font-size:11px;color:var(--red)">⚠ También configurá la fecha de inicio en Ajustes de Planificación para ver etiquetas de meses reales.</span>' : ''}
+    const empty = !hasItems
+      ? `<div style="font-size:44px;margin-bottom:12px">📋</div>
+         <div style="font-size:16px;color:var(--text);margin-bottom:6px;font-weight:600">Todavía no hay presupuesto</div>
+         <div style="font-size:12px;color:var(--text3);margin-bottom:18px;max-width:420px;margin-left:auto;margin-right:auto">Para planificar necesitás primero tener ítems cargados. Seguí estos pasos:</div>
+         <ol style="text-align:left;display:inline-block;font-size:12px;color:var(--text2);line-height:2;margin-bottom:18px">
+           <li>Cargá <b>Insumos</b> (materiales, mano de obra)</li>
+           <li>Armá <b>APUs</b> combinando insumos</li>
+           <li>Agregá ítems al <b>Presupuesto</b> eligiendo APUs</li>
+           <li>Volvé acá para planificar la ejecución mes a mes</li>
+         </ol><br>
+         <button class="btn btn-primary" onclick="showTab('presupuesto')">Ir a Presupuesto →</button>`
+      : hasHidden
+        ? `<div style="font-size:32px;margin-bottom:10px">👁</div><div style="font-size:13px">Todos los ítems están ocultos. Mostralos desde la pestaña <b>Presupuesto</b>.</div><br><button class="btn btn-ghost" onclick="showTab('presupuesto')">Ir a Presupuesto</button>`
+        : `<div style="font-size:13px">🔍 Ningún ítem coincide con la búsqueda.</div>`;
+    html = `<tr><td colspan="11" style="text-align:center;padding:40px 20px;color:var(--text3)">
+      ${empty}
+      ${noStart && hasItems ? '<br><br><span style="font-size:11px;color:var(--M)">⚠ Tip: configurá la fecha de inicio en Ajustes de Planificación para ver etiquetas de meses reales.</span>' : ''}
     </td></tr>`;
   }
   document.getElementById('tbody-plan').innerHTML = html;
@@ -2483,7 +3135,7 @@ function renderPlanControl() {
       <div class="stat-card"><div class="stat-label">Plan Base — Mes ${mes+1}</div><div class="stat-value" style="font-size:17px;color:var(--text2)">${totPB.toFixed(1)} <span style="font-size:12px;color:var(--text3)">u.</span></div></div>
       <div class="stat-card"><div class="stat-label">Plan Vigente — Mes ${mes+1}</div><div class="stat-value" style="font-size:17px;color:var(--accent)">${totPV.toFixed(1)} <span style="font-size:12px;color:var(--text3)">u.</span></div></div>
       <div class="stat-card"><div class="stat-label">Ejecutado — Mes ${mes+1}</div><div class="stat-value" style="font-size:17px;color:var(--accent3)">${totEJ.toFixed(1)} <span style="font-size:12px;color:var(--text3)">u.</span></div></div>
-      <div class="stat-card"><div class="stat-label">Saldo / Reprogramado</div><div class="stat-value" style="font-size:17px;color:${cSald}">${totSaldo.toFixed(1)} <span style="font-size:12px;color:var(--text3)">u.</span></div></div>
+      <div class="stat-card" style="${totReprog>0.001?'border-color:rgba(251,146,60,.4)':''}"><div class="stat-label">Saldo / Reprogramado</div><div class="stat-value" style="font-size:17px;color:${cSald}">${totSaldo.toFixed(1)} <span style="font-size:12px;color:var(--text3)">u.</span></div>${totReprog>0.001?`<div style="font-size:10px;color:var(--orange);margin-top:3px;font-family:var(--mono)" title="Unidades que estaban planificadas para este mes y se movieron al siguiente">⚠ ${totReprog.toFixed(1)} u. se pasaron al Mes ${mes+2}</div>`:''}</div>
       <div class="stat-card"><div class="stat-label">Desvío Económico (EV−AC)</div><div class="stat-value" style="font-size:17px;color:${cDevE}">${totDevE===0?'—':(totDevE>0?'+':'')+fmt(totDevE)}</div></div>
     </div>`;
   }
@@ -2753,11 +3405,7 @@ function renderGanttRubros() {
   if(!chapNames.length){wrap.style.display='none';return;}
   wrap.style.display='block';
 
-  // Normalizar siempre por pv$ — no cambia al navegar meses
-  let globalMax=1;
-  chapNames.forEach(ch=>chapData[ch].forEach(m=>{globalMax=Math.max(globalMax,m.pv);}));
-
-  const MAX_BAR=40; // altura máxima de barra (px)
+  const BAR_H=24;   // altura fija de barra (px) — todas iguales
   const ROW_H=54;   // alto total de celda (px)
   const PAD_B=8;    // padding inferior (px) — espacio bajo la barra
 
@@ -2786,11 +3434,9 @@ function renderGanttRubros() {
       if(m.pv>0){const last=runs[runs.length-1];if(last&&last.end===i-1){last.end=i;}else runs.push({start:i,end:i});}
     });
     runs.forEach((r,ri)=>{
-      // Altura del tramo = máximo pv dentro del tramo → barra uniforme dentro del span
-      const maxPvSpan=Math.max(...months.slice(r.start,r.end+1).map(m=>m.pv));
-      const spanH=Math.max(10,Math.round((maxPvSpan/globalMax)*MAX_BAR));
+      // Altura fija para todas las barras — la magnitud se lee en el tooltip, no en el alto
       for(let i=r.start;i<=r.end;i++){
-        spanOf[i]={ri,isFirst:i===r.start,isLast:i===r.end,spanH};
+        spanOf[i]={ri,isFirst:i===r.start,isLast:i===r.end,spanH:BAR_H};
       }
     });
 
@@ -3128,10 +3774,7 @@ function exportGanttRubrosPDF() {
   const mesLabels=Array.from({length:totalMes},(_,i)=>getMesLabel(i));
 
   // Max global para normalizar alturas
-  let globalMax=1;
-  chapNames.forEach(ch=>chapData[ch].forEach(m=>{globalMax=Math.max(globalMax,m.pv);}));
-
-  const MAX_BAR=44; // px altura máxima
+  const BAR_H=26;  // px altura fija de barra — todas iguales
   const ROW_H=62;  // px alto total de celda de barra
   const PAD_B=10;  // px padding inferior
 
@@ -3153,9 +3796,8 @@ function exportGanttRubrosPDF() {
       if(m.pv>0){const last=runs[runs.length-1];if(last&&last.end===i-1){last.end=i;}else runs.push({start:i,end:i});}
     });
     runs.forEach(r=>{
-      const maxPvSpan=Math.max(...months.slice(r.start,r.end+1).map(m=>m.pv));
-      const spanH=Math.max(10,Math.round((maxPvSpan/globalMax)*MAX_BAR));
-      for(let i=r.start;i<=r.end;i++){spanOf[i]={isFirst:i===r.start,isLast:i===r.end,spanH};}
+      // Altura fija — todas las barras iguales
+      for(let i=r.start;i<=r.end;i++){spanOf[i]={isFirst:i===r.start,isLast:i===r.end,spanH:BAR_H};}
     });
 
     // Celdas de barras — sin cambio de color por estado, siempre color del rubro
@@ -3567,13 +4209,13 @@ function saveBimItem(){
   const qtyExec = parseFloat(document.getElementById('bim-exec').value)||0;
   const existing = editingBimIdx !== null ? bimItems[editingBimIdx] : {};
   const b = {...existing, id: existing.id || 'bim_'+Date.now(), code: selectedBimApu.code, desc: selectedBimApu.desc, unit: selectedBimApu.unit,
-             chapter: selectedBimApu.chapter, nivel, zona, qtyTotal, qtyExec};
+             chapter: selectedBimApu.chapter, nivel, zona, qtyTotal, qtyExec, cronograma: existing.cronograma||{}};
 
   if(editingBimIdx!==null) bimItems[editingBimIdx]=b; else bimItems.push(b);
   
   try {
     if(!presItems.find(p=>p.code===b.code)){
-      presItems.push({code:b.code,desc:b.desc,unit:b.unit,chapter:resolveChapter(b.code, b.chapter),cantidad:0,visible:true});
+      presItems.push({code:b.code,desc:b.desc,unit:b.unit,chapter:resolveChapter(b.code, b.chapter),cantidad:0,visible:true,cronograma:{}});
       presItems.sort((a,bb)=>{ const cc=a.chapter.localeCompare(bb.chapter); return cc!==0?cc:a.code.localeCompare(bb.code); });
     }
   } catch(e) { console.error('Error al auto-crear presItem desde BIM:', e); }
@@ -3604,7 +4246,9 @@ function renderDashboard() {
 
     const bItems = bimItems.filter(b=>b.code===pi.code);
     const qty = bItems.length > 0 ? bItems.reduce((s,b)=>s+(parseFloat(b.qtyTotal)||0),0) : (pi.cantidad||0);
-    const qtyExec = bItems.length > 0 ? bItems.reduce((s,b)=>s+(parseFloat(b.qtyExec)||0),0) : 0;
+    const qtyExec = bItems.length > 0
+      ? bItems.reduce((s,b)=>s+(parseFloat(b.qtyExec)||0),0)
+      : (pi.execU || Object.values(pi.cronograma||{}).reduce((s,m)=>s+(m.ej||0),0));
 
     // Certificado = ya emitido/cobrado (general + cada zona BIM)
     let certU = getYaCobradoItem(pi.code, null, null);
@@ -3636,20 +4280,38 @@ function renderDashboard() {
   const totalEmitidoNeto  = certsEmitidos.reduce((s,c) => s + (c.neto||0), 0);
   const pctCertif = totalPres > 0 ? (totalEmitidoBruto / totalPres) * 100 : 0;
 
-  // --- EVM (Earned Value Management) ---
-  // PV = Planned Value = acumulado de la curva S hasta el mes actual (último cert emitido)
-  const mesActual = certificados.length > 0 ? Math.max(...certificados.map(c => c.numero||0)) : 0;
-  const periods = planificacion.periods || [];
-  let PV = 0;
-  if(mesActual > 0 && periods.length >= mesActual) {
-    PV = (periods[mesActual-1] / 100) * totalPres;
-  } else if(periods.length > 0) {
-    PV = (periods[periods.length-1] / 100) * totalPres;
-  }
-  // EV = Earned Value = valor del trabajo ejecutado al costo presupuestado
-  const EV = totalExec;
-  // AC = Actual Cost = lo que realmente costó (certificado bruto emitido/cobrado)
-  const AC = totalEmitidoBruto;
+  // --- EVM (Earned Value Management) — UNIFICADO: las 3 métricas salen del cronograma ---
+  const totalMesesEVM = planificacion.duration_months || 6;
+  // "Mes actual" = último mes con actividad real (ejecución o gasto cargado)
+  let mesActual = 0;
+  presItems.filter(i=>i.visible!==false).forEach(pi => {
+    const bims = bimItems.filter(b => b.code === pi.code);
+    const objs = bims.length>0 ? bims : [pi];
+    objs.forEach(o => {
+      Object.keys(o.cronograma||{}).forEach(k => {
+        const m = o.cronograma[k];
+        if((m.ej||0)>0 || (m.gr||0)>0){ const mi=parseInt(k)+1; if(mi>mesActual) mesActual=mi; }
+      });
+    });
+  });
+  // PV = valor planificado acumulado hasta mesActual (cantidades pv × precio venta)
+  // EV = valor ganado acumulado hasta mesActual (cantidades ej × precio venta)
+  // AC = costo real acumulado hasta mesActual (gasto real gr, sin K ni IVA)
+  let PV = 0, EV = 0, AC = 0;
+  presItems.filter(i=>i.visible!==false).forEach(pi => {
+    const pu = getPU(pi.code);
+    const bims = bimItems.filter(b => b.code === pi.code);
+    const objs = bims.length>0 ? bims : [pi];
+    objs.forEach(o => {
+      for(let m=0; m<mesActual; m++){
+        const per = o.cronograma?.[String(m)];
+        if(!per) continue;
+        PV += (per.pv||0) * pu;
+        EV += (per.ej||0) * pu;
+        AC += (per.gr||0);
+      }
+    });
+  });
 
   const SPI = PV > 0 ? (EV / PV) : null;
   const CPI = AC > 0 ? (EV / AC) : null;
@@ -3663,7 +4325,20 @@ function renderDashboard() {
   const kpiColor = (val, good, bad) => val === null ? 'var(--text3)' : (val >= good ? 'var(--green)' : (val >= bad ? 'var(--M)' : 'var(--red)'));
   const signStr = v => v > 0 ? '+' : '';
 
+  if(ocultarDetalleApu){
+    container.innerHTML = `
+      ${renderMetaPanel(totalPres, AC)}
+      <div style="padding:0 20px 20px">
+        <div style="background:var(--surface);border:1px dashed var(--border);border-radius:12px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div style="font-size:12px;color:var(--text3)">📊 El detalle de presupuesto por APU (venta bruto, ejecutado, EVM, avance por rubro) está oculto — útil mientras trabajás solo con el pozo m² y todavía no cargaste todo al detalle.</div>
+          <button class="btn btn-ghost btn-sm" onclick="toggleOcultarDetalleApu()">Mostrar detalle</button>
+        </div>
+      </div>`;
+    return;
+  }
+
   let html = `
+    ${renderMetaPanel(totalPres, AC)}
     <div class="dash-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
       <div class="dash-card">
         <div class="dash-card-lbl">Presupuesto Venta Bruto</div>
@@ -3676,7 +4351,7 @@ function renderDashboard() {
         <div style="font-size:11px;color:var(--text3);margin-top:4px">${pctGlobal.toFixed(1)}% del presupuesto</div>
       </div>
       <div class="dash-card">
-        <div class="dash-card-lbl">Certificado Emitido (AC)</div>
+        <div class="dash-card-lbl">Certificado Emitido</div>
         <div class="dash-card-val" style="color:var(--accent)">${fmt(totalEmitidoBruto)}</div>
         <div style="font-size:11px;color:var(--text3);margin-top:4px">${certsEmitidos.length} certif. — ${pctCertif.toFixed(1)}% del total</div>
       </div>
@@ -3695,6 +4370,16 @@ function renderDashboard() {
         <div class="dash-card-val" style="color:${mesesRestantes<=1?'var(--red)':mesesRestantes<=3?'var(--M)':'var(--text)'}">${mesesRestantes}</div>
         <div style="font-size:11px;color:var(--text3);margin-top:4px">de ${mesesTotales} totales</div>
       </div>` : ''}
+      <div class="dash-card">
+        <div class="dash-card-lbl">Gasto Real (AC)</div>
+        <div class="dash-card-val" style="color:rgba(251,146,60,0.95)">${fmt(AC)}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">Costo real s/ IVA — cronograma</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-lbl">Ganancia Real (EV−AC)</div>
+        <div class="dash-card-val" style="color:${CV>=0?'var(--green)':'var(--red)'}">${signStr(CV)}${fmt(CV)}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">${EV>0?((CV/EV)*100).toFixed(1)+'% margen':'—'}</div>
+      </div>
     </div>
 
     ${PV > 0 ? `
@@ -3875,12 +4560,13 @@ function promptNewObra() {
 }
 
 function exportCurrentObra() {
-  const data = { K, insumos, apus, pres: presItems, bimItems, name: currentObraName };
+  const data = { K, kComponents, insumos, apus, pres: presItems, bimItems, certificados, planificacion, planView, pacTareas, pacView, presupuestoMeta, ocultarDetalleApu, name: currentObraName };
   const dStr = JSON.stringify(data, null, 2);
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([dStr], {type: 'application/json'}));
   a.download = `Presupuesto_${currentObraName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.json`;
   a.click();
+  localStorage.setItem('pob_backup_last_ts', String(Date.now())); // el export manual cuenta como respaldo
   toast('Obra exportada a JSON');
 }
 
@@ -3892,6 +4578,11 @@ function importObraJSON(e) {
     try {
       const data = JSON.parse(ev.target.result);
       if(!data.insumos || !data.apus || !data.pres) throw new Error('Estructura inválida o archivo corrupto');
+      // Normalizar rubros (unifica guiones/em-dash/en-dash entre versiones)
+      const nz = (arr, key='chapter') => (arr||[]).map(o => ({...o, [key]: normalizeChapter(o[key]||'')}));
+      data.apus = nz(data.apus);
+      data.pres = nz(data.pres);
+      data.bimItems = nz(data.bimItems);
       const id = 'obra_' + Date.now();
       const name = (data.name || 'Obra Importada');
       obrasList.push({ id, name, date: new Date().toISOString() });
@@ -3904,7 +4595,11 @@ function importObraJSON(e) {
         bimItems: data.bimItems || [],
         certificados: data.certificados || [],
         planificacion: data.planificacion || { start_date: '', duration_months: 6, periods: [] },
-        planView: data.planView || 'detail'
+        planView: data.planView || 'detail',
+        pacTareas: data.pacTareas || [],
+        pacView: data.pacView || 'carga',
+        presupuestoMeta: data.presupuestoMeta || { activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0 },
+        ocultarDetalleApu: data.ocultarDetalleApu || false
       }));
       saveObrasList();
       switchObra(id);
@@ -3916,6 +4611,95 @@ function importObraJSON(e) {
   };
   reader.readAsText(file);
   e.target.value = ''; // reset file input
+}
+
+// =================== CÓMPUTO DE MATERIALES (PDF para el cliente) ===================
+// Lista agregada de materiales con cantidades totales, SIN precios.
+// Pensado para cuando el cliente compra los materiales por su cuenta.
+function exportComputoPDF() {
+  const agg = {}; // code → {code, desc, unit, category, qty}
+  presItems.filter(p => p.visible !== false).forEach(p => {
+    const apu = apus.find(a => a.code === p.code);
+    if(!apu) return;
+    const bims = bimItems.filter(b => b.code === p.code);
+    const qty = bims.length > 0 ? bims.reduce((s,b) => s + (parseFloat(b.qtyTotal)||0), 0) : (p.cantidad||0);
+    if(qty <= 0) return;
+    apu.resources.forEach(r => {
+      const ins = insumos.find(i => i.code === r.cod_recurso);
+      const tipo = ins ? ins.tipo : r.tipo;
+      if(tipo !== 'M') return; // solo materiales — la mano de obra y equipos no van al cliente
+      if(!agg[r.cod_recurso]) agg[r.cod_recurso] = {
+        code: r.cod_recurso,
+        desc: ins ? ins.desc : r.desc,
+        unit: ins ? ins.unit : (r.uni_rec||''),
+        category: ins ? (ins.category||'GENERAL') : 'GENERAL',
+        qty: 0
+      };
+      agg[r.cod_recurso].qty += (r.rendimiento||0) * qty;
+    });
+  });
+
+  const list = Object.values(agg).filter(m => m.qty > 0)
+    .sort((a,b) => { const cc = a.category.localeCompare(b.category); return cc !== 0 ? cc : a.code.localeCompare(b.code); });
+  if(list.length === 0){ toast('No hay materiales computados — cargá cantidades en el presupuesto primero'); return; }
+
+  const d = new Date().toLocaleDateString('es-AR');
+  let html = `
+    <div class="print-header">
+      <div>
+        <div class="print-title">CÓMPUTO DE MATERIALES</div>
+        <div style="font-size: 14px; margin-top: 4px; color: #000"><strong>Obra:</strong> ${currentObraName || 'Sin Título'}</div>
+      </div>
+      <div class="print-meta">
+        <div><strong>Fecha:</strong> ${d}</div>
+        <div>${list.length} materiales computados</div>
+      </div>
+    </div>
+    <table class="print-table">
+      <thead>
+        <tr>
+          <th style="width:12%">Código</th>
+          <th style="width:58%">Material</th>
+          <th style="width:10%">Unidad</th>
+          <th class="print-number" style="width:20%">Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>`;
+
+  let lastCat = '';
+  list.forEach(m => {
+    if(m.category !== lastCat){
+      lastCat = m.category;
+      html += `<tr class="print-chap"><td colspan="4">${m.category}</td></tr>`;
+    }
+    // redondeo hacia arriba a 2 decimales: al cliente no le podés pedir que compre 3.14159 bolsas
+    const qtyShow = (Math.ceil(m.qty * 100) / 100).toLocaleString('es-AR', {minimumFractionDigits: 0, maximumFractionDigits: 2});
+    html += `
+        <tr>
+          <td>${m.code}</td>
+          <td class="print-desc">${m.desc}</td>
+          <td>${m.unit}</td>
+          <td class="print-number" style="font-weight:600">${qtyShow}</td>
+        </tr>`;
+  });
+
+  html += `
+      </tbody>
+    </table>
+    <div style="margin-top:16px;padding:10px 14px;border:1px solid #999;border-radius:6px;font-size:10px;color:#444;line-height:1.6">
+      <strong>⚠ Importante:</strong> las cantidades son netas de cómputo teórico y <strong>no incluyen desperdicio</strong>, roturas ni previsión de sobrantes.
+      Se recomienda adicionar un porcentaje según el material (típico: 5–10% en áridos y ladrillos, 10–15% en cerámicos y revestimientos).
+      Este documento no incluye mano de obra, equipos ni subcontratos.
+    </div>
+    <div style="margin-top: 60px; display:flex; justify-content:space-around; text-align:center; font-size:11px;">
+       <div style="border-top:1px solid #000; width:200px; padding-top:5px">Firma Contratista</div>
+       <div style="border-top:1px solid #000; width:200px; padding-top:5px">Firma Comitente</div>
+    </div>`;
+
+  const printArea = document.getElementById('print-area');
+  printArea.innerHTML = html;
+  setTimeout(() => { window.print(); setTimeout(() => { printArea.innerHTML=''; }, 1000); }, 150);
+  toast('Generando cómputo de materiales...');
 }
 
 // =================== EXPORT CSV ===================
@@ -4158,7 +4942,7 @@ function getPresupuestoTotal() { return presItems.filter(p=>p.visible!==false).r
 function renderCurvaS() {
   const ctx = document.getElementById('chart-curva-s');
   if(!ctx) return;
-  if(chartCurvaS) chartCurvaS.destroy();
+  if(chartCurvaS) { chartCurvaS.destroy(); chartCurvaS = null; }
   const totalObra = getPresupuestoTotal();
   if(totalObra === 0) return;
 
@@ -4226,7 +5010,8 @@ function openCertificadoModal(certId) {
   editingCertId = certId;
   currentCertItems = [];
   
-  let c = { numero: certificados.length + 1, fecha: new Date().toISOString().split('T')[0], periodo: '', ret_reparo: 5, ret_anticipo: 0, ret_otros: 0, estado: 'Borrador', certMode: 'general', items: [] };
+  const nextNum = certificados.length>0 ? Math.max(...certificados.map(x=>x.numero||0))+1 : 1;
+  let c = { numero: nextNum, fecha: new Date().toISOString().split('T')[0], periodo: '', ret_reparo: 5, ret_anticipo: 0, ret_otros: 0, estado: 'Borrador', certMode: 'general', items: [] };
   if(certId) {
     const existing = certificados.find(x => x.id === certId);
     if(existing) c = JSON.parse(JSON.stringify(existing));
@@ -4416,7 +5201,30 @@ function calcCertTotals() {
 function saveCertificado() {
   const num = parseInt(document.getElementById('c-numero').value)||1;
   const t = calcCertTotals();
-  
+
+  // --- Validación de sobre-certificación ---
+  const EPS = 1e-6;
+  let errores = [];
+  currentCertItems.forEach(it => {
+    if(currentCertMode === 'general') {
+      const tot = (it.yaCobradoU||0) + (it.aCertificarU||0);
+      if(tot > (it.totalU||0) + EPS) errores.push(`• ${it.code}: certificás ${tot.toFixed(2)} u. pero el total es ${(it.totalU||0).toFixed(2)} u.`);
+    } else {
+      if(it.children.length === 0) {
+        const tot = (it.yaCobradoU||0) + (it.aCertificarU||0);
+        if(tot > (it.totalU||0) + EPS) errores.push(`• ${it.code}: certificás ${tot.toFixed(2)} u. pero el total es ${(it.totalU||0).toFixed(2)} u.`);
+      }
+      it.children.forEach(ch => {
+        const tot = (ch.yaCobradoU||0) + (ch.aCertificarU||0);
+        if(tot > (ch.totalU||0) + EPS) errores.push(`• ${it.code} (${ch.nivel||''}/${ch.zona||''}): ${tot.toFixed(2)} u. > total ${(ch.totalU||0).toFixed(2)} u.`);
+      });
+    }
+  });
+  if(errores.length > 0){
+    alert('⚠ Sobre-certificación detectada:\n\n'+errores.join('\n')+'\n\nAjustá las cantidades antes de guardar.');
+    return;
+  }
+
   let flatItems = [];
   currentCertItems.forEach(it => {
       if(currentCertMode === 'general') {
@@ -4446,8 +5254,11 @@ function marcarCertificadoCobrado() {
   saveCertificado();
 }
 
-function deleteCertificado(id) {
-  if(confirm("¿Estás seguro de eliminar este certificado? Esta acción no se puede deshacer y ajustará el saldo de Ya Cobrado nuevamente.")){
+async function deleteCertificado(id) {
+  const cert=certificados.find(c=>c.id===id);
+  const body=`Certificado N° <strong>${cert?.numero||'?'}</strong> — ${cert?.periodo||''}<br><span style="font-family:var(--mono);font-size:12px;color:var(--text3)">Bruto: $${Math.round(cert?.bruto||0).toLocaleString('es-AR')} · Estado: ${cert?.estado||''}</span><br><br><span style="color:var(--red);font-size:12px">Esto recalculará el "Ya Cobrado" de los ítems afectados.</span>`;
+  const ok=await confirmAction({title:'Eliminar certificado',body,okText:'Eliminar',danger:true});
+  if(ok){
     certificados = certificados.filter(c => c.id !== id);
     save(); renderCertificadosTab(); toast('Certificado eliminado');
   }
@@ -4640,14 +5451,1050 @@ function exportGanttPDF() {
   setTimeout(()=>{ window.print(); setTimeout(()=>{ area.innerHTML=''; },1000); },150);
 }
 
+// =================== BÚSQUEDA GLOBAL (Ctrl+K) ===================
+let _gsIdx = 0;
+let _gsHits = [];
+function openGlobalSearch(){
+  const inp=document.getElementById('gs-input'); if(!inp) return;
+  inp.value=''; _gsIdx=0; _gsHits=[];
+  openModal('modal-search');
+  setTimeout(()=>{inp.focus(); renderGlobalSearch();}, 50);
+}
+function renderGlobalSearch(){
+  const q=(document.getElementById('gs-input').value||'').toLowerCase().trim();
+  const out=document.getElementById('gs-results');
+  _gsHits=[];
+  if(!q){
+    out.innerHTML='<div style="padding:20px;text-align:center;color:var(--text3);font-size:12px">Empezá a escribir para buscar en Insumos, APUs e Ítems del Presupuesto</div>';
+    return;
+  }
+  const match=(s)=> (s||'').toLowerCase().includes(q);
+  insumos.forEach((i,ix)=>{ if(match(i.code)||match(i.desc)) _gsHits.push({kind:'Insumo',icon:'📦',label:i.code+' — '+i.desc,meta:'$'+(i.price||0).toLocaleString('es-AR')+' / '+i.unit,action:()=>{showTab('insumos');const s=document.getElementById('srch-ins');if(s){s.value=i.code;renderInsumos();}}}); });
+  apus.forEach((a,ax)=>{ if(match(a.code)||match(a.desc)) _gsHits.push({kind:'APU',icon:'🧩',label:a.code+' — '+a.desc,meta:a.chapter+' · '+(a.resources?.length||0)+' recursos',action:()=>{showTab('apu');setTimeout(()=>openModalAPU(ax),100);}}); });
+  presItems.forEach((p,px)=>{ if(match(p.code)||match(p.desc)) _gsHits.push({kind:'Presupuesto',icon:'📋',label:p.code+' — '+p.desc,meta:p.chapter+' · '+(p.cantidad||0)+' '+p.unit,action:()=>{showTab('presupuesto');}}); });
+  if(_gsHits.length===0){ out.innerHTML='<div style="padding:20px;text-align:center;color:var(--text3);font-size:12px">Sin resultados para "'+q+'"</div>'; return; }
+  _gsIdx=Math.min(_gsIdx,_gsHits.length-1);
+  out.innerHTML=_gsHits.slice(0,30).map((h,i)=>`
+    <div class="gs-row" data-gs-i="${i}" onclick="gsPick(${i})" onmouseenter="_gsIdx=${i};gsHighlight()" style="padding:10px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;border-left:3px solid transparent;${i===_gsIdx?'background:rgba(200,241,53,0.08);border-left-color:var(--accent)':''}">
+      <span style="font-size:18px">${h.icon}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${h.label}</div>
+        <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-top:2px">${h.kind} · ${h.meta}</div>
+      </div>
+    </div>
+  `).join('');
+}
+function gsHighlight(){
+  document.querySelectorAll('#gs-results .gs-row').forEach((el,i)=>{
+    el.style.background = i===_gsIdx?'rgba(200,241,53,0.08)':'transparent';
+    el.style.borderLeftColor = i===_gsIdx?'var(--accent)':'transparent';
+  });
+}
+function gsPick(i){
+  if(_gsHits[i]){ closeModal('modal-search'); _gsHits[i].action(); }
+}
+function gsKey(e){
+  if(e.key==='Escape'){ closeModal('modal-search'); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); _gsIdx=Math.min(_gsIdx+1,_gsHits.length-1); gsHighlight(); }
+  else if(e.key==='ArrowUp'){ e.preventDefault(); _gsIdx=Math.max(_gsIdx-1,0); gsHighlight(); }
+  else if(e.key==='Enter'){ e.preventDefault(); gsPick(_gsIdx); }
+}
+document.addEventListener('keydown', e => {
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){
+    e.preventDefault(); openGlobalSearch();
+  }
+});
+
+// =================== CONFIRMACIÓN CUSTOM ===================
+function confirmAction(opts){
+  return new Promise(resolve=>{
+    const ov=document.getElementById('modal-confirm');
+    document.getElementById('cf-title').textContent=opts.title||'¿Confirmar acción?';
+    document.getElementById('cf-body').innerHTML=opts.body||'';
+    const okBtn=document.getElementById('cf-ok');
+    okBtn.textContent=opts.okText||'Confirmar';
+    okBtn.className='btn '+(opts.danger?'btn-danger':'btn-primary');
+    const cancel=()=>{closeModal('modal-confirm');okBtn.onclick=null;resolve(false);};
+    const ok=()=>{closeModal('modal-confirm');okBtn.onclick=null;resolve(true);};
+    document.getElementById('cf-cancel').onclick=cancel;
+    okBtn.onclick=ok;
+    openModal('modal-confirm');
+  });
+}
+
+// =================== IMPORT CSV INSUMOS ===================
+function importInsumosCSV(ev){
+  const file=ev.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const txt=e.target.result;
+      const sep=txt.includes(';')?';':',';
+      const lines=txt.split(/\r?\n/).filter(l=>l.trim());
+      if(lines.length<2){alert('CSV vacío o sin datos');return;}
+      const headers=lines[0].split(sep).map(h=>h.trim().toLowerCase());
+      const col=(names)=>{ for(const n of names){ const i=headers.indexOf(n); if(i>=0) return i; } return -1; };
+      const iCode=col(['codigo','código','code','cod']);
+      const iDesc=col(['descripcion','descripción','desc','detalle']);
+      const iUnit=col(['unidad','unit','um']);
+      const iPrice=col(['precio','price','valor','$']);
+      const iTipo=col(['tipo','type']);
+      const iCat=col(['categoria','categoría','category','rubro']);
+      if(iCode<0||iDesc<0){alert('El CSV debe tener al menos columnas "codigo" y "descripcion".\n\nCabeceras detectadas: '+headers.join(', '));return;}
+      let nuevos=0, actualizados=0;
+      for(let k=1;k<lines.length;k++){
+        const parts=lines[k].split(sep).map(s=>s.trim().replace(/^"|"$/g,''));
+        const code=(parts[iCode]||'').toUpperCase();
+        if(!code) continue;
+        const rec={ code, tipo:(iTipo>=0?parts[iTipo]:'M')||'M', desc:parts[iDesc]||'', unit:iUnit>=0?parts[iUnit]||'':'', price:iPrice>=0?parseFloat(parts[iPrice].replace(/\./g,'').replace(',','.'))||0:0, category:(iCat>=0?parts[iCat]:'GENERAL')||'GENERAL' };
+        const ex=insumos.findIndex(i=>i.code===code);
+        if(ex>=0){ insumos[ex]={...insumos[ex],...rec}; actualizados++; } else { insumos.push(rec); nuevos++; }
+      }
+      syncAll();save();updateBadges();renderInsumos();
+      alert(`✓ Import CSV:\n${nuevos} insumos nuevos\n${actualizados} actualizados`);
+    }catch(err){ alert('Error al leer CSV: '+err.message); }
+  };
+  reader.readAsText(file,'UTF-8');
+  ev.target.value='';
+}
+
+// =================== PAC / PRODUCTIVIDAD ===================
+
+function setPacView(v) {
+  pacView = v;
+  const btnC = document.getElementById('pac-view-carga');
+  const btnD = document.getElementById('pac-view-dash');
+  if(btnC){ btnC.style.background = v==='carga'?'rgba(200,241,53,.15)':'transparent'; btnC.style.color = v==='carga'?'var(--accent)':'var(--text3)'; }
+  if(btnD){ btnD.style.background = v==='dash'?'rgba(200,241,53,.15)':'transparent'; btnD.style.color = v==='dash'?'var(--accent)':'var(--text3)'; }
+  const cW = document.getElementById('pac-carga-wrap');
+  const dW = document.getElementById('pac-dash-wrap');
+  if(cW) cW.style.display = v==='carga'?'block':'none';
+  if(dW) dW.style.display = v==='dash'?'block':'none';
+  save();
+  if(v==='carga') renderPACCarga(); else renderPACDash();
+}
+
+function _pacFiltered() {
+  const mes = document.getElementById('pac-filter-mes')?.value || 'all';
+  const sem = document.getElementById('pac-filter-sem')?.value || 'all';
+  const rub = document.getElementById('pac-filter-rubro')?.value || 'all';
+  const q   = (document.getElementById('pac-search')?.value || '').toLowerCase();
+  return pacTareas.filter(t => {
+    if(mes !== 'all' && String(t.mes) !== mes) return false;
+    if(sem !== 'all' && String(t.semana) !== sem) return false;
+    if(rub !== 'all' && t.rubro !== rub) return false;
+    if(q && !t.tarea.toLowerCase().includes(q) && !t.contratista.toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+
+function _poblarFiltrosPAC() {
+  const meses = [...new Set(pacTareas.map(t=>t.mes))].sort((a,b)=>a-b);
+  const rubros = [...new Set(pacTareas.map(t=>t.rubro).filter(Boolean))].sort();
+  const selMes = document.getElementById('pac-filter-mes');
+  const selRub = document.getElementById('pac-filter-rubro');
+  if(!selMes || !selRub) return;
+  const curMes = selMes.value, curRub = selRub.value;
+  const totalM = planificacion.duration_months || 6;
+  selMes.innerHTML = '<option value="all">Todos los meses</option>' +
+    Array.from({length:totalM},(_,i)=>`<option value="${i+1}">Mes ${i+1}</option>`).join('');
+  selMes.value = meses.includes(parseInt(curMes)) ? curMes : 'all';
+  const chapOpts = [...new Set(presItems.map(p=>normalizeChapter(p.chapter)).filter(Boolean))].sort();
+  const allRubs = [...new Set([...rubros, ...chapOpts])].sort();
+  selRub.innerHTML = '<option value="all">Todos los rubros</option>' +
+    allRubs.map(r=>`<option value="${r}">${r}</option>`).join('');
+  selRub.value = allRubs.includes(curRub) ? curRub : 'all';
+}
+
+function renderPAC() {
+  _poblarFiltrosPAC();
+  // Sincronizar botones de vista
+  const btnC = document.getElementById('pac-view-carga');
+  const btnD = document.getElementById('pac-view-dash');
+  if(btnC){ btnC.style.background = pacView==='carga'?'rgba(200,241,53,.15)':'transparent'; btnC.style.color = pacView==='carga'?'var(--accent)':'var(--text3)'; }
+  if(btnD){ btnD.style.background = pacView==='dash'?'rgba(200,241,53,.15)':'transparent'; btnD.style.color = pacView==='dash'?'var(--accent)':'var(--text3)'; }
+  const cW = document.getElementById('pac-carga-wrap');
+  const dW = document.getElementById('pac-dash-wrap');
+  if(cW) cW.style.display = pacView==='carga'?'block':'none';
+  if(dW) dW.style.display = pacView==='dash'?'block':'none';
+  // badge
+  const b = document.getElementById('bdg-pac');
+  if(b) b.textContent = pacTareas.length;
+  if(pacView==='carga') renderPACCarga(); else renderPACDash();
+}
+
+function renderPACCarga() {
+  const wrap = document.getElementById('pac-tabla-wrap');
+  if(!wrap) return;
+  const lista = _pacFiltered();
+
+  if(pacTareas.length === 0) {
+    wrap.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--text3)">
+      <div style="font-size:44px;margin-bottom:12px">🎯</div>
+      <div style="font-size:16px;color:var(--text);margin-bottom:6px;font-weight:600">No hay tareas cargadas</div>
+      <div style="font-size:12px;margin-bottom:20px;max-width:380px;margin-left:auto;margin-right:auto">Cargá tareas semanales para medir el PAC (Porcentaje de Actividades Completadas) semana a semana.</div>
+      <button class="btn btn-primary" onclick="openModalPacTarea(null)">+ Agregar primera tarea</button>
+    </div>`;
+    return;
+  }
+  if(lista.length === 0) {
+    wrap.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text3)">🔍 Sin resultados para el filtro seleccionado.</div>`;
+    return;
+  }
+
+  // Agrupar por mes → semana
+  const grupos = {};
+  lista.forEach(t => {
+    const k = `${t.mes}-${t.semana}`;
+    if(!grupos[k]) grupos[k] = {mes:t.mes, semana:t.semana, tareas:[]};
+    grupos[k].tareas.push(t);
+  });
+
+  let html = '';
+  Object.values(grupos).sort((a,b)=> a.mes!==b.mes ? a.mes-b.mes : a.semana-b.semana).forEach(g => {
+    const total = g.tareas.length;
+    const comp  = g.tareas.filter(t=>t.cumplimiento==='SI').length;
+    const noComp = g.tareas.filter(t=>t.cumplimiento==='NO').length;
+    const sinReg = total - comp - noComp;
+    const pac = total > 0 ? Math.round((comp/total)*100) : 0;
+    const pacColor = pac>=80?'var(--green)':pac>=60?'var(--M)':'var(--red)';
+
+    html += `<div style="margin:16px 20px 0;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface2)">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="font-size:13px;font-weight:700;color:var(--text)">Mes ${g.mes} — Semana ${g.semana}</span>
+          <span style="font-size:10px;font-family:var(--mono);color:var(--text3)">${total} tareas · ${comp} completas · ${noComp} incompletas${sinReg>0?' · '+sinReg+' sin registrar':''}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="background:rgba(0,0,0,0.3);border-radius:100px;height:8px;width:120px;overflow:hidden">
+            <div style="background:${pacColor};height:100%;width:${pac}%;border-radius:100px;transition:width .3s"></div>
+          </div>
+          <span style="font-size:16px;font-weight:800;font-family:var(--mono);color:${pacColor}">${pac}%</span>
+        </div>
+      </div>
+      <table class="data-table" style="margin:0;border-radius:0">
+        <thead><tr>
+          <th>Rubro</th><th>Tarea</th><th>Contratista</th>
+          <th>Plan inicio</th><th>Plan fin</th>
+          <th style="text-align:center">Estado</th>
+          <th>Fin real</th><th>Causa</th><th style="text-align:center">Acciones</th>
+        </tr></thead>
+        <tbody>`;
+
+    g.tareas.forEach(t => {
+      const idx = pacTareas.indexOf(t);
+      const stBg = t.cumplimiento==='SI'?'rgba(74,222,128,.12)':t.cumplimiento==='NO'?'rgba(248,113,113,.12)':'transparent';
+      const stTxt = t.cumplimiento==='SI'?'var(--green)':t.cumplimiento==='NO'?'var(--red)':'var(--text3)';
+      const stLabel = t.cumplimiento==='SI'?'✅ Completada':t.cumplimiento==='NO'?'❌ No completada':'— Sin registrar';
+      const adicBadge = (t.adicional && t.adicional!=='no') ? '<span style="font-size:9px;background:rgba(139,92,246,.2);color:var(--accent2);padding:1px 5px;border-radius:4px;margin-left:4px">'+(t.adicional==='adicional'?'ADIC.':'ECON.')+'</span>' : '';
+      const hitoBadge = t.esHito ? '<span style="font-size:9px;background:rgba(251,146,60,.2);color:var(--orange);padding:1px 5px;border-radius:4px;margin-left:5px">HITO</span>' : '';
+      const nRep = t.reprogCount||0;
+      const repBadge = nRep>0
+        ? `<span style="font-size:9px;background:${nRep>=2?'rgba(248,113,113,.2)':'rgba(251,146,60,.2)'};color:${nRep>=2?'var(--red)':'var(--orange)'};padding:1px 5px;border-radius:4px;margin-left:4px" title="${nRep>=2?'⚠ Tarea crónica: ':''}arrastrada ${nRep} vez/veces desde su semana original">↪×${nRep}</span>`
+        : '';
+      const arrBadge = t.arrastrada
+        ? '<span style="font-size:9px;background:rgba(90,90,114,.25);color:var(--text3);padding:1px 5px;border-radius:4px;margin-left:4px" title="Esta tarea se re-comprometió en una semana posterior">↪ movida</span>'
+        : '';
+      html += `<tr style="background:${stBg}">
+        <td style="font-size:11px;color:var(--text3)">${t.rubro||'—'}</td>
+        <td style="font-weight:600;max-width:200px">${t.tarea}${hitoBadge}${adicBadge}${repBadge}${arrBadge}</td>
+        <td style="font-size:12px;color:var(--text2)">${t.contratista||'—'}</td>
+        <td style="font-family:var(--mono);font-size:11px;color:var(--text3)">${t.fechaPlanInicio||'—'}</td>
+        <td style="font-family:var(--mono);font-size:11px;color:var(--text3)">${t.fechaPlanFin||'—'}</td>
+        <td style="text-align:center;font-size:11px;font-weight:600;color:${stTxt}">${stLabel}</td>
+        <td style="font-family:var(--mono);font-size:11px;color:${t.fechaRealFin?'var(--text2)':'var(--text3)'}">${t.fechaRealFin||'—'}</td>
+        <td style="font-size:11px;color:var(--orange)">${t.causaNoCumplimiento||'—'}</td>
+        <td style="text-align:center;white-space:nowrap">
+          <button class="btn-icon" onclick="openModalPacTarea(${idx})" title="Editar">✏️</button>
+          <button class="btn-icon" onclick="quickPacCumplimiento(${idx},'SI')" title="Marcar completada" style="font-size:15px;opacity:${t.cumplimiento==='SI'?1:0.4}">✅</button>
+          <button class="btn-icon" onclick="openModalPacNoCumplimiento(${idx})" title="Marcar no completada" style="font-size:15px;opacity:${t.cumplimiento==='NO'?1:0.4}">❌</button>
+          ${t.cumplimiento!=='SI' && !t.arrastrada ? `<button class="btn-icon" onclick="arrastrarTareaPAC(${idx})" title="Arrastrar a la semana siguiente (la original queda como no cumplida)" style="color:var(--orange)">↪</button>` : ''}
+          <button class="btn-icon" onclick="deletePacTarea(${idx})" title="Eliminar" style="color:var(--red)">🗑</button>
+        </td>
+      </tr>`;
+      if(t.restricciones){
+        html += `<tr style="background:rgba(251,146,60,.04)"><td colspan="9" style="padding:4px 16px;font-size:10px;color:var(--orange)">📌 Restricción: ${t.restricciones}</td></tr>`;
+      }
+      if(t.medidaCorrectiva){
+        html += `<tr style="background:rgba(56,189,248,.04)"><td colspan="9" style="padding:4px 16px;font-size:10px;color:var(--accent3)">🔧 Medida correctiva: ${t.medidaCorrectiva}</td></tr>`;
+      }
+    });
+
+    html += `</tbody></table></div>`;
+  });
+
+  wrap.innerHTML = html;
+}
+
+function renderPACDash() {
+  const lista = _pacFiltered();
+  const total = lista.length;
+  const comp  = lista.filter(t=>t.cumplimiento==='SI').length;
+  const noComp = lista.filter(t=>t.cumplimiento==='NO').length;
+  const pac = total > 0 ? Math.round((comp/total)*100) : 0;
+  const pacColor = pac>=80?'#4ade80':pac>=60?'#38bdf8':'#f87171';
+
+  // KPIs
+  const kpis = document.getElementById('pac-kpis');
+  if(kpis) kpis.innerHTML = [
+    {label:'PAC Global',val:pac+'%',color:pacColor},
+    {label:'Tareas planificadas',val:total,color:'var(--text)'},
+    {label:'Completadas',val:comp,color:'#4ade80'},
+    {label:'No completadas',val:noComp,color:'#f87171'},
+    {label:'Sin registrar',val:total-comp-noComp,color:'var(--text3)'},
+    {label:'Semanas activas',val:[...new Set(lista.map(t=>t.mes+'-'+t.semana))].length,color:'var(--accent)'},
+  ].map(k=>`<div class="dash-card"><div class="dash-card-lbl">${k.label}</div><div class="dash-card-val" style="color:${k.color}">${k.val}</div></div>`).join('');
+
+  if(typeof Chart==='undefined') return;
+
+  // — Donut PAC —
+  const ctxD = document.getElementById('chart-pac-donut');
+  if(ctxD){
+    if(chartPacDonut){chartPacDonut.destroy();chartPacDonut=null;}
+    chartPacDonut = new Chart(ctxD, {
+      type:'doughnut',
+      data:{labels:['Completadas','No completadas','Sin registrar'],datasets:[{data:[comp,noComp,total-comp-noComp],backgroundColor:['rgba(74,222,128,0.8)','rgba(248,113,113,0.8)','rgba(90,90,114,0.5)'],borderWidth:0}]},
+      options:{cutout:'72%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed}`}}}}
+    });
+    const lbl = document.getElementById('pac-donut-label');
+    if(lbl) lbl.innerHTML = `<span style="font-size:28px;font-weight:800;font-family:var(--mono);color:${pacColor}">${pac}%</span><br>PAC acumulado`;
+  }
+
+  // — Barras por semana + % línea —
+  const ctxS = document.getElementById('chart-pac-semanas');
+  if(ctxS){
+    if(chartPacSemanas){chartPacSemanas.destroy();chartPacSemanas=null;}
+    const gruposSem = {};
+    lista.forEach(t=>{
+      const k=`M${t.mes}·S${t.semana}`;
+      if(!gruposSem[k]) gruposSem[k]={comp:0,no:0,total:0};
+      gruposSem[k].total++;
+      if(t.cumplimiento==='SI') gruposSem[k].comp++;
+      else if(t.cumplimiento==='NO') gruposSem[k].no++;
+    });
+    const semKeys = Object.keys(gruposSem).sort();
+    chartPacSemanas = new Chart(ctxS,{
+      type:'bar',
+      data:{
+        labels:semKeys,
+        datasets:[
+          {label:'Completadas',data:semKeys.map(k=>gruposSem[k].comp),backgroundColor:'rgba(74,222,128,0.75)',borderRadius:3,yAxisID:'yN'},
+          {label:'No completadas',data:semKeys.map(k=>gruposSem[k].no),backgroundColor:'rgba(248,113,113,0.75)',borderRadius:3,yAxisID:'yN'},
+          {label:'% PAC',data:semKeys.map(k=>gruposSem[k].total>0?Math.round(gruposSem[k].comp/gruposSem[k].total*100):0),type:'line',borderColor:'#c8f135',backgroundColor:'rgba(200,241,53,0.1)',pointBackgroundColor:'#c8f135',tension:0.3,yAxisID:'yP',borderWidth:2}
+        ]
+      },
+      options:{
+        responsive:true,
+        plugins:{legend:{labels:{color:'#aaa',font:{size:10},boxWidth:10}}},
+        scales:{
+          yN:{type:'linear',position:'left',beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#888',font:{size:10}},stacked:true},
+          yP:{type:'linear',position:'right',min:0,max:100,grid:{drawOnChartArea:false},ticks:{color:'#c8f135',font:{size:10},callback:v=>v+'%'}},
+          x:{ticks:{color:'#888',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}
+        }
+      }
+    });
+  }
+
+  // — Barras horizontales por rubro —
+  const ctxR = document.getElementById('chart-pac-rubros');
+  if(ctxR){
+    if(chartPacRubros){chartPacRubros.destroy();chartPacRubros=null;}
+    const rubData = {};
+    lista.forEach(t=>{
+      const r = t.rubro||'Sin rubro';
+      if(!rubData[r]) rubData[r]={comp:0,total:0};
+      rubData[r].total++;
+      if(t.cumplimiento==='SI') rubData[r].comp++;
+    });
+    const rubs = Object.keys(rubData).sort();
+    chartPacRubros = new Chart(ctxR,{
+      type:'bar',
+      data:{
+        labels:rubs.map(r=>r.length>22?r.substring(0,20)+'…':r),
+        datasets:[{
+          label:'% Cumplimiento',
+          data:rubs.map(r=>rubData[r].total>0?Math.round(rubData[r].comp/rubData[r].total*100):0),
+          backgroundColor:rubs.map(r=>{const p=rubData[r].total>0?rubData[r].comp/rubData[r].total:0;return p>=0.8?'rgba(74,222,128,0.75)':p>=0.6?'rgba(56,189,248,0.75)':'rgba(248,113,113,0.75)';}),
+          borderRadius:4
+        }]
+      },
+      options:{
+        indexAxis:'y',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x}% completado`}}},
+        scales:{
+          x:{min:0,max:100,ticks:{color:'#888',font:{size:10},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}},
+          y:{ticks:{color:'#ccc',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}
+        }
+      }
+    });
+  }
+
+  // — Donut causas de no cumplimiento —
+  const ctxC = document.getElementById('chart-pac-causas');
+  if(ctxC){
+    if(chartPacCausas){chartPacCausas.destroy();chartPacCausas=null;}
+    const causas = {};
+    lista.filter(t=>t.cumplimiento==='NO'&&t.causaNoCumplimiento).forEach(t=>{
+      causas[t.causaNoCumplimiento]=(causas[t.causaNoCumplimiento]||0)+1;
+    });
+    const cKeys = Object.keys(causas);
+    // Empty-state idempotente: un único div de mensaje, canvas oculto/visible según haya datos
+    let emptyMsg = ctxC.parentElement.querySelector('.pac-causas-empty');
+    if(!emptyMsg){
+      emptyMsg = document.createElement('div');
+      emptyMsg.className = 'pac-causas-empty';
+      emptyMsg.style.cssText = 'display:none;text-align:center;padding:40px;color:var(--text3);font-size:12px';
+      emptyMsg.textContent = '✅ Sin causas de no cumplimiento';
+      ctxC.parentElement.appendChild(emptyMsg);
+    }
+    if(cKeys.length>0){
+      ctxC.style.display = 'block';
+      emptyMsg.style.display = 'none';
+      const palette=['rgba(56,189,248,0.8)','rgba(251,146,60,0.8)','rgba(248,113,113,0.8)','rgba(74,222,128,0.8)','rgba(139,92,246,0.8)','rgba(251,191,36,0.8)','rgba(236,72,153,0.8)'];
+      chartPacCausas = new Chart(ctxC,{
+        type:'doughnut',
+        data:{labels:cKeys,datasets:[{data:cKeys.map(k=>causas[k]),backgroundColor:cKeys.map((_,i)=>palette[i%palette.length]),borderWidth:0}]},
+        options:{cutout:'60%',plugins:{legend:{position:'right',labels:{color:'#aaa',font:{size:10},boxWidth:10,padding:8}}}}
+      });
+    } else {
+      ctxC.style.display = 'none';
+      emptyMsg.style.display = 'block';
+    }
+  }
+
+  // — Pareto de causas (histórico acumulado, respeta solo el filtro de rubro) —
+  const ctxP = document.getElementById('chart-pac-pareto');
+  const conclEl = document.getElementById('pac-pareto-conclusion');
+  if(ctxP){
+    if(chartPacPareto){chartPacPareto.destroy();chartPacPareto=null;}
+    const rubFil = document.getElementById('pac-filter-rubro')?.value || 'all';
+    const histBase = pacTareas.filter(t => rubFil==='all' || t.rubro===rubFil);
+    const cnt = {};
+    histBase.filter(t=>t.cumplimiento==='NO'&&t.causaNoCumplimiento).forEach(t=>{
+      cnt[t.causaNoCumplimiento] = (cnt[t.causaNoCumplimiento]||0)+1;
+    });
+    const pares = Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+    const totalInc = pares.reduce((s,[,v])=>s+v,0);
+    let empty = ctxP.parentElement.querySelector('.pac-pareto-empty');
+    if(!empty){
+      empty = document.createElement('div');
+      empty.className = 'pac-pareto-empty';
+      empty.style.cssText = 'display:none;text-align:center;padding:40px;color:var(--text3);font-size:12px';
+      ctxP.parentElement.insertBefore(empty, ctxP.nextSibling);
+    }
+    if(totalInc === 0){
+      ctxP.style.display='none'; empty.style.display='block';
+      empty.textContent = '✅ Todavía no hay incumplimientos con causa registrada';
+      if(conclEl) conclEl.innerHTML='';
+    } else {
+      ctxP.style.display='block'; empty.style.display='none';
+      // acumulado % para la línea de Pareto
+      let acum = 0;
+      const acumPct = pares.map(([,v])=>{ acum += v; return Math.round(acum/totalInc*100); });
+      // "pocos vitales": las causas hasta cruzar el 80%
+      let idx80 = acumPct.findIndex(p=>p>=80);
+      if(idx80 < 0) idx80 = pares.length-1;
+      chartPacPareto = new Chart(ctxP,{
+        data:{
+          labels: pares.map(([k])=>k),
+          datasets:[
+            { type:'bar', label:'Incumplimientos', data: pares.map(([,v])=>v),
+              backgroundColor: pares.map((_,i)=> i<=idx80 ? 'rgba(248,113,113,0.8)' : 'rgba(90,90,114,0.55)'),
+              borderRadius:3, yAxisID:'yC', order:2 },
+            { type:'line', label:'% acumulado', data: acumPct,
+              borderColor:'#c8f135', backgroundColor:'rgba(200,241,53,0.08)',
+              pointBackgroundColor:'#c8f135', pointRadius:3, tension:0.25, borderWidth:2,
+              yAxisID:'yP', order:1 }
+          ]
+        },
+        options:{
+          responsive:true,
+          plugins:{
+            legend:{labels:{color:'#aaa',font:{size:10},boxWidth:10}},
+            tooltip:{callbacks:{label:c=> c.dataset.type==='line'
+              ? ` Acumulado: ${c.parsed.y}%`
+              : ` ${c.parsed.y} incumplimiento(s) — ${Math.round(c.parsed.y/totalInc*100)}%`}}
+          },
+          scales:{
+            yC:{type:'linear',position:'left',beginAtZero:true,ticks:{color:'#888',font:{size:10},precision:0},grid:{color:'rgba(255,255,255,0.05)'}},
+            yP:{type:'linear',position:'right',min:0,max:100,ticks:{color:'#c8f135',font:{size:10},callback:v=>v+'%'},grid:{drawOnChartArea:false}},
+            x:{ticks:{color:'#ccc',font:{size:9},maxRotation:35,minRotation:0},grid:{display:false}}
+          }
+        }
+      });
+      if(conclEl){
+        const vitales = pares.slice(0, idx80+1);
+        const pctVitales = Math.round(vitales.reduce((s,[,v])=>s+v,0)/totalInc*100);
+        conclEl.innerHTML = `<div style="background:rgba(248,113,113,.08);border-left:3px solid var(--red);padding:8px 11px;border-radius:6px">
+          <strong style="color:var(--red)">${pctVitales}%</strong> de tus incumplimientos (${totalInc} en total) se explican por:
+          <strong style="color:var(--text)">${vitales.map(([k])=>k).join(' + ')}</strong>.
+          <span style="color:var(--text3)">Atacá esas causas primero.</span>
+        </div>`;
+      }
+    }
+  }
+
+  // — Tabla de tareas crónicas (arrastradas 2+ veces) —
+  const crEl = document.getElementById('pac-tabla-cronicas');
+  if(crEl){
+    const cronicas = pacTareas.filter(t=>(t.reprogCount||0)>=2)
+      .sort((a,b)=>(b.reprogCount||0)-(a.reprogCount||0));
+    crEl.innerHTML = cronicas.length===0
+      ? '<div style="color:var(--text3);font-size:12px;padding:8px">✅ Sin tareas crónicas — nada se arrastró 2 veces o más.</div>'
+      : cronicas.map(t=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 8px;border-bottom:1px solid var(--border)">
+          <span style="background:rgba(248,113,113,.2);color:var(--red);font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap">↪×${t.reprogCount}</span>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.tarea}</div>
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">M${t.mes}·S${t.semana}${t.contratista?' · '+t.contratista:''}${t.rubro?' · '+t.rubro:''}</div>
+          </div>
+        </div>`).join('');
+  }
+
+  // — Tabla hitos —
+  const hEl = document.getElementById('pac-tabla-hitos');
+  if(hEl){
+    const hitos = lista.filter(t=>t.esHito);
+    hEl.innerHTML = hitos.length===0
+      ? '<div style="color:var(--text3);font-size:12px;padding:8px">Sin hitos cargados.</div>'
+      : `<table style="width:100%;font-size:11px;border-collapse:collapse">`+
+        `<thead><tr>${['Mes/Sem','Tarea','Fecha plan fin','Restricciones'].map(h=>`<th style="text-align:left;padding:5px 8px;color:var(--text3);border-bottom:1px solid var(--border)">${h}</th>`).join('')}</tr></thead><tbody>`+
+        hitos.map(t=>`<tr><td style="padding:5px 8px;font-family:var(--mono);color:var(--text3)">M${t.mes}·S${t.semana}</td><td style="padding:5px 8px;font-weight:600;color:var(--orange)">${t.tarea}</td><td style="padding:5px 8px;font-family:var(--mono)">${t.fechaPlanFin||'—'}</td><td style="padding:5px 8px;color:var(--text3)">${t.restricciones||'—'}</td></tr>`).join('')+
+        `</tbody></table>`;
+  }
+
+  // — Tabla medidas correctivas —
+  const cEl = document.getElementById('pac-tabla-correctivas');
+  if(cEl){
+    const correc = lista.filter(t=>t.medidaCorrectiva);
+    cEl.innerHTML = correc.length===0
+      ? '<div style="color:var(--text3);font-size:12px;padding:8px">Sin medidas correctivas registradas.</div>'
+      : `<table style="width:100%;font-size:11px;border-collapse:collapse">`+
+        `<thead><tr>${['Rubro','Tarea','Causa','Medida'].map(h=>`<th style="text-align:left;padding:5px 8px;color:var(--text3);border-bottom:1px solid var(--border)">${h}</th>`).join('')}</tr></thead><tbody>`+
+        correc.map(t=>`<tr><td style="padding:5px 8px;color:var(--text3);font-size:10px">${t.rubro||'—'}</td><td style="padding:5px 8px;font-weight:600">${t.tarea}</td><td style="padding:5px 8px;color:var(--orange)">${t.causaNoCumplimiento||'—'}</td><td style="padding:5px 8px;color:var(--accent3)">${t.medidaCorrectiva}</td></tr>`).join('')+
+        `</tbody></table>`;
+  }
+}
+
+function openModalPacTarea(idx) {
+  editingPacIdx = idx;
+  const totalM = planificacion.duration_months || 6;
+  const selMes = document.getElementById('pac-t-mes');
+  const selRub = document.getElementById('pac-t-rubro');
+  if(!selMes) return;
+  selMes.innerHTML = Array.from({length:totalM},(_,i)=>`<option value="${i+1}">Mes ${i+1}</option>`).join('');
+  const chapOpts = [...new Set(presItems.map(p=>normalizeChapter(p.chapter)).filter(Boolean))].sort();
+  selRub.innerHTML = '<option value="">— Sin rubro —</option>'+chapOpts.map(c=>`<option value="${c}">${c}</option>`).join('');
+
+  document.getElementById('pac-modal-title').textContent = idx!==null ? 'Editar Tarea PAC' : 'Nueva Tarea PAC';
+  if(idx!==null && pacTareas[idx]){
+    const t = pacTareas[idx];
+    selRub.value = t.rubro||'';
+    document.getElementById('pac-t-contratista').value = t.contratista||'';
+    document.getElementById('pac-t-tarea').value = t.tarea||'';
+    selMes.value = t.mes||1;
+    document.getElementById('pac-t-semana').value = t.semana||1;
+    document.getElementById('pac-t-fecha-plan-ini').value = t.fechaPlanInicio||'';
+    document.getElementById('pac-t-fecha-plan-fin').value = t.fechaPlanFin||'';
+    document.getElementById('pac-t-cumplimiento').value = t.cumplimiento||'';
+    document.getElementById('pac-t-fecha-real').value = t.fechaRealFin||'';
+    document.getElementById('pac-t-causa').value = t.causaNoCumplimiento||'';
+    document.getElementById('pac-t-correctiva').value = t.medidaCorrectiva||'';
+    document.getElementById('pac-t-hito').value = t.esHito?'si':'no';
+    document.getElementById('pac-t-restricciones').value = t.restricciones||'';
+    document.getElementById('pac-t-adicional').value = t.adicional||'no';
+    document.getElementById('pac-t-presupuesto').value = t.presupuestoAdicional||'';
+  } else {
+    ['pac-t-contratista','pac-t-tarea','pac-t-fecha-plan-ini','pac-t-fecha-plan-fin','pac-t-fecha-real','pac-t-causa','pac-t-correctiva','pac-t-restricciones','pac-t-presupuesto'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    document.getElementById('pac-t-cumplimiento').value='';
+    document.getElementById('pac-t-hito').value='no';
+    document.getElementById('pac-t-adicional').value='no';
+  }
+  togglePacCausa();
+  openModal('modal-pac-tarea');
+}
+
+function togglePacCausa(){
+  const v = document.getElementById('pac-t-cumplimiento')?.value;
+  const w = document.getElementById('pac-causa-wrap');
+  if(w) w.style.display = v==='NO' ? 'block' : 'none';
+}
+
+function savePacTarea(){
+  const tarea = document.getElementById('pac-t-tarea').value.trim();
+  if(!tarea){ toast('Ingresá una descripción de tarea'); return; }
+  const t = {
+    id: (editingPacIdx!==null && pacTareas[editingPacIdx]) ? pacTareas[editingPacIdx].id : 'pac_'+Date.now(),
+    rubro: document.getElementById('pac-t-rubro').value,
+    tarea,
+    contratista: document.getElementById('pac-t-contratista').value.trim(),
+    mes: parseInt(document.getElementById('pac-t-mes').value)||1,
+    semana: parseInt(document.getElementById('pac-t-semana').value)||1,
+    fechaPlanInicio: document.getElementById('pac-t-fecha-plan-ini').value,
+    fechaPlanFin: document.getElementById('pac-t-fecha-plan-fin').value,
+    cumplimiento: document.getElementById('pac-t-cumplimiento').value || null,
+    fechaRealFin: document.getElementById('pac-t-fecha-real').value,
+    causaNoCumplimiento: document.getElementById('pac-t-causa').value,
+    medidaCorrectiva: document.getElementById('pac-t-correctiva').value.trim(),
+    esHito: document.getElementById('pac-t-hito').value==='si',
+    restricciones: document.getElementById('pac-t-restricciones').value.trim(),
+    adicional: document.getElementById('pac-t-adicional').value,
+    presupuestoAdicional: parseFloat(document.getElementById('pac-t-presupuesto').value)||0,
+    // preservar trazabilidad de reprogramaciones al editar
+    reprogCount: (editingPacIdx!==null && pacTareas[editingPacIdx]) ? (pacTareas[editingPacIdx].reprogCount||0) : 0,
+    origenId: (editingPacIdx!==null && pacTareas[editingPacIdx]) ? (pacTareas[editingPacIdx].origenId||null) : null,
+    arrastrada: (editingPacIdx!==null && pacTareas[editingPacIdx]) ? !!pacTareas[editingPacIdx].arrastrada : false,
+  };
+  if(editingPacIdx!==null) pacTareas[editingPacIdx]=t; else pacTareas.push(t);
+  save(); closeModal('modal-pac-tarea'); renderPAC();
+  if(pacView==='carga') renderPACCarga(); else renderPACDash();
+  toast(editingPacIdx!==null?'Tarea actualizada':'Tarea PAC agregada');
+}
+
+function quickPacCumplimiento(idx, estado){
+  if(!pacTareas[idx]) return;
+  pacTareas[idx].cumplimiento = pacTareas[idx].cumplimiento===estado ? null : estado;
+  if(estado==='SI' && !pacTareas[idx].fechaRealFin) pacTareas[idx].fechaRealFin = new Date().toISOString().split('T')[0];
+  save(); renderPACCarga();
+}
+
+function openModalPacNoCumplimiento(idx){
+  // Abre modal de tarea preseleccionando NO
+  openModalPacTarea(idx);
+  setTimeout(()=>{ document.getElementById('pac-t-cumplimiento').value='NO'; togglePacCausa(); },100);
+}
+
+// ---- Arrastrar tarea no cumplida a la semana siguiente ----
+// La original QUEDA marcada como NO en su semana (el PAC de esa semana no se maquilla)
+// y se crea un re-compromiso en la semana siguiente con el contador de arrastres.
+async function arrastrarTareaPAC(idx){
+  const t = pacTareas[idx];
+  if(!t) return;
+  const totalM = planificacion.duration_months || 6;
+  let nMes = t.mes, nSem = t.semana + 1;
+  if(nSem > 5){ nSem = 1; nMes++; }
+  if(nMes > totalM){ toast('⚠ No hay semanas futuras dentro del plazo de obra'); return; }
+
+  const veces = (t.reprogCount||0) + 1;
+  const avisoCronica = veces >= 2
+    ? `<div style="background:rgba(248,113,113,.1);border-left:3px solid var(--red);padding:8px 10px;border-radius:6px;margin-bottom:10px;font-size:12px"><strong style="color:var(--red)">⚠ Tarea crónica:</strong> sería el arrastre N° ${veces}. Revisá si la causa de fondo está resuelta antes de volver a comprometerla.</div>`
+    : '';
+  const avisoCausa = !t.causaNoCumplimiento
+    ? `<div style="background:rgba(251,146,60,.1);border-left:3px solid var(--orange);padding:8px 10px;border-radius:6px;margin-bottom:10px;font-size:12px">💡 Esta tarea no tiene <strong>causa de no cumplimiento</strong> cargada. Sin causa no aparece en el Pareto.</div>`
+    : '';
+  const ok = await confirmAction({
+    title:'Arrastrar a la semana siguiente',
+    body:`${avisoCronica}${avisoCausa}<strong>${t.tarea}</strong><br>
+      <span style="color:var(--text3);font-size:12px">M${t.mes}·S${t.semana} → <span style="color:var(--accent)">M${nMes}·S${nSem}</span></span><br><br>
+      <span style="font-size:12px">La tarea original queda registrada como <strong style="color:var(--red)">no completada</strong> en M${t.mes}·S${t.semana} (así el PAC de esa semana refleja el incumplimiento real) y se crea un nuevo compromiso en M${nMes}·S${nSem}.</span>`,
+    okText:'Arrastrar'
+  });
+  if(!ok) return;
+
+  // La original queda asentada como NO cumplida
+  t.cumplimiento = 'NO';
+  t.arrastrada = true;
+
+  pacTareas.push({
+    ...t,
+    id: 'pac_'+Date.now(),
+    mes: nMes, semana: nSem,
+    cumplimiento: null,
+    fechaRealFin: '',
+    causaNoCumplimiento: '',
+    arrastrada: false,
+    reprogCount: veces,
+    origenId: t.origenId || t.id
+  });
+  save(); renderPAC();
+  toast(`↪ Arrastrada a M${nMes}·S${nSem} — desvío asentado en M${t.mes}·S${t.semana}`);
+}
+
+async function deletePacTarea(idx){
+  const t = pacTareas[idx];
+  const ok = await confirmAction({title:'Eliminar tarea PAC',body:`Tarea: <strong>${t.tarea}</strong><br><span style="color:var(--text3);font-size:12px">M${t.mes}·S${t.semana} — ${t.rubro||'sin rubro'}</span>`,okText:'Eliminar',danger:true});
+  if(!ok) return;
+  pacTareas.splice(idx,1);
+  save(); renderPAC();
+  if(pacView==='carga') renderPACCarga(); else renderPACDash();
+}
+
+// ---- Generar tareas PAC desde el cronograma de Planificación ----
+let _pacGenItems = [];
+
+function _planItemsDelMes(mes){
+  const k = String(mes-1); // cronograma usa índice 0-based
+  const out = [];
+  presItems.filter(p=>p.visible!==false).forEach(p=>{
+    const bims = bimItems.filter(b=>b.code===p.code);
+    let pv = 0;
+    if(bims.length>0) bims.forEach(b=>pv += (b.cronograma?.[k]?.pv||0));
+    else pv = (p.cronograma?.[k]?.pv||0);
+    if(pv>0) out.push({code:p.code, desc:p.desc, unit:p.unit, chapter:normalizeChapter(p.chapter), pv});
+  });
+  return out;
+}
+
+function openModalPacGen(){
+  const totalM = planificacion.duration_months || 6;
+  const selMes = document.getElementById('pac-gen-mes');
+  selMes.innerHTML = Array.from({length:totalM},(_,i)=>`<option value="${i+1}">Mes ${i+1}</option>`).join('');
+  // si hay un mes filtrado en el PAC, arrancar ahí
+  const fm = document.getElementById('pac-filter-mes')?.value;
+  if(fm && fm!=='all') selMes.value = fm;
+  renderPacGenList();
+  openModal('modal-pac-gen');
+}
+
+function renderPacGenList(){
+  const mes = parseInt(document.getElementById('pac-gen-mes').value)||1;
+  const cont = document.getElementById('pac-gen-list');
+  _pacGenItems = _planItemsDelMes(mes);
+  if(_pacGenItems.length===0){
+    cont.innerHTML = '<div style="text-align:center;color:var(--text3);font-size:12px;padding:24px">Sin ítems con Plan Vigente en este mes.<br>Cargá cantidades en <b>Planificación y Control</b> primero.</div>';
+    return;
+  }
+  cont.innerHTML = _pacGenItems.map((it,i)=>{
+    const ya = pacTareas.some(t=>t.mes===mes && t.tarea.startsWith(it.code+' '));
+    return `<label style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;${ya?'opacity:.45':''}" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">
+      <input type="checkbox" data-gen-i="${i}" ${ya?'disabled':'checked'}>
+      <span class="code-badge">${it.code}</span>
+      <span style="flex:1;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${it.desc}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap">${it.pv.toFixed(1)} ${it.unit||'u'}</span>
+      ${ya?'<span style="font-size:9px;color:var(--text3);white-space:nowrap">ya creada</span>':''}
+    </label>`;
+  }).join('');
+}
+
+function generarTareasPAC(){
+  const mes = parseInt(document.getElementById('pac-gen-mes').value)||1;
+  const semana = parseInt(document.getElementById('pac-gen-semana').value)||1;
+  const checks = document.querySelectorAll('#pac-gen-list input[type=checkbox]:checked:not(:disabled)');
+  let n = 0;
+  checks.forEach(ch=>{
+    const it = _pacGenItems[parseInt(ch.dataset.genI)];
+    if(!it) return;
+    pacTareas.push({
+      id:'pac_'+Date.now()+'_'+n, rubro:it.chapter,
+      tarea:`${it.code} — ${it.desc} (${it.pv.toFixed(1)} ${it.unit||'u'})`,
+      contratista:'', mes, semana,
+      fechaPlanInicio:'', fechaPlanFin:'', cumplimiento:null, fechaRealFin:'',
+      causaNoCumplimiento:'', medidaCorrectiva:'', esHito:false, restricciones:'',
+      adicional:'no', presupuestoAdicional:0
+    });
+    n++;
+  });
+  if(n===0){ toast('No hay ítems seleccionados'); return; }
+  save(); closeModal('modal-pac-gen'); renderPAC();
+  toast(`⚡ ${n} tarea(s) creadas — Mes ${mes}, Semana ${semana}`);
+}
+
+// ---- Export PDF del reporte PAC ----
+function exportPacPDF(){
+  const lista = _pacFiltered();
+  if(lista.length===0){ toast('No hay tareas para exportar'); return; }
+  const total = lista.length;
+  const comp  = lista.filter(t=>t.cumplimiento==='SI').length;
+  const noComp = lista.filter(t=>t.cumplimiento==='NO').length;
+  const pac = total>0?Math.round((comp/total)*100):0;
+  const pacColor = pac>=80?'#16a34a':pac>=60?'#0ea5e9':'#dc2626';
+  const filMes = document.getElementById('pac-filter-mes')?.value;
+  const filSem = document.getElementById('pac-filter-sem')?.value;
+  const periodo = [filMes!=='all'?`Mes ${filMes}`:'',filSem!=='all'?`Semana ${filSem}`:''].filter(Boolean).join(' · ') || 'Período completo';
+
+  // Causas
+  const causas={};
+  lista.filter(t=>t.cumplimiento==='NO'&&t.causaNoCumplimiento).forEach(t=>{causas[t.causaNoCumplimiento]=(causas[t.causaNoCumplimiento]||0)+1;});
+  const causasHtml = Object.entries(causas).length>0
+    ? Object.entries(causas).map(([k,v])=>`<span style="background:#1e293b;padding:2px 8px;border-radius:4px;margin:2px;display:inline-block;font-size:11px">${k}: <strong>${v}</strong></span>`).join('')
+    : '<span style="color:#888;font-size:12px">Sin causas registradas</span>';
+
+  const gruposSem={};
+  lista.forEach(t=>{const k=`M${t.mes}·S${t.semana}`;if(!gruposSem[k])gruposSem[k]={mes:t.mes,semana:t.semana,lista:[]};gruposSem[k].lista.push(t);});
+
+  let tablaHtml='';
+  Object.values(gruposSem).sort((a,b)=>a.mes!==b.mes?a.mes-b.mes:a.semana-b.semana).forEach(g=>{
+    const gComp=g.lista.filter(t=>t.cumplimiento==='SI').length;
+    const gPac=g.lista.length>0?Math.round(gComp/g.lista.length*100):0;
+    tablaHtml+=`<tr><td colspan="7" style="background:#1e293b;color:#c8f135;font-weight:700;padding:8px 12px;font-size:12px">Mes ${g.mes} — Semana ${g.semana} &nbsp;·&nbsp; PAC: ${gPac}% (${gComp}/${g.lista.length})</td></tr>`;
+    g.lista.forEach(t=>{
+      const sc=t.cumplimiento==='SI'?'#16a34a':t.cumplimiento==='NO'?'#dc2626':'#555';
+      const sl=t.cumplimiento==='SI'?'✅ SÍ':t.cumplimiento==='NO'?'❌ NO':'—';
+      tablaHtml+=`<tr>
+        <td style="font-size:10px;color:#666">${t.rubro||'—'}</td>
+        <td style="font-size:11px;font-weight:600">${t.tarea}${t.esHito?' 🏁':''}</td>
+        <td style="font-size:11px">${t.contratista||'—'}</td>
+        <td style="font-family:monospace;font-size:10px">${t.fechaPlanFin||'—'}</td>
+        <td style="font-family:monospace;font-size:10px">${t.fechaRealFin||'—'}</td>
+        <td style="color:${sc};font-weight:700;text-align:center;font-size:11px">${sl}</td>
+        <td style="font-size:10px;color:#f97316">${t.causaNoCumplimiento||t.medidaCorrectiva?(t.causaNoCumplimiento||'')+(t.medidaCorrectiva?(' → '+t.medidaCorrectiva):''):'—'}</td>
+      </tr>`;
+    });
+  });
+
+  const printArea = document.getElementById('print-area');
+  printArea.innerHTML = `<style>
+    #print-area{font-family:'Space Grotesk',sans-serif;color:#111;background:#fff}
+    #print-area .ph{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #111;padding-bottom:12px;margin-bottom:20px}
+    #print-area .ptitle{font-size:22px;font-weight:800}#print-area .psub{font-size:13px;color:#555;margin-top:2px}
+    #print-area .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+    #print-area .kpi{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px;text-align:center}
+    #print-area .kpi-val{font-size:22px;font-weight:800;font-family:monospace}
+    #print-area .kpi-lbl{font-size:10px;color:#666;text-transform:uppercase;margin-top:3px}
+    #print-area table{width:100%;border-collapse:collapse;font-size:11px;margin-top:16px}
+    #print-area th{background:#0f172a;color:#fff;padding:7px 10px;text-align:left;font-size:10px;text-transform:uppercase;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #print-area td{padding:6px 10px;border-bottom:1px solid #e2e8f0}#print-area tr:nth-child(even) td{background:#f9fafb}
+    #print-area h3{font-size:13px;color:#334155;text-transform:uppercase;letter-spacing:.05em;margin:18px 0 8px}
+    #print-area .causas-wrap{background:#f1f5f9;padding:10px;border-radius:6px;margin-bottom:16px}
+    @media print{@page{size:A4 landscape;margin:1.2cm}}
+  </style>
+  <div class="ph">
+    <div><div class="ptitle">REPORTE PAC — ${currentObraName||'Obra'}</div><div class="psub">${periodo} · Generado ${new Date().toLocaleDateString('es-AR')}</div></div>
+    <div style="text-align:right;font-family:monospace;font-size:11px;color:#555">PAC ACUMULADO<br><span style="font-size:32px;font-weight:900;color:${pacColor}">${pac}%</span></div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">${total}</div><div class="kpi-lbl">Tareas planificadas</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:#16a34a">${comp}</div><div class="kpi-lbl">Completadas</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:#dc2626">${noComp}</div><div class="kpi-lbl">No completadas</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:#888">${total-comp-noComp}</div><div class="kpi-lbl">Sin registrar</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:${pacColor}">${pac}%</div><div class="kpi-lbl">PAC del período</div></div>
+  </div>
+  <h3>Causas de no cumplimiento</h3>
+  <div class="causas-wrap">${causasHtml}</div>
+  <table>
+    <thead><tr><th>Rubro</th><th>Tarea</th><th>Contratista</th><th>Plan fin</th><th>Fin real</th><th>Estado</th><th>Causa / Correctiva</th></tr></thead>
+    <tbody>${tablaHtml}</tbody>
+  </table>`;
+  setTimeout(()=>{ window.print(); setTimeout(()=>{printArea.innerHTML='';},1000); },150);
+  toast('Generando PDF...');
+}
+
+// =================== PRESUPUESTO META (m² / modo pozo) ===================
+
+function openModalMeta(){
+  document.getElementById('meta-m2').value = presupuestoMeta.m2 || '';
+  document.getElementById('meta-valor').value = presupuestoMeta.valorM2 || '';
+  document.getElementById('meta-moneda').value = presupuestoMeta.moneda || 'ARS';
+  document.getElementById('meta-fecha').value = presupuestoMeta.fecha || new Date().toISOString().split('T')[0];
+  document.getElementById('meta-tc').value = presupuestoMeta.tipoCambio || '';
+  document.getElementById('meta-terreno').value = presupuestoMeta.valorTerreno || '';
+  document.getElementById('meta-btn-off').style.display = presupuestoMeta.activo ? 'inline-flex' : 'none';
+  updateMetaPreview();
+  renderMetaHistorial();
+  openModal('modal-meta');
+}
+
+function updateMetaPreview(){
+  const m2 = parseFloat(document.getElementById('meta-m2').value)||0;
+  const v  = parseFloat(document.getElementById('meta-valor').value)||0;
+  const mon = document.getElementById('meta-moneda').value;
+  const tc  = parseFloat(document.getElementById('meta-tc').value)||0;
+  const terreno = parseFloat(document.getElementById('meta-terreno').value)||0;
+  const sim = mon==='USD' ? 'US$ ' : '$ ';
+  const construccion = m2*v;
+  const el = document.getElementById('meta-preview');
+  if(el) el.textContent = sim + Math.round(construccion).toLocaleString('es-AR');
+
+  const elUsd = document.getElementById('meta-preview-usd');
+  if(elUsd){
+    if(tc>0){
+      const equiv = mon==='USD' ? construccion*tc : construccion/tc;
+      elUsd.textContent = mon==='USD' ? `≈ $ ${Math.round(equiv).toLocaleString('es-AR')} ARS` : `≈ US$ ${Math.round(equiv).toLocaleString('es-AR')}`;
+    } else elUsd.textContent = '';
+  }
+
+  const wrapT = document.getElementById('meta-preview-terreno');
+  if(wrapT){
+    if(terreno>0){
+      wrapT.style.display = 'block';
+      const total = construccion + terreno;
+      const inc = total>0 ? (terreno/total*100) : 0;
+      document.getElementById('meta-preview-terreno-val').textContent = sim+Math.round(terreno).toLocaleString('es-AR');
+      document.getElementById('meta-preview-total-val').textContent = sim+Math.round(total).toLocaleString('es-AR');
+      document.getElementById('meta-preview-incidencia').textContent = `El terreno incide ${inc.toFixed(1)}% en la inversión total`;
+    } else wrapT.style.display = 'none';
+  }
+}
+
+function renderMetaHistorial(){
+  const el = document.getElementById('meta-historial');
+  if(!el) return;
+  const h = presupuestoMeta.historial || [];
+  if(h.length === 0){ el.innerHTML=''; return; }
+  el.innerHTML = `<div style="font-size:11px;color:var(--text3);margin-bottom:6px;font-family:var(--mono)">HISTORIAL DEL VALOR m²</div>
+    <div style="max-height:110px;overflow:auto;border:1px solid var(--border);border-radius:6px">
+    ${h.slice().reverse().map(r=>`<div style="display:flex;justify-content:space-between;padding:5px 9px;font-size:11px;border-bottom:1px solid var(--border)">
+        <span style="color:var(--text3);font-family:var(--mono)">${r.fecha||'—'}</span>
+        <span style="font-family:var(--mono)">${r.moneda==='USD'?'US$':'$'} ${Number(r.valorM2).toLocaleString('es-AR')}/m²</span>
+      </div>`).join('')}
+    </div>`;
+}
+
+function saveMeta(){
+  const m2 = parseFloat(document.getElementById('meta-m2').value)||0;
+  const v  = parseFloat(document.getElementById('meta-valor').value)||0;
+  if(m2<=0 || v<=0){ toast('Cargá superficie y valor del m²'); return; }
+  const moneda = document.getElementById('meta-moneda').value;
+  const fecha  = document.getElementById('meta-fecha').value;
+  const tipoCambio = parseFloat(document.getElementById('meta-tc').value)||0;
+  const valorTerreno = parseFloat(document.getElementById('meta-terreno').value)||0;
+  // guardar en historial solo si cambió el valor (sirve para redeterminación futura)
+  const h = presupuestoMeta.historial || [];
+  const ult = h[h.length-1];
+  if(!ult || ult.valorM2 !== v || ult.moneda !== moneda) h.push({fecha, valorM2:v, moneda});
+  presupuestoMeta = { activo:true, m2, valorM2:v, moneda, fecha, historial:h, tipoCambio, valorTerreno };
+  save(); closeModal('modal-meta');
+  if(currentTab==='guia') renderDashboard();
+  toast('🎯 Presupuesto Meta actualizado');
+}
+
+async function desactivarMeta(){
+  const ok = await confirmAction({title:'Desactivar Presupuesto Meta', body:'Se deja de mostrar el control por m². Los datos quedan guardados por si lo reactivás.', okText:'Desactivar', danger:true});
+  if(!ok) return;
+  presupuestoMeta.activo = false;
+  save(); closeModal('modal-meta');
+  if(currentTab==='guia') renderDashboard();
+  toast('Presupuesto Meta desactivado');
+}
+
+// Calcula los números del pozo. totalPres = presupuesto bottom-up (con K), AC = gasto real
+// "meta" es el costo de construcción puro (m² × valor m², igual que publica la CAC — no incluye terreno).
+// El terreno se suma aparte para la inversión total; no se resta del pozo de construcción.
+function getMetaNums(totalPres, AC){
+  const meta = (presupuestoMeta.m2||0) * (presupuestoMeta.valorM2||0);
+  const terreno = presupuestoMeta.valorTerreno||0;
+  const inversionTotal = meta + terreno;
+  const incidenciaTerreno = (terreno>0 && inversionTotal>0) ? (terreno/inversionTotal*100) : null;
+  const reserva = meta - totalPres;          // lo que queda sin computar al detalle
+  const disponible = meta - AC;              // lo que queda del pozo de construcción
+  const pctComputado = meta>0 ? (totalPres/meta)*100 : 0;
+  const pctGastado   = meta>0 ? (AC/meta)*100 : 0;
+  return { meta, terreno, inversionTotal, incidenciaTerreno, reserva, disponible, pctComputado, pctGastado };
+}
+
+function renderMetaPanel(totalPres, AC){
+  if(!presupuestoMeta.activo) return '';
+  const n = getMetaNums(totalPres, AC);
+  const sim = presupuestoMeta.moneda==='USD' ? 'US$ ' : '$ ';
+  const money = v => _oculto() ? '•••' : sim + Math.round(v).toLocaleString('es-AR');
+  // Notación compacta para las cards: un pozo de 9 dígitos no entra y se lee peor
+  const moneyC = v => {
+    if(_oculto()) return '•••';
+    const a = Math.abs(v), sg = v<0?'-':'';
+    if(a >= 1e6) return sg+sim+(a/1e6).toLocaleString('es-AR',{minimumFractionDigits:1,maximumFractionDigits:1})+' M';
+    if(a >= 1e3) return sg+sim+Math.round(a).toLocaleString('es-AR');
+    return sg+sim+a.toLocaleString('es-AR',{maximumFractionDigits:0});
+  };
+  const sobrepasado = n.reserva < 0;
+  const alerta = sobrepasado
+    ? `<div style="background:rgba(248,113,113,.1);border-left:3px solid var(--red);padding:9px 12px;border-radius:6px;margin-top:12px;font-size:12px">
+         <strong style="color:var(--red)">⚠ El detalle superó la meta.</strong> Lo computado por APU excede el pozo en <strong>${money(Math.abs(n.reserva))}</strong>. O la obra se encareció, o el valor del m² quedó viejo.
+       </div>`
+    : (n.pctComputado>85
+      ? `<div style="background:rgba(251,146,60,.1);border-left:3px solid var(--orange);padding:9px 12px;border-radius:6px;margin-top:12px;font-size:12px">
+           <strong style="color:var(--orange)">⚠ Reserva ajustada.</strong> Ya computaste el ${n.pctComputado.toFixed(0)}% del pozo. Queda poco margen para lo que falta definir (terminaciones, griferías, etc.).
+         </div>`
+      : '');
+
+  const pctComp = Math.min(100, Math.max(0, n.pctComputado));
+  const pctGast = Math.min(100, Math.max(0, n.pctGastado));
+
+  return `
+  <div style="padding:0 20px;margin-bottom:20px">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div>
+          <h3 style="margin:0;font-size:14px;color:var(--text)">🎯 Presupuesto Meta — Control por m²</h3>
+          <div style="font-size:11px;color:var(--text3);margin-top:3px;font-family:var(--mono)">${presupuestoMeta.m2} m² × ${money(presupuestoMeta.valorM2)}/m²${presupuestoMeta.fecha?' · valor de '+presupuestoMeta.fecha:''}</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="openModalMeta()">Configurar</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px">
+        <div class="dash-card">
+          <div class="dash-card-lbl">Pozo total (Meta)</div>
+          <div class="dash-card-val" style="font-size:21px;color:var(--accent)">${moneyC(n.meta)}</div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${money(n.meta)}</div>
+          ${presupuestoMeta.tipoCambio>0 ? `<div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${presupuestoMeta.moneda==='USD' ? '≈ $ '+Math.round(n.meta*presupuestoMeta.tipoCambio).toLocaleString('es-AR') : '≈ US$ '+Math.round(n.meta/presupuestoMeta.tipoCambio).toLocaleString('es-AR')}</div>` : ''}
+        </div>
+        <div class="dash-card"><div class="dash-card-lbl">Computado por APU</div><div class="dash-card-val" style="font-size:21px">${moneyC(totalPres)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${n.pctComputado.toFixed(1)}% del pozo</div></div>
+        <div class="dash-card"><div class="dash-card-lbl">Reserva sin computar</div><div class="dash-card-val" style="font-size:21px;color:${sobrepasado?'var(--red)':'var(--M)'}">${moneyC(n.reserva)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${sobrepasado?'excedido':'para lo no definido'}</div></div>
+        <div class="dash-card"><div class="dash-card-lbl">Gastado real</div><div class="dash-card-val" style="font-size:21px;color:rgba(251,146,60,.95)">${moneyC(AC)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${n.pctGastado.toFixed(1)}% del pozo</div></div>
+        <div class="dash-card"><div class="dash-card-lbl">Disponible del pozo</div><div class="dash-card-val" style="font-size:21px;color:${n.disponible>=0?'var(--green)':'var(--red)'}">${moneyC(n.disponible)}</div></div>
+      </div>
+
+      ${n.terreno>0 ? `
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px;padding-top:4px;border-top:1px dashed var(--border)">
+        <div class="dash-card"><div class="dash-card-lbl">Valor del terreno</div><div class="dash-card-val" style="font-size:19px;color:var(--MO)">${moneyC(n.terreno)}</div></div>
+        <div class="dash-card"><div class="dash-card-lbl">Inversión total (terreno + construcción)</div><div class="dash-card-val" style="font-size:19px">${moneyC(n.inversionTotal)}</div></div>
+        <div class="dash-card"><div class="dash-card-lbl">Incidencia del terreno</div><div class="dash-card-val" style="font-size:19px;color:var(--orange)">${n.incidenciaTerreno.toFixed(1)}%</div><div style="font-size:10px;color:var(--text3);margin-top:3px">sobre la inversión total</div></div>
+      </div>` : ''}
+
+      <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px;display:flex;justify-content:space-between">
+        <span>CONSUMO DEL POZO</span><span>${money(n.meta)}</span>
+      </div>
+      <div style="position:relative;background:rgba(255,255,255,.06);height:22px;border-radius:6px;overflow:hidden">
+        <div style="position:absolute;left:0;top:0;height:100%;width:${pctComp}%;background:rgba(200,241,53,.28)" title="Computado por APU"></div>
+        <div style="position:absolute;left:0;top:0;height:100%;width:${pctGast}%;background:rgba(251,146,60,.85)" title="Gastado real"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:7px;font-size:10px;color:var(--text3)">
+        <span><span style="display:inline-block;width:9px;height:9px;background:rgba(200,241,53,.28);border-radius:2px;margin-right:4px"></span>Computado por APU</span>
+        <span><span style="display:inline-block;width:9px;height:9px;background:rgba(251,146,60,.85);border-radius:2px;margin-right:4px"></span>Gastado real</span>
+      </div>
+      ${alerta}
+    </div>
+  </div>`;
+}
+
+// =================== OCULTAR DETALLE APU (dashboard) ===================
+function toggleOcultarDetalleApu(){
+  ocultarDetalleApu = !ocultarDetalleApu;
+  const btn = document.getElementById('btn-ocultar-apu');
+  if(btn){
+    btn.textContent = ocultarDetalleApu ? '📊 Detalle APU oculto' : '📊 Ocultar detalle por APU';
+    btn.style.color = ocultarDetalleApu ? 'var(--orange)' : 'var(--text3)';
+    btn.style.borderColor = ocultarDetalleApu ? 'rgba(251,146,60,.4)' : 'var(--border)';
+  }
+  save();
+  if(currentTab==='guia') renderDashboard();
+}
+
+// =================== MODO PRESENTACIÓN ===================
+function toggleModoPresentacion(){
+  modoPresentacion = !modoPresentacion;
+  const btn = document.getElementById('btn-modo-pres');
+  if(btn){
+    btn.textContent = modoPresentacion ? '🙈 Valores ocultos' : '👁 Modo presentación';
+    btn.style.color = modoPresentacion ? 'var(--orange)' : 'var(--text3)';
+    btn.style.borderColor = modoPresentacion ? 'rgba(251,146,60,.4)' : 'var(--border)';
+  }
+  showTab(currentTab);
+  toast(modoPresentacion ? '🙈 Importes ocultos — los PDF siguen saliendo con valores' : '👁 Importes visibles');
+}
+
+// Los export deben mostrar siempre los importes reales, aunque el modo presentación esté activo
+['exportPresPDF','exportComputoPDF','printCertificado','exportGanttPDF','exportGanttRubrosPDF','exportPres','exportBIM','exportPacPDF']
+.forEach(fnName => {
+  const orig = window[fnName];
+  if(typeof orig !== 'function') return;
+  window[fnName] = function(...args){
+    const prev = _forceMoney;
+    _forceMoney = true;
+    try { return orig.apply(this, args); }
+    finally { _forceMoney = prev; }
+  };
+});
+
 // =================== INIT ===================
 loadObrasList();
 load();syncAll();renderInsumos();
+initBackup();
 
-// Advertencia al cerrar tab — los datos se guardan localmente, previene cierres accidentales
+// Advertencia al cerrar tab — sólo si el último save falló (quota, etc)
 window.addEventListener('beforeunload', e => {
-  e.preventDefault();
-  e.returnValue = '';
+  if(_saveErrorShown){
+    e.preventDefault();
+    e.returnValue = 'Hay cambios sin guardar por error de almacenamiento. ¿Seguro que querés salir?';
+  }
 });
 </script>
 
@@ -4754,29 +6601,29 @@ window.addEventListener('beforeunload', e => {
   <div style="background:#18181c;border:1px solid #2a2a35;border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,0.55);overflow:hidden;">
     <div id="gantt-tip-header" style="padding:9px 12px 7px;border-bottom:1px solid #2a2a35;display:flex;align-items:center;gap:8px;">
       <span id="gantt-tip-dot" style="display:inline-block;width:9px;height:9px;border-radius:2px;flex-shrink:0;"></span>
-      <span id="gantt-tip-rubro" style="font-size:11px;font-weight:700;color:#e8e8f0;font-family:'Syne',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;"></span>
+      <span id="gantt-tip-rubro" style="font-size:11px;font-weight:700;color:#e8e8f0;font-family:'Space Grotesk',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;"></span>
     </div>
     <div style="padding:10px 12px 11px;">
-      <div id="gantt-tip-mes" style="font-size:10px;color:#9090a8;font-family:'DM Mono',monospace;margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase;"></div>
+      <div id="gantt-tip-mes" style="font-size:10px;color:#9090a8;font-family:'IBM Plex Mono',monospace;margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase;"></div>
       <div style="display:flex;flex-direction:column;gap:5px;">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
           <span style="font-size:9px;color:#5a5a72;text-transform:uppercase;letter-spacing:.06em;">Plan</span>
-          <span id="gantt-tip-pv" style="font-size:12px;font-weight:700;color:#e8e8f0;font-family:'DM Mono',monospace;"></span>
+          <span id="gantt-tip-pv" style="font-size:12px;font-weight:700;color:#e8e8f0;font-family:'IBM Plex Mono',monospace;"></span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
           <span style="font-size:9px;color:#5a5a72;text-transform:uppercase;letter-spacing:.06em;">Ejecutado</span>
-          <span id="gantt-tip-ej" style="font-size:12px;font-weight:600;color:#38bdf8;font-family:'DM Mono',monospace;"></span>
+          <span id="gantt-tip-ej" style="font-size:12px;font-weight:600;color:#38bdf8;font-family:'IBM Plex Mono',monospace;"></span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
           <span style="font-size:9px;color:#5a5a72;text-transform:uppercase;letter-spacing:.06em;">Gasto real</span>
-          <span id="gantt-tip-gr" style="font-size:12px;font-weight:600;color:#fb923c;font-family:'DM Mono',monospace;"></span>
+          <span id="gantt-tip-gr" style="font-size:12px;font-weight:600;color:#fb923c;font-family:'IBM Plex Mono',monospace;"></span>
         </div>
       </div>
       <!-- Mini barra de progreso -->
       <div id="gantt-tip-bar-wrap" style="margin-top:10px;display:none;">
         <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
           <span style="font-size:9px;color:#5a5a72;text-transform:uppercase;letter-spacing:.06em;">Avance</span>
-          <span id="gantt-tip-pct" style="font-size:10px;font-weight:700;font-family:'DM Mono',monospace;"></span>
+          <span id="gantt-tip-pct" style="font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace;"></span>
         </div>
         <div style="height:5px;background:#2a2a35;border-radius:4px;overflow:hidden;">
           <div id="gantt-tip-bar" style="height:100%;border-radius:4px;transition:width .2s;"></div>
