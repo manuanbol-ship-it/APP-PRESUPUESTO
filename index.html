@@ -211,9 +211,24 @@ tr:hover td{background:rgba(255,255,255,.015)}
 .dash-empty{border:1px dashed var(--border2);border-radius:12px;padding:32px 26px;text-align:center;background:var(--surface)}
 .dash-empty h3{font-family:var(--display);font-size:16px;color:var(--text);margin-bottom:8px}
 .dash-empty p{font-size:13px;color:var(--text3);line-height:1.7;max-width:540px;margin:0 auto 18px}
-.dash-empty .dash-steps{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px}
-.dash-empty .dash-steps span{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 11px;color:var(--text2)}
-.dash-empty .dash-steps i{color:var(--text3);font-style:normal;align-self:center}
+.dash-steps{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px}
+.dash-steps span{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 11px;color:var(--text2)}
+.dash-steps i{color:var(--text3);font-style:normal;align-self:center}
+/* Franja de "obra sin números": avisa sin tapar el tablero */
+.dash-empty-bar{display:flex;align-items:center;justify-content:space-between;gap:12px 18px;flex-wrap:wrap;padding:12px 16px;border:1px dashed var(--border2);border-radius:10px;background:rgba(200,241,53,.03)}
+.dash-empty-bar-txt{font-size:12.5px;color:var(--text3)}
+.dash-empty-bar-txt b{color:var(--text);font-weight:600}
+.dash-empty-bar .dash-steps{justify-content:flex-end}
+/* Curva vacía: grilla + S fantasma + mensaje */
+.dash-chart-ghost{position:relative;height:260px}
+.dash-chart-ghost svg{position:absolute;inset:0;width:100%;height:100%}
+.dash-chart-ghost-x{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--text3)}
+.dash-chart-ghost-msg{position:absolute;inset:0 0 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:5px;padding:0 20px}
+.dash-chart-ghost-t{font-size:13px;font-weight:600;color:var(--text2);background:var(--surface);padding:3px 10px;border-radius:6px}
+.dash-chart-ghost-s{font-size:11px;color:var(--text3);font-family:var(--mono);background:var(--surface);padding:2px 8px;border-radius:5px}
+.dash-chart-legend{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:var(--text3);opacity:.7}
+.dash-chart-legend span{display:inline-flex;align-items:center;gap:6px}
+.dash-chart-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
 .dash-guide{padding:0}
 .dash-guide summary{cursor:pointer;padding:14px 20px;font-size:14px;font-weight:600;color:var(--text);list-style:none;display:flex;align-items:center;gap:9px;user-select:none}
 .dash-guide summary::-webkit-details-marker{display:none}
@@ -5202,26 +5217,24 @@ function renderDashboard() {
     return;
   }
 
-  // Obra recién creada: mostrar por dónde empezar en vez de una grilla de ceros y guiones
-  if(totalPres===0 && AC===0 && totalEmitidoBruto===0){
-    container.innerHTML = `
-      ${renderMetaPanel(totalCostoDirecto, AC)}
-      ${renderProyeccionPanel()}
-      <div style="padding:20px">
-        <div class="dash-empty">
-          <h3>Todavía no hay números para mostrar</h3>
-          <p>El panel se llena solo a medida que cargás la obra: precios en Insumos, los APU que los combinan, las cantidades en el Presupuesto y el avance mes a mes en Planificación.</p>
-          <div class="dash-steps">
-            <span>1 · Insumos</span><i>→</i><span>2 · APU</span><i>→</i><span>3 · Presupuesto</span><i>→</i><span>4 · Planificación</span>
-          </div>
-        </div>
-      </div>`;
-    return;
-  }
+  // Obra sin números todavía (o alguien que abre la app por primera vez, sin localStorage):
+  // el tablero se dibuja entero igual, con sus cards, curva y rubros en cero. Sólo se suma
+  // una franja arriba que explica por dónde empezar.
+  const obraVacia = totalPres===0 && AC===0 && totalEmitidoBruto===0;
+  const sinEVM = PV === 0;
 
   let html = `
     ${renderMetaPanel(totalCostoDirecto, AC)}
     ${renderProyeccionPanel()}
+    ${obraVacia ? `
+    <div style="padding:20px 20px 0">
+      <div class="dash-empty-bar">
+        <div class="dash-empty-bar-txt"><b>Obra sin números todavía.</b> El tablero se completa solo a medida que cargás la obra.</div>
+        <div class="dash-steps">
+          <span>1 · Insumos</span><i>→</i><span>2 · APU</span><i>→</i><span>3 · Presupuesto</span><i>→</i><span>4 · Planificación</span>
+        </div>
+      </div>
+    </div>` : ''}
     <div style="padding:20px 20px 0">
       <h3 class="dash-sec-t">Estado económico</h3>
       <div class="dash-hero">
@@ -5248,14 +5261,15 @@ function renderDashboard() {
       </div>
     </div>
 
-    ${hayCurva ? `
     <div style="padding:20px 20px 0">
       <h3 class="dash-sec-t">Curva de avance — plan vs. ejecutado vs. gasto</h3>
       <div class="dash-chart-card">
-        <div style="height:260px"><canvas id="chart-dash-evm"></canvas></div>
-        <div class="dash-chart-note">El gasto real de la curva es sólo el de los ítems del cronograma. Los GG (${fmt(ggReal)}) y los imprevistos (${fmt(impReal)}) no tienen mes asignado, así que suman en el AC de arriba pero no se reparten acá.</div>
+        ${hayCurva
+          ? `<div style="height:260px"><canvas id="chart-dash-evm"></canvas></div>
+        <div class="dash-chart-note">El gasto real de la curva es sólo el de los ítems del cronograma. Los GG (${fmt(ggReal)}) y los imprevistos (${fmt(impReal)}) no tienen mes asignado, así que suman en el AC de arriba pero no se reparten acá.</div>`
+          : renderDashChartVacio(Math.max(nMeses, 6))}
       </div>
-    </div>` : ''}
+    </div>
 
     <div style="padding:20px 20px 0">
       <h3 class="dash-sec-t">Certificación y plazo</h3>
@@ -5283,9 +5297,8 @@ function renderDashboard() {
       </div>
     </div>
 
-    ${PV > 0 ? `
     <div style="padding:0 20px; margin-top:8px">
-      <h3 class="dash-sec-t">Control EVM — Mes ${mesActual} de ${mesesTotales}</h3>
+      <h3 class="dash-sec-t">Control EVM — ${sinEVM ? 'sin períodos cargados' : `Mes ${mesActual} de ${mesesTotales}`}</h3>
       <div style="display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:12px">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center">
           <div style="font-size:11px;color:var(--text3);margin-bottom:6px">SPI (Schedule Perf. Index)</div>
@@ -5299,16 +5312,16 @@ function renderDashboard() {
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center">
           <div style="font-size:11px;color:var(--text3);margin-bottom:6px">SV — Desvío de Plazo</div>
-          <div style="font-size:18px;font-weight:bold;font-family:var(--mono);color:${SV>=0?'var(--green)':'var(--red)'}">${signStr(SV)}${fmt(SV)}</div>
-          <div style="font-size:10px;color:var(--text3);margin-top:4px">${SV>=0?'Adelantado':'Retrasado'}</div>
+          <div style="font-size:18px;font-weight:bold;font-family:var(--mono);color:${sinEVM?'var(--text3)':SV>=0?'var(--green)':'var(--red)'}">${signStr(SV)}${fmt(SV)}</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px">${sinEVM?'Sin datos':SV>=0?'Adelantado':'Retrasado'}</div>
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center">
           <div style="font-size:11px;color:var(--text3);margin-bottom:6px">CV — Desvío de Costo</div>
-          <div style="font-size:18px;font-weight:bold;font-family:var(--mono);color:${CV>=0?'var(--green)':'var(--red)'}">${signStr(CV)}${fmt(CV)}</div>
-          <div style="font-size:10px;color:var(--text3);margin-top:4px">${CV>=0?'Ahorro':'Sobrecosto'}</div>
+          <div style="font-size:18px;font-weight:bold;font-family:var(--mono);color:${sinEVM?'var(--text3)':CV>=0?'var(--green)':'var(--red)'}">${signStr(CV)}${fmt(CV)}</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px">${sinEVM?'Sin datos':CV>=0?'Ahorro':'Sobrecosto'}</div>
         </div>
       </div>
-    </div>` : ''}
+    </div>
 
     <div style="padding:0 20px; margin-top:20px">
       <h3 class="dash-sec-t">Avance por Rubro</h3>
@@ -5317,9 +5330,11 @@ function renderDashboard() {
 
   Object.keys(chapData).sort().forEach(chap => {
     const d = chapData[chap];
-    if(d.total > 0) {
-       const pctExec = Math.min((d.exec / d.total) * 100, 100);
-       const pctCert = Math.min((d.cert / d.total) * 100, 100);
+    // Con la obra vacía se muestran todos los rubros en 0%, para que se vea la estructura.
+    // Con datos, sólo los que tienen importe (igual que antes).
+    if(d.total > 0 || obraVacia) {
+       const pctExec = d.total > 0 ? Math.min((d.exec / d.total) * 100, 100) : 0;
+       const pctCert = d.total > 0 ? Math.min((d.cert / d.total) * 100, 100) : 0;
        html += `
          <div style="background:var(--surface);padding:14px 18px;border-radius:10px;border:1px solid var(--border)">
             <div style="display:flex;justify-content:space-between;margin-bottom:12px;align-items:center">
@@ -5350,6 +5365,41 @@ function renderDashboard() {
   html += `</div></div>`;
   container.innerHTML = html;
   if(hayCurva) renderDashEVMChart(seriePV, serieEV, serieAC);
+}
+
+// Placeholder de la curva cuando todavía no hay cronograma cargado: la grilla, los meses
+// y una S fantasma en gris, con un mensaje encima. Es ilustrativa, no son datos.
+function renderDashChartVacio(meses){
+  const W = 600, H = 220, padB = 26;
+  const grid = [0,1,2,3,4].map(i => {
+    const y = 12 + i * ((H - padB - 12) / 4);
+    return `<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
+  }).join('');
+  const base = H - padB;
+  const curva = `M0,${base} C${W*0.30},${base} ${W*0.42},18 ${W},14`;
+  // Los meses van en HTML: dentro de un SVG estirado (preserveAspectRatio none) el texto se deforma
+  const labels = Array.from({length:meses},(_,i)=>`<span>Mes ${i+1}</span>`).join('');
+  return `
+    <div class="dash-chart-ghost">
+      <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="ghostArea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="rgba(144,144,168,.13)"/><stop offset="1" stop-color="rgba(144,144,168,0)"/>
+        </linearGradient></defs>
+        ${grid}
+        <path d="${curva} L${W},${base} Z" fill="url(#ghostArea)"/>
+        <path d="${curva}" fill="none" stroke="rgba(144,144,168,.35)" stroke-width="2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <div class="dash-chart-ghost-x">${labels}</div>
+      <div class="dash-chart-ghost-msg">
+        <div class="dash-chart-ghost-t">La curva aparece cuando cargues el plan</div>
+        <div class="dash-chart-ghost-s">Cantidades en el Presupuesto y avance mes a mes en Planificación y Control</div>
+      </div>
+    </div>
+    <div class="dash-chart-legend">
+      <span><i style="background:#c8f135"></i>Plan vigente (PV)</span>
+      <span><i style="background:#38bdf8"></i>Ejecutado (EV)</span>
+      <span><i style="background:#fb923c"></i>Gasto real de ítems (AC)</span>
+    </div>`;
 }
 
 // Curva de avance del dashboard: PV, EV y AC acumulados mes a mes.
