@@ -8,22 +8,23 @@
 <style>
 :root{--bg:#0f0f11;--surface:#18181c;--surface2:#1f1f26;--border:#2a2a35;--border2:#3a3a4a;--accent:#c8f135;--accent2:#8b5cf6;--accent3:#38bdf8;--text:#e8e8f0;--text2:#9090a8;--text3:#5a5a72;--red:#f87171;--orange:#fb923c;--green:#4ade80;--yellow:#fbbf24;--M:#38bdf8;--MO:#a78bfa;--E:#fb923c;--SC:#4ade80;--mono:'IBM Plex Mono',monospace;--sans:'Space Grotesk',sans-serif;--display:'Space Grotesk',sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;background-image:radial-gradient(920px 500px at 16% -10%,rgba(200,241,53,.05),transparent 62%),radial-gradient(760px 440px at 94% 2%,rgba(56,189,248,.045),transparent 64%);background-attachment:fixed}
 .app-shell{display:flex;height:100vh;overflow:hidden}
-.sidebar{width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column}
+.sidebar{width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow:hidden}
 .logo{padding:24px 20px 20px;border-bottom:1px solid var(--border)}
 .logo-title{font-family:var(--display);font-weight:800;font-size:15px;color:var(--accent);letter-spacing:.05em;line-height:1.2}
 .logo-sub{font-size:10px;color:var(--text3);font-family:var(--mono);margin-top:4px;letter-spacing:.08em}
-.nav{padding:12px 8px;flex:1}
+.nav{padding:12px 8px;flex:1;overflow-y:auto;min-height:60px}
 .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;margin-bottom:2px;transition:all .15s;font-size:13px;font-weight:500;color:var(--text2);border:1px solid transparent}
 .nav-item:hover{background:var(--surface2);color:var(--text)}
-.nav-item.active{background:rgba(200,241,53,.08);color:var(--accent);border-color:rgba(200,241,53,.2)}
+.nav-item.active{background:rgba(200,241,53,.08);color:var(--accent);border-color:rgba(200,241,53,.2);position:relative}
+.nav-item.active::before{content:'';position:absolute;left:-8px;top:50%;transform:translateY(-50%);width:3px;height:18px;background:var(--accent);border-radius:0 3px 3px 0}
 .nav-badge{margin-left:auto;font-family:var(--mono);font-size:10px;background:var(--surface2);color:var(--text3);padding:2px 6px;border-radius:20px}
 .nav-item.active .nav-badge{background:rgba(200,241,53,.15);color:var(--accent)}
 .flag-e{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;font-size:9px;font-weight:800;margin-left:4px;cursor:default;background:rgba(248,113,113,.18);color:var(--red);border:1px solid rgba(248,113,113,.35);flex-shrink:0;vertical-align:middle;line-height:1}
 .flag-w{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;font-size:9px;font-weight:800;margin-left:4px;cursor:default;background:rgba(251,191,36,.15);color:var(--yellow);border:1px solid rgba(251,191,36,.3);flex-shrink:0;vertical-align:middle;line-height:1}
 .issues-pill{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:20px;background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.3)}
-.sidebar-footer{padding:12px 16px;border-top:1px solid var(--border)}
+.sidebar-footer{padding:12px 16px;border-top:1px solid var(--border);flex-shrink:0;max-height:52vh;overflow-y:auto}
 .k-display{font-family:var(--mono);font-size:11px;color:var(--text3)}
 .k-value{color:var(--accent);font-size:14px;font-weight:500}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
@@ -162,6 +163,64 @@ tr:hover td{background:rgba(255,255,255,.015)}
 .dash-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.6s ease}
 .dash-guide{background:url('data:image/svg+xml;utf8,<svg width=\"20\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"2\" cy=\"2\" r=\"1\" fill=\"rgba(255,255,255,0.05)\"/></svg>');background-color:#111;padding:24px;border-radius:12px;display:flex;flex-direction:column;gap:12px;color:var(--text2);font-size:13px;line-height:1.6}
 .dash-guide h3{color:#fff;margin:0;font-size:16px;display:flex;align-items:center;gap:8px}
+/* ===== SIDEBAR FOOTER COMPACTO ===== */
+.sidebar-footer{padding:10px 12px 12px;display:flex;flex-direction:column;gap:8px;max-height:none;overflow:visible}
+.sf-row{display:flex;align-items:center;gap:8px}
+.sf-k{display:flex;align-items:baseline;gap:6px;flex:1;min-width:0}
+.sf-k-lbl{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em}
+.sf-pill{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:20px;cursor:pointer;background:transparent;border:1px solid var(--border);color:var(--text3);transition:all .15s;white-space:nowrap}
+.sf-pill:hover{border-color:var(--border2);color:var(--text)}
+.sf-pill.warn{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3);color:var(--yellow)}
+.sf-pill.err{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.3);color:var(--red)}
+.sf-ajustes{display:flex;align-items:center;gap:8px;width:100%;padding:9px 11px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.sf-ajustes:hover{border-color:var(--border2);color:var(--text)}
+.sf-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);margin-left:auto;flex-shrink:0}
+.sf-dot.ok{background:var(--green)}
+.sf-dot.warn{background:var(--orange)}
+.sf-dot.err{background:var(--red)}
+/* ===== MODAL AJUSTES DE OBRA ===== */
+.aj-sec{margin-bottom:18px}
+.aj-sec-t{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px}
+.aj-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.aj-btn{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-family:var(--sans);font-size:12px;font-weight:500;text-align:left;cursor:pointer;transition:all .15s;width:100%}
+.aj-btn:hover{border-color:var(--border2);color:var(--text)}
+.aj-btn span.aj-ic{font-size:14px;flex-shrink:0}
+/* ===== DASHBOARD ===== */
+.dash-sec-t{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px;font-weight:500}
+.dash-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.dash-hero .dash-card{padding:18px 20px;gap:6px}
+/* clamp: los importes en pesos son largos y no tienen que partirse en dos renglones */
+.dash-hero .dash-card-val{font-size:clamp(17px,1.45vw,21px);letter-spacing:-.01em;white-space:nowrap;overflow-wrap:normal}
+/* Materialidad: luz cenital arriba + sombra abajo, para que las cards no vivan
+   todas en el mismo plano que el fondo. Sin esto la pantalla se lee plana. */
+.dash-card{background:linear-gradient(160deg,var(--surface2) 0%,var(--surface) 48%);box-shadow:0 1px 2px rgba(0,0,0,.35),0 10px 26px -14px rgba(0,0,0,.8);position:relative;overflow:hidden;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.dash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09) 25%,rgba(255,255,255,.09) 75%,transparent)}
+.dash-card:hover{transform:translateY(-2px);border-color:var(--border2);box-shadow:0 2px 4px rgba(0,0,0,.35),0 16px 34px -16px rgba(0,0,0,.9)}
+/* El acento concentrado en una sola card en vez de repartido en veinte lugares */
+.dash-card.is-primary{border-color:rgba(200,241,53,.28);background:linear-gradient(160deg,rgba(200,241,53,.09) 0%,var(--surface) 56%)}
+.dash-card.is-primary::after{content:'';position:absolute;width:240px;height:240px;right:-100px;top:-130px;border-radius:50%;background:radial-gradient(circle,rgba(200,241,53,.17),transparent 68%);pointer-events:none}
+.dash-card.is-primary .dash-card-val{color:var(--accent)}
+.dash-card.is-primary .dash-card-lbl{color:rgba(200,241,53,.65)}
+.dash-bar-fill{background:linear-gradient(90deg,var(--accent3),var(--accent))}
+.dash-card-sub{font-size:11px;color:var(--text3);font-family:var(--mono);margin-top:2px}
+/* Chart del dashboard */
+.dash-chart-card{background:linear-gradient(160deg,var(--surface2) 0%,var(--surface) 48%);border:1px solid var(--border);border-radius:12px;padding:18px 20px 14px;position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.35),0 10px 26px -14px rgba(0,0,0,.8)}
+.dash-chart-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09) 25%,rgba(255,255,255,.09) 75%,transparent)}
+.dash-chart-note{font-size:10.5px;color:var(--text3);font-family:var(--mono);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.dash-card-val,.dash-card-sub,.stat-value,.k-value,.price-cell,.chap-total,table{font-variant-numeric:tabular-nums}
+.dash-empty{border:1px dashed var(--border2);border-radius:12px;padding:32px 26px;text-align:center;background:var(--surface)}
+.dash-empty h3{font-family:var(--display);font-size:16px;color:var(--text);margin-bottom:8px}
+.dash-empty p{font-size:13px;color:var(--text3);line-height:1.7;max-width:540px;margin:0 auto 18px}
+.dash-empty .dash-steps{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px}
+.dash-empty .dash-steps span{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 11px;color:var(--text2)}
+.dash-empty .dash-steps i{color:var(--text3);font-style:normal;align-self:center}
+.dash-guide{padding:0}
+.dash-guide summary{cursor:pointer;padding:14px 20px;font-size:14px;font-weight:600;color:var(--text);list-style:none;display:flex;align-items:center;gap:9px;user-select:none}
+.dash-guide summary::-webkit-details-marker{display:none}
+.dash-guide summary::after{content:'+';margin-left:auto;color:var(--text3);font-family:var(--mono);font-size:15px}
+.dash-guide[open] summary::after{content:'−'}
+.dash-guide[open] summary{border-bottom:1px solid var(--border)}
+.dash-guide .dash-guide-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:12px}
 /* Print Styles */
 @media print {
   body { background: #fff !important; color: #000 !important; overflow: auto; }
@@ -231,7 +290,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
     <div id="save-indicator" style="margin-top:6px;font-size:10px;font-family:var(--mono);color:var(--green);min-height:14px;text-align:right"></div>
   </div>
   <nav class="nav">
-    <div class="nav-item active" onclick="showTab('guia')"><span>🏠</span> Dashboard & Guía</div>
+    <div class="nav-item active" onclick="showTab('guia')"><span>🏠</span> Dashboard</div>
     <div class="nav-item" onclick="showTab('insumos')"><span>📦</span> Insumos <span class="nav-badge" id="bdg-ins">0</span></div>
     <div class="nav-item" onclick="showTab('apu')"><span>⚙️</span> APU <span class="nav-badge" id="bdg-apu">0</span></div>
     <div class="nav-item" onclick="showTab('indice')"><span>📋</span> Índice APU <span class="nav-badge" id="bdg-idx">0</span></div>
@@ -239,28 +298,68 @@ tr:hover td{background:rgba(255,255,255,.015)}
     <div class="nav-item" onclick="showTab('oldschool')" style="color:var(--text2)"><span>🏫</span> Avance 'Old School'</div>
     <div class="nav-item" onclick="showTab('plan')" style="color:var(--text2)"><span>📈</span> Planificación y Control</div>
     <div class="nav-item" onclick="showTab('presupuesto')"><span>💰</span> Presupuesto <span class="nav-badge" id="bdg-pres">0</span></div>
+      <div class="nav-item" onclick="showTab('gastos')"><span>💸</span> Gastos de Obra <span class="nav-badge" id="bdg-gastos">0</span></div>
       <div class="nav-item" onclick="showTab('cert')"><span>📑</span> Certificaciones <span class="nav-badge" id="bdg-cert">0</span></div>
       <div class="nav-item" onclick="showTab('pac')"><span>🎯</span> PAC / Productividad <span class="nav-badge" id="bdg-pac">0</span></div>
+      <div class="nav-item" onclick="showTab('ayuda')"><span>📖</span> Guía de Uso</div>
   </nav>
   <div class="sidebar-footer">
-    <div id="issues-summary" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);border-radius:8px;cursor:pointer" onclick="showTab('insumos')" title="Ver problemas detectados">
-      <div style="font-size:10px;color:var(--red);font-weight:700;font-family:var(--mono);letter-spacing:.04em">⚠ PROBLEMAS DETECTADOS</div>
-      <div id="issues-detail" style="font-size:10px;color:var(--text3);margin-top:3px;line-height:1.5"></div>
+    <div class="sf-row">
+      <div class="sf-k">
+        <span class="sf-k-lbl">K</span>
+        <span class="k-value" id="k-display">1.32</span>
+        <button class="btn-icon" onclick="openModalK()" title="Editar el coeficiente K" style="font-size:11px">✎</button>
+      </div>
+      <button class="sf-pill" id="sf-issues-pill" style="display:none" onclick="openModalAjustes()" title="Ver problemas detectados"></button>
     </div>
-    <div id="backup-status" onclick="backupClick()" title="Respaldo automático a carpeta local (tip: elegí una carpeta dentro de Google Drive y se sube solo a la nube)" style="cursor:pointer;margin-bottom:10px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:10px;font-family:var(--mono);display:flex;align-items:center;gap:6px">
-      <span>🛡</span><span style="color:var(--text3)">Respaldo:</span><span id="backup-state" style="color:var(--text3)">…</span>
+    <button class="sf-ajustes" onclick="openModalAjustes()" title="Respaldo, vistas, gastos generales, versiones y problemas detectados">
+      <span>⚙</span> Ajustes de obra <span class="sf-dot" id="sf-backup-dot" title="Estado del respaldo automático"></span>
+    </button>
+  </div>
+</div>
+
+<!-- MODAL AJUSTES DE OBRA -->
+<div class="modal-overlay" id="modal-ajustes">
+  <div class="modal">
+    <div class="modal-title">⚙ Ajustes de obra</div>
+
+    <div class="aj-sec">
+      <div class="aj-sec-t">Respaldo</div>
+      <div id="backup-status" onclick="backupClick()" title="Respaldo automático a carpeta local (tip: elegí una carpeta dentro de Google Drive y se sube solo a la nube)" style="cursor:pointer;padding:11px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:11px;font-family:var(--mono);display:flex;align-items:center;gap:7px">
+        <span>🛡</span><span style="color:var(--text3)">Respaldo:</span><span id="backup-state" style="color:var(--text3)">…</span>
+      </div>
     </div>
-    <div style="display:flex;gap:6px;margin-bottom:6px">
-      <button class="btn btn-ghost btn-sm" onclick="openModalMeta()" title="Control top-down por m² — definí el pozo total y seguí cuánto queda" style="flex:1;font-size:10px;padding:6px 8px">🎯 Meta m²</button>
-      <button class="btn btn-ghost btn-sm" id="btn-modo-pres" onclick="toggleModoPresentacion()" title="Oculta todos los importes en pantalla — para compartir pantalla con el cliente o un subcontratista" style="flex:1;font-size:10px;padding:6px 8px;color:var(--text3)">👁 Modo presentación</button>
+
+    <div class="aj-sec">
+      <div class="aj-sec-t">Vistas</div>
+      <div class="aj-grid">
+        <button class="aj-btn" id="btn-modo-pres" onclick="toggleModoPresentacion()" title="Oculta todos los importes en pantalla — para compartir pantalla con el cliente o un subcontratista">👁 Modo presentación</button>
+        <button class="aj-btn" id="btn-ocultar-apu" onclick="toggleOcultarDetalleApu()" title="Oculta la sección de presupuesto por APU del Dashboard (útil mientras no tenés todo detallado y trabajás solo con el pozo m²)">📊 Ocultar detalle por APU</button>
+      </div>
     </div>
-    <div style="margin-bottom:10px">
-      <button class="btn btn-ghost btn-sm" id="btn-ocultar-apu" onclick="toggleOcultarDetalleApu()" title="Oculta la sección de presupuesto por APU del Dashboard (útil mientras no tenés todo detallado y trabajás solo con el pozo m²)" style="width:100%;font-size:10px;padding:6px 8px;color:var(--text3)">📊 Ocultar detalle por APU</button>
+
+    <div class="aj-sec">
+      <div class="aj-sec-t">Control económico</div>
+      <div class="aj-grid">
+        <button class="aj-btn" onclick="closeModal('modal-ajustes');openModalMeta()" title="Control top-down por m² — definí el pozo total y seguí cuánto queda">🎯 Meta m²</button>
+        <button class="aj-btn" onclick="closeModal('modal-ajustes');openModalK()" title="Coeficiente K: GG, beneficio, imprevistos, financiero e impuestos">📐 Coeficiente K</button>
+        <button class="aj-btn" onclick="closeModal('modal-ajustes');showTab('gastos')" title="Capataz, sereno, luz y agua de obra, seguros, permisos — costos que no están en ningún ítem">🏢 Gastos Grales.</button>
+        <button class="aj-btn" onclick="closeModal('modal-ajustes');showTab('gastos')" title="Registrar lo que no estaba previsto: sorpresas de obra, errores de proyecto, terceros">⚡ Imprevistos</button>
+        <button class="aj-btn" onclick="closeModal('modal-ajustes');openModalSnapshots()" title="Guardá una foto del presupuesto con nombre (ej: antes de actualizar precios) y compará o restaurá después" style="grid-column:1/-1">📸 Versiones del presupuesto</button>
+      </div>
     </div>
-    <div class="k-display">Coeficiente K</div>
-    <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
-      <span class="k-value" id="k-display">1.32</span>
-      <button class="btn btn-ghost btn-sm" onclick="openModalK()">editar</button>
+
+    <div class="aj-sec" style="margin-bottom:0">
+      <div class="aj-sec-t">Problemas detectados</div>
+      <div id="issues-summary" style="display:none;padding:11px 12px;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);border-radius:8px;cursor:pointer" onclick="closeModal('modal-ajustes');showTab('insumos')" title="Ver problemas detectados">
+        <div style="font-size:10px;color:var(--red);font-weight:700;font-family:var(--mono);letter-spacing:.04em">⚠ PROBLEMAS DETECTADOS</div>
+        <div id="issues-detail" style="font-size:11px;color:var(--text3);margin-top:4px;line-height:1.6"></div>
+      </div>
+      <div id="issues-ok" style="padding:11px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:11px;font-family:var(--mono);color:var(--green)">✓ Sin problemas detectados</div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modal-ajustes')">Cerrar</button>
     </div>
   </div>
 </div>
@@ -271,12 +370,13 @@ tr:hover td{background:rgba(255,255,255,.015)}
 <!-- ===== TAB: GUIA ===== -->
 <div id="tab-guia" class="tab-content active-tab">
   <div class="topbar">
-    <div><div class="topbar-title">Estado del Proyecto y Guía</div><div class="topbar-sub">Monitoreo visual del presupuesto y reglas del sistema</div></div>
+    <div><div class="topbar-title">Estado del Proyecto</div><div class="topbar-sub">Monitoreo visual del presupuesto, EVM y control por m²</div></div>
   </div>
   <div class="content" style="overflow-y:auto; padding-bottom:40px">
     <div id="dash-container"></div>
-    <div class="dash-guide" style="margin-top:20px">
-      <h3>📚 Funcionamiento del Sistema</h3>
+    <details class="dash-guide" style="margin:20px 20px 0">
+      <summary>📚 Funcionamiento del Sistema</summary>
+      <div class="dash-guide-body">
       <p>Bienvenido al módulo integral de Presupuesto. Este sistema está diseñado para reemplazar planillas complejas por un flujo intuitivo:</p>
       <ul style="padding-left:20px;display:flex;flex-direction:column;gap:8px">
         <li><b>1. Insumos:</b> La base de precios de la obra. Modificá un precio acá y actualizará automáticamente y en cascada todo el presupuesto.</li>
@@ -284,7 +384,8 @@ tr:hover td{background:rgba(255,255,255,.015)}
         <li><b>3. BIM / Desglose:</b> ¡La clave del control! En lugar de poner "100 m² de Muro" sueltos, acá cargás exactamente en qué Nivel y Sector van (ej: P01 - Baño - 10m²). Todo lo de esta tabla alimenta sola a la suma final en el Presupuesto.</li>
         <li><b>4. Presupuesto:</b> Tu resumen final de venta. Podés elegir ocultar ítems al cliente usando el botón de visible, y decidir si le bajás también el desglose de zonas a PDF o CSV.  <br><i style="color:var(--text3)">*Aclaración: Si prefieres no usar desplose BIM para algún rubro, simplemente escribí la cantidad total directo en la celda correspondiente del Presupuesto (la verás con un texto gris).</i></li>
       </ul>
-    </div>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -547,7 +648,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <div style="text-align:right;font-size:10px;color:var(--orange);margin-top:2px" id="meta-preview-incidencia"></div>
     </div>
   </div>
-  <p style="font-size:10px;color:var(--text3);margin-top:8px;line-height:1.5">💡 El valor del m² que publica la CAC/INDEC es <b>costo de construcción puro</b> — no incluye el terreno (que varía muchísimo según ubicación). Por eso el terreno se suma aparte para calcular la inversión total y su incidencia.</p>
+  <p style="font-size:10px;color:var(--text3);margin-top:8px;line-height:1.5">💡 El valor del m² que publica la CAC/INDEC es <b>costo de construcción puro</b> — no incluye el terreno (que varía muchísimo según ubicación) ni tu ganancia. Por eso el panel compara el pozo contra el <b>costo directo de tus APU (sin K)</b>, y el terreno se suma aparte para calcular la inversión total y su incidencia.</p>
   <div id="meta-historial" style="margin-top:12px"></div>
   <div class="modal-actions" style="justify-content:space-between">
     <button class="btn btn-danger" id="meta-btn-off" onclick="desactivarMeta()" style="margin-right:auto">Desactivar</button>
@@ -555,6 +656,69 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <button class="btn btn-ghost" onclick="closeModal('modal-meta')">Cancelar</button>
       <button class="btn btn-primary" onclick="saveMeta()">Guardar</button>
     </div>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: DESGLOSE DEL POZO — UNIDADES A VENDER -->
+<div class="modal-overlay" id="modal-pozo-unidades">
+<div class="modal" style="max-width:700px">
+  <div class="modal-title">🏗️ Desglose del Pozo — Unidades a Vender</div>
+  <p style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">Cargá el inventario completo de unidades e id completándolas a medida que las vendés. Las que vendés a un <b>tercero</b> aportan plata real para financiar la obra. Las que te quedan <b>sin vender</b> podés dejarlas en $0 por ahora — no hace falta saber su valor final hasta que decidas venderlas.</p>
+
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:16px">
+    <label class="form-label">💰 Capital Propio Aportado <span style="font-weight:400;color:var(--text3)">(plata que ponés vos, aparte de vender unidades)</span></label>
+    <input type="number" class="form-input" id="pu-capital-propio" step="0.01" min="0" placeholder="0" style="margin-top:6px" oninput="renderPozoUnidadesLista()">
+  </div>
+
+  <div id="pu-form-title" style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:6px;letter-spacing:.04em">NUEVA UNIDAD</div>
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">Nombre / Unidad</label><input class="form-input" id="pu-nombre" placeholder="Ej: Depto 1A"></div>
+    <div class="form-group"><label class="form-label">Cantidad</label><input type="number" class="form-input" id="pu-cantidad" value="1" min="1"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">M² por unidad</label><input type="number" class="form-input" id="pu-m2" step="0.01" min="0"></div>
+    <div class="form-group">
+      <label class="form-label">Estado</label>
+      <select class="form-input" id="pu-inversor" onchange="togglePuTercero()">
+        <option value="propio">🏠 Sin vender (propia por ahora)</option>
+        <option value="tercero">🤝 Vendida a Tercero</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row" id="pu-tercero-wrap" style="display:none">
+    <div class="form-group"><label class="form-label">Nombre del comprador/inversor</label><input class="form-input" id="pu-nombre-tercero" placeholder="Ej: Juan Pérez"></div>
+    <div class="form-group"><label class="form-label">Precio de venta $/m² (preventa)</label><input type="number" class="form-input" id="pu-valorm2" step="0.01" min="0"></div>
+  </div>
+  <div class="form-row" id="pu-propio-wrap">
+    <div class="form-group">
+      <label class="form-label">Valor $/m² <span style="font-weight:400;color:var(--text3)">(opcional — completalo cuando la vendas o definas su valor)</span></label>
+      <input type="number" class="form-input" id="pu-valorm2-propio" step="0.01" min="0" placeholder="0">
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:14px">
+    <button class="btn btn-primary" id="pu-btn-add" onclick="addPozoUnidad()" style="flex:1">+ Agregar Unidad</button>
+    <button class="btn btn-ghost" id="pu-btn-cancel" onclick="cancelEditPozoUnidad()" style="display:none">Cancelar edición</button>
+  </div>
+
+  <div id="pu-lista" style="max-height:260px;overflow:auto;border:1px solid var(--border);border-radius:8px"></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">FUENTES PARA FINANCIAR LA OBRA</div>
+      <div style="font-family:var(--display);font-size:19px;font-weight:800;color:var(--accent)" id="pu-total-fuentes">$0</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:2px">Capital propio + ventas a terceros</div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">POTENCIAL SIN VENDER</div>
+      <div style="font-family:var(--display);font-size:19px;font-weight:800;color:var(--M)" id="pu-total-propias">$0</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:2px" id="pu-total-propias-detail">0 unidades</div>
+    </div>
+  </div>
+
+  <div class="modal-actions">
+    <button class="btn btn-ghost" onclick="closeModal('modal-pozo-unidades')">Cancelar</button>
+    <button class="btn btn-primary" onclick="savePozoUnidades()">Guardar</button>
   </div>
 </div>
 </div>
@@ -611,6 +775,481 @@ tr:hover td{background:rgba(255,255,255,.015)}
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- ===== TAB: GUÍA DE USO ===== -->
+<!-- ===== TAB: GASTOS DE OBRA (Generales + Imprevistos) ===== -->
+<div id="tab-gastos" class="tab-content">
+  <style>
+    .gx-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px}
+    .gx-h{font-size:14px;color:var(--text);margin:0 0 4px;font-weight:600}
+    .gx-sub{font-size:11.5px;color:var(--text2);line-height:1.6;margin:0 0 14px}
+    .gx-mini{font-size:10px;color:var(--text3);font-family:var(--mono)}
+    .gx-val{font-family:var(--display);font-size:19px;font-weight:800}
+    .gx-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:11px 13px}
+  </style>
+  <div class="topbar">
+    <div><div class="topbar-title">Gastos de Obra</div><div class="topbar-sub">Costos que no pertenecen a ningún ítem: generales del proyecto e imprevistos</div></div>
+  </div>
+  <div class="content" style="overflow-y:auto">
+    <div style="max-width:900px;margin:0 auto;padding:0 20px 60px">
+
+      <div id="gx-resumen" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:18px"></div>
+
+      <!-- ===== GASTOS GENERALES ===== -->
+      <div class="gx-card">
+        <h3 class="gx-h">🏢 Gastos Generales</h3>
+        <p class="gx-sub">Costos de gestión que no están en ningún ítem del cómputo: capataz, sereno, luz y agua de obra, seguros, obrador, permisos. <b>Dependen del tiempo</b>: si el plazo se estira, suben aunque todos los ítems salgan baratos.</p>
+
+        <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:3px;margin-bottom:16px;max-width:420px">
+          <button id="gg-modo-pct" onclick="setGGModo('porcentaje')" style="flex:1;padding:7px;border-radius:5px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:transparent;color:var(--text3)">% Manual</button>
+          <button id="gg-modo-det" onclick="setGGModo('detalle')" style="flex:1;padding:7px;border-radius:5px;border:none;cursor:pointer;font-size:12px;font-weight:600;background:transparent;color:var(--text3)">📋 Detallar conceptos</button>
+        </div>
+
+        <div id="gg-porcentaje-wrap" style="display:none">
+          <div style="text-align:center;padding:22px;color:var(--text3);font-size:12px;border:1px dashed var(--border);border-radius:8px">
+            Estás usando el <b>% manual</b> del coeficiente K. Pasá a <b>Detallar conceptos</b> para cargar los gastos reales y que la app saque el porcentaje sola.
+          </div>
+        </div>
+
+        <div id="gg-detalle-wrap">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;align-items:start">
+            <div>
+              <div id="gg-form-title" class="gx-mini" style="margin-bottom:6px;letter-spacing:.04em">NUEVO CONCEPTO</div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Concepto</label><input class="form-input" id="gg-concepto" placeholder="Ej: Capataz de obra"></div>
+                <div class="form-group">
+                  <label class="form-label">Tipo</label>
+                  <select class="form-input" id="gg-tipo" onchange="toggleGGTipo()">
+                    <option value="mensual">📅 Mensual</option>
+                    <option value="unico">1️⃣ Único / global</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label" id="gg-monto-lbl">Monto por mes</label><input type="number" class="form-input" id="gg-monto" step="0.01" min="0" placeholder="0"></div>
+                <div class="form-group" id="gg-meses-wrap">
+                  <label class="form-label">Desde el mes — hasta</label>
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <input type="number" class="form-input" id="gg-desde" step="1" min="1" placeholder="1" style="text-align:center">
+                    <span style="color:var(--text3);font-size:12px">a</span>
+                    <input type="number" class="form-input" id="gg-hasta" step="1" min="1" placeholder="6" style="text-align:center">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Gastado real hasta hoy <span style="font-weight:400;color:var(--text3)">(opcional)</span></label>
+                <input type="number" class="form-input" id="gg-real" step="0.01" min="0" placeholder="0">
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-primary" id="gg-btn-add" onclick="addGGItem()" style="flex:1">+ Agregar Concepto</button>
+                <button class="btn btn-ghost" id="gg-btn-cancel" onclick="cancelEditGGItem()" style="display:none">Cancelar</button>
+              </div>
+              <div style="font-size:10px;color:var(--text3);margin-top:8px;line-height:1.45">💡 Si el precio aumenta a mitad de obra, cargá dos filas (meses 1 a 6 a un valor, 7 a 12 a otro). Así editar una no modifica los meses ya pasados.</div>
+            </div>
+
+            <div>
+              <div class="gx-mini" style="margin-bottom:6px;letter-spacing:.04em">CONCEPTOS CARGADOS</div>
+              <div id="gg-lista" style="max-height:300px;overflow:auto;border:1px solid var(--border);border-radius:8px"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px">
+                <div class="gx-box"><div class="gx-mini">PLANIFICADO</div><div class="gx-val" style="color:var(--accent)" id="gg-total-plan">$0</div></div>
+                <div class="gx-box"><div class="gx-mini">REAL</div><div class="gx-val" style="color:rgba(251,146,60,.95)" id="gg-total-real">$0</div></div>
+                <div class="gx-box"><div class="gx-mini">% INCIDENCIA</div><div class="gx-val" style="color:var(--M)" id="gg-pct-calc">—</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;margin-top:14px;align-items:start">
+            <div class="form-group" style="margin:0">
+              <label class="form-label">Calcular el % sobre...</label>
+              <select class="form-input" id="gg-base" onchange="onGGConfigChange()">
+                <option value="estimado">🎯 Costo Estimado (m² × CAC) — estable desde el día 1</option>
+                <option value="directo">📋 Costo directo cargado — preciso con el presupuesto completo</option>
+              </select>
+              <div style="font-size:10px;color:var(--text3);margin-top:5px;line-height:1.45">Si vas armando el presupuesto de a poco, usá el <b>Costo Estimado</b>: no se mueve porque cargues más ítems.</div>
+            </div>
+            <label style="display:flex;align-items:flex-start;gap:9px;padding:11px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer">
+              <input type="checkbox" id="gg-aplicar-k" onchange="onGGConfigChange()" style="margin-top:2px">
+              <span style="font-size:11.5px;line-height:1.5;color:var(--text2)">
+                <b style="color:var(--text)">Aplicar este % al coeficiente K</b><br>
+                Solo si le facturás la obra a un cliente. Si construís para vender, dejalo apagado: tu precio lo pone el mercado y acá los GG ya se cuentan como costo real.
+              </span>
+            </label>
+          </div>
+          <div id="gg-aviso" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <!-- ===== IMPREVISTOS ===== -->
+      <div class="gx-card">
+        <h3 class="gx-h">⚡ Imprevistos</h3>
+        <p class="gx-sub">Lo que <b>no estaba previsto</b>: una fundación que hubo que rehacer, bombear agua, la medianera del vecino, una multa. Van acá y no en el Gasto Real de un ítem, para que el desvío de esa tarea no quede mintiendo.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;align-items:start">
+          <div>
+            <div class="form-group">
+              <label class="form-label">Reserva para imprevistos (%)</label>
+              <input type="number" class="form-input" id="imp-reserva-pct" step="0.1" min="0" oninput="onImpReservaChange()">
+              <div style="font-size:10px;color:var(--text3);margin-top:4px;line-height:1.45">Hereda el % del K hasta que lo edites acá; después queda independiente. Dejalo vacío para volver a heredar. Útil si ponés el K en 1.00 porque vendés en pozo y aun así querés tu colchón.</div>
+            </div>
+
+            <div id="imp-form-title" class="gx-mini" style="margin:14px 0 6px;letter-spacing:.04em">NUEVO IMPREVISTO</div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="imp-fecha"></div>
+              <div class="form-group"><label class="form-label">Monto</label><input type="number" class="form-input" id="imp-monto" step="0.01" min="0" placeholder="0"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Concepto</label><input class="form-input" id="imp-concepto" placeholder="Ej: Rehacer fundación eje 3 por napa"></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Causa</label>
+                <select class="form-input" id="imp-causa">
+                  <option value="SORPRESA DE OBRA">🕳 Sorpresa de obra</option>
+                  <option value="ERROR DE PROYECTO">📐 Error de proyecto</option>
+                  <option value="CLIMA">🌧 Clima</option>
+                  <option value="PRECIOS">📈 Salto de precios</option>
+                  <option value="TERCEROS">🤝 Terceros</option>
+                  <option value="OTROS">❓ Otros</option>
+                </select>
+              </div>
+              <div class="form-group"><label class="form-label">Rubro <span style="font-weight:400;color:var(--text3)">(opcional)</span></label><select class="form-input" id="imp-rubro"></select></div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary" id="imp-btn-add" onclick="addImprevisto()" style="flex:1">+ Registrar Imprevisto</button>
+              <button class="btn btn-ghost" id="imp-btn-cancel" onclick="cancelEditImprevisto()" style="display:none">Cancelar</button>
+            </div>
+          </div>
+
+          <div>
+            <div id="imp-reserva-panel" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px"></div>
+            <div id="imp-alerta" style="margin-bottom:10px"></div>
+            <div class="gx-mini" style="margin-bottom:6px;letter-spacing:.04em">REGISTRADOS</div>
+            <div id="imp-lista" style="max-height:250px;overflow:auto;border:1px solid var(--border);border-radius:8px"></div>
+            <div id="imp-causas" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="tab-ayuda" class="tab-content">
+  <style>
+    .g-wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+    .g-intro{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:18px;font-size:13px;color:var(--text2);line-height:1.7}
+    .g-cat{font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+    .g-sec{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+    .g-sec summary{cursor:pointer;padding:13px 16px;font-size:13px;font-weight:600;color:var(--text);list-style:none;display:flex;align-items:center;gap:10px;user-select:none}
+    .g-sec summary::-webkit-details-marker{display:none}
+    .g-sec summary:hover{background:var(--surface2)}
+    .g-sec summary::after{content:'+';margin-left:auto;color:var(--text3);font-family:var(--mono);font-size:15px}
+    .g-sec[open] summary::after{content:'−'}
+    .g-sec[open] summary{border-bottom:1px solid var(--border);color:var(--accent)}
+    .g-body{padding:14px 18px;font-size:12.5px;color:var(--text2);line-height:1.75}
+    .g-body p{margin:0 0 10px}
+    .g-body ul,.g-body ol{margin:0 0 10px;padding-left:20px}
+    .g-body li{margin-bottom:5px}
+    .g-body b{color:var(--text)}
+    .g-body code{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;color:var(--accent)}
+    .g-tip{background:rgba(200,241,53,.06);border-left:3px solid var(--accent);padding:8px 12px;border-radius:6px;margin:10px 0;font-size:12px}
+    .g-warn{background:rgba(251,146,60,.07);border-left:3px solid var(--orange);padding:8px 12px;border-radius:6px;margin:10px 0;font-size:12px}
+    .g-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0;font-size:11px;font-family:var(--mono)}
+    .g-flow span{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text)}
+    .g-flow i{color:var(--text3);font-style:normal}
+  </style>
+  <div class="topbar">
+    <div><div class="topbar-title">Guía de Uso</div><div class="topbar-sub">Cómo funciona cada parte de la app y respuestas a las dudas más comunes</div></div>
+  </div>
+  <div class="content" style="overflow-y:auto">
+    <div class="g-wrap">
+
+      <div class="g-intro">
+        <b style="color:var(--text)">La app tiene dos maneras de trabajar, y conviven:</b><br>
+        <b>1) De abajo hacia arriba (detalle):</b> cargás Insumos → armás APUs → los llevás al Presupuesto → planificás y controlás mes a mes. Precisión máxima, pero exige cargar todo.<br>
+        <b>2) De arriba hacia abajo (pozo por m²):</b> definís cuánto <i>debería</i> costar la obra (m² × valor CAC) y la vas controlando contra lo gastado, aunque no tengas todo detallado. Ideal para desarrollos en pozo donde muchas decisiones (porcelanatos, griferías) se toman al final.<br><br>
+        Podés usar una, la otra, o las dos a la vez — el Dashboard muestra ambas.
+      </div>
+      <input class="form-input" id="g-buscar" placeholder="🔍 Buscar en la guía... (ej: 'gastos generales', 'arrastre', 'respaldo')" oninput="guiaFiltrar()" style="width:100%;margin-bottom:6px">
+
+      <div class="g-cat">El flujo básico</div>
+
+      <details class="g-sec" open><summary>🚀 Empezar una obra desde cero</summary><div class="g-body">
+        <div class="g-flow"><span>📦 Insumos</span><i>→</i><span>⚙️ APUs</span><i>→</i><span>💰 Presupuesto</span><i>→</i><span>📈 Planificación</span><i>→</i><span>📑 Certificación</span><i>→</i><span>🎯 PAC</span></div>
+        <ol>
+          <li><b>Insumos:</b> cargá materiales (M), mano de obra (MO), equipos (E) y subcontratos (SC) con su precio. Vienen precargados varios cientos típicos de Argentina — actualizá los precios a tu realidad.</li>
+          <li><b>APU</b> (Análisis de Precios Unitarios): cada APU combina insumos con un rendimiento. Ej: 1 m² de muro = 33 ladrillos + 0,02 m³ de mezcla + 1,1 h de oficial.</li>
+          <li><b>Presupuesto:</b> elegís APUs y les ponés cantidad. El precio unitario ya sale con el K aplicado.</li>
+          <li><b>Planificación y Control:</b> repartís las cantidades en los meses de obra y después vas cargando lo realmente ejecutado y gastado.</li>
+          <li><b>Certificaciones:</b> emitís certificados de avance para cobrar.</li>
+          <li><b>PAC:</b> semana a semana, medís qué tareas se cumplieron y por qué no.</li>
+        </ol>
+        <div class="g-tip">💡 Si todavía no tenés todo definido, arrancá solo con <b>🎯 Meta m²</b> (sidebar) y andá agregando el detalle con el tiempo.</div>
+      </div></details>
+
+      <details class="g-sec"><summary>📦 Insumos — la base de precios</summary><div class="g-body">
+        <p>Todo precio de la app nace acá. Cuando cambiás el precio de un insumo, se <b>propaga automáticamente</b> a todos los APUs que lo usan, y de ahí al presupuesto entero.</p>
+        <ul>
+          <li><b>Editar precio rápido:</b> clic directo sobre el precio en la tabla, escribís y Enter.</li>
+          <li><b>Importar CSV (📥):</b> acepta listas de proveedores. Necesita como mínimo columnas <code>codigo</code> y <code>descripcion</code>; entiende también <code>unidad</code>, <code>precio</code>, <code>tipo</code>, <code>categoria</code>. Si el código ya existe, actualiza; si no, crea. Maneja números con coma decimal.</li>
+          <li><b>⚠ amarillo:</b> insumo con precio $0 — el panel de "problemas detectados" del sidebar los cuenta.</li>
+          <li>El código debe ser <b>único</b> — la app lo valida al guardar.</li>
+        </ul>
+      </div></details>
+
+      <details class="g-sec"><summary>⚙️ APU — Análisis de Precios Unitarios</summary><div class="g-body">
+        <p>Un APU define cuánto cuesta hacer <b>una unidad</b> de un ítem (1 m², 1 m³, 1 boca). Suma recursos × rendimiento.</p>
+        <ul>
+          <li><b>Rendimiento:</b> cuánto insumo consume una unidad del ítem. Editable en línea desde la tabla expandida.</li>
+          <li><b>Duplicar (📋):</b> crea una copia para variantes (mismo muro, otro ladrillo) sin recargar todo.</li>
+          <li><b>Eliminar:</b> te avisa cuántos ítems del presupuesto quedarían huérfanos y cuánta plata representa.</li>
+          <li>El <b>Índice APU</b> muestra todos los precios unitarios ya con K aplicado — es tu lista de precios de venta.</li>
+        </ul>
+      </div></details>
+
+      <details class="g-sec"><summary>📐 El Coeficiente K — qué es y cuándo usar cada componente</summary><div class="g-body">
+        <p>K convierte tu <b>costo directo</b> en <b>precio de venta</b>: K = 1 + GG% + Beneficio% + Imprevistos% + Financiero%. Se edita desde el sidebar y el simulador te muestra en vivo cómo impacta en el total.</p>
+        <ul>
+          <li><b>GG (Gastos Generales):</b> NO es ganancia. Es el costo de gestionar la obra que no está en ningún ítem: tu tiempo o el del capataz coordinando, obrador, vallado, baño químico, luz y agua de obra, seguros, permisos. Aunque compres el hormigón elaborado y contrates la mano de obra por contrato separado, estos costos existen igual — GG es el balde donde viven.</li>
+          <li><b>Beneficio:</b> ganancia pura del constructor. <b>Ponelo en 0%</b> si construís para vos o vendés en pozo (tu ganancia sale de la venta, no de un margen por ítem). Usalo solo cuando construís para un cliente que te paga por el servicio.</li>
+          <li><b>Imprevistos:</b> colchón para lo que sale mal. Aplica siempre.</li>
+          <li><b>Financiero:</b> el costo de la plata en el tiempo (interés o inflación). En pozo importa más que nunca: pagás hoy, cobrás preventas de a poco.</li>
+          <li><b>Impuestos (IIBB + cheque):</b> Ingresos Brutos sobre tu facturación (1,5–3% según provincia) y el impuesto al cheque (~1,2%). Va acá y no junto al IVA porque <b>sale de tu bolsillo</b> y te come margen — el IVA en cambio solo pasa por vos. Ganancias no va acá: se calcula sobre tu utilidad al cierre, no sobre la obra.</li>
+        </ul>
+        <div class="g-tip">💡 <b>Si vendés en pozo, lo más limpio es dejar el K en 1.00</b> (todo en 0). Tu precio lo pone el mercado del departamento, no tu costo × K. Cargás GG e Imprevistos en sus módulos como costos reales, y el "precio unitario" de la app pasa a mostrarte tu costo directo, que es lo que querés controlar. Para obra a terceros en cambio sí usás el K completo: 1.35–1.60.</div>
+        <div class="g-warn">⚠ Si ponés Imprevistos en 0 en el K, definí tu reserva dentro del módulo <b>⚡ Imprevistos</b> — tiene su propio campo de % que funciona independiente del K.</div>
+        <div class="g-warn">⚠ Detalle fino: IIBB se calcula sobre el precio final (que ya incluye el K), no sobre el costo. Sumarlo como % simple lo subestima apenas — con 3% la diferencia es de centavos por peso, despreciable en la práctica.</div>
+        <div class="g-warn">⚠ Si presupuestaste GG pero al final no los gastás (gestionás todo vos sin cargo), no pasa nada: el "Gastado Real" es independiente del K, y esa diferencia aparece sola como más ganancia real.</div>
+      </div></details>
+
+      <details class="g-sec"><summary>🏢 Gastos Generales — detallarlos en vez de estimar un %</summary><div class="g-body">
+        <p>El % de GG del K es un atajo, y tiene una debilidad: <b>los GG dependen del tiempo, no del costo de la obra</b>. El capataz cobra por mes, no por metro cuadrado. La misma obra en 12 meses tiene el doble de GG que en 6.</p>
+        <p>Están en la pestaña <b>💸 Gastos de Obra</b> del menú. Todo se guarda solo, no hay botón de guardar. Cargás los conceptos reales:</p>
+        <ul>
+          <li><b>Mensuales</b>, con <b>rango de meses</b> (del mes X al Y): capataz, sereno, luz y agua, baño químico, obrador. Si el precio aumenta a mitad de obra, cargás dos filas (meses 1 a 6 a un valor, 7 a 12 a otro) — así editar una no modifica retroactivamente los meses ya pasados.</li>
+          <li><b>Únicos</b>: seguro de obra, permisos y gestoría, armado y desarme del obrador.</li>
+          <li><b>Gastado real</b> por concepto: opcional, lo vas completando a medida que pagás.</li>
+        </ul>
+        <p>La app calcula el <b>% real</b> dividiendo el GG total por tu costo directo, y te avisa si tu % manual se estaba quedando corto. Con el modo detalle activo, el campo GG del K queda de solo lectura porque lo manda el cálculo.</p>
+        <div class="g-warn">⚠ Si el % te da muy alto (más de 40%), casi siempre es porque todavía no cargaste todo el presupuesto: al dividir por un costo directo chico el porcentaje se dispara. La app te avisa.</div>
+      </div></details>
+
+      <details class="g-sec"><summary>⚡ Imprevistos — registrar lo que no estaba previsto</summary><div class="g-body">
+        <p>Están en la pestaña <b>💸 Gastos de Obra</b>, sección Imprevistos. Sirve para lo que se sale del plan: rehacer una fundación por una napa, bombear agua, arreglarle la medianera al vecino, una multa municipal.</p>
+        <p><b>La reserva</b> viene del % de Imprevistos del K, pero tiene su propio campo editable: si cambiás ese número queda independiente del K. Eso te sirve cuando ponés el K en 0 porque vendés en pozo y aun así querés tu colchón. La app te muestra: reserva, consumido y disponible, con alerta al pasar el 80% y aviso rojo si te la comés entera.</p>
+        <p>Cada imprevisto lleva fecha, monto, concepto, <b>causa</b> (sorpresa de obra, error de proyecto, clima, salto de precios, terceros) y opcionalmente el rubro afectado. Con las causas cargadas, abajo se arma un gráfico de <b>dónde se te va la plata</b> — y eso te sirve para la próxima obra.</p>
+        <div class="g-tip">💡 Registralos acá y <b>no</b> los cargues en el Gasto Real de un ítem. Si metés el costo de rehacer una fundación dentro de la mampostería, ese ítem queda mintiendo para siempre. El total consumido se suma igual al costo del proyecto.</div>
+      </div></details>
+
+      <details class="g-sec"><summary>❗ ¿Los Gastos Generales van dentro del Gasto Real de cada ítem?</summary><div class="g-body">
+        <p><b>No.</b> En el Gasto Real de cada ítem del cronograma va <b>solo el costo directo de ese ítem</b>: materiales, mano de obra y subcontratos de esa tarea puntual. Nada de GG prorrateados.</p>
+        <p><b>Por qué:</b> el desvío del ítem compara contra su costo directo teórico. Si de un lado tenés costo puro y del otro le sumás GG, el desvío miente.</p>
+        <p><b>Ejemplo:</b> presupuestaste un ítem en $100 de costo directo y salió $80. Ahorraste $20 reales en ese ítem — eso queda bien registrado. El capataz mientras tanto cobró lo mismo de siempre, y eso va en su propia línea de Gastos Generales.</p>
+        <div class="g-tip">💡 Esta separación importa porque <b>GG e ítems se mueven por motivos distintos</b>: podés tener todos los ítems por debajo del presupuesto y aun así perder plata porque la obra se estiró cuatro meses y los GG se dispararon.</div>
+        <p>El <b>Gasto Real de GG</b> que cargás en el módulo se suma automáticamente al costo total del proyecto (el AC del dashboard), así tu Ganancia Real no sale inflada por olvidarte de contar los indirectos.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>⚙ Líneas del presupuesto — GG, imprevistos y honorarios para el cliente</summary><div class="g-body">
+        <p>Botón <b>⚙ Líneas</b> en la pestaña Presupuesto. Define qué va al pie del presupuesto y del PDF:</p>
+        <ul>
+          <li><b>Gastos Generales como línea separada</b>: usa el detalle de 💸 Gastos de Obra. El cliente ve el número y queda claro que está atado al plazo.</li>
+          <li><b>Imprevistos como línea separada</b>: usa el % de reserva del módulo de Imprevistos.</li>
+          <li><b>Honorarios profesionales</b>: % sobre el subtotal de obra o monto fijo, con <b>su propio IVA</b> (21 si sos responsable inscripto, 0 si monotributista).</li>
+        </ul>
+        <div class="g-warn">⚠ <b>GG e imprevistos van dentro del K o como línea, nunca las dos cosas.</b> Si activás la línea y todavía tenés el % cargado en el K, la app te marca el doble conteo con ⚠. Poné ese componente del K en 0.</div>
+        <p>Por qué el IVA de honorarios va aparte: los materiales que compra el cliente ya traen su IVA adentro del precio. Una sola línea de IVA sobre todo lo cobraría dos veces.</p>
+        <p>Estructura resultante: <code>ítems</code> → <code>+ GG</code> → <code>+ imprevistos</code> → <code>SUBTOTAL OBRA</code> → <code>+ IVA obra</code> → <code>+ honorarios</code> → <code>+ IVA honorarios</code> → <code>TOTAL</code>. Cada renglón es discutible por separado.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>🧾 IVA — ¿cargo los precios con IVA o sin IVA?</summary><div class="g-body">
+        <p>La respuesta depende de una sola cosa: <b>¿podés recuperar ese IVA o no?</b></p>
+        <ul>
+          <li><b>Si lo recuperás</b> (sos responsable inscripto y tu venta genera débito fiscal contra el cual descontarlo): el IVA que pagás en los materiales es <b>crédito fiscal</b>, te vuelve. No es tu costo.<br>→ <b>Cargá el precio NETO en el APU.</b> Si el proveedor te pasa $121.000 con IVA, cargás $100.000.</li>
+          <li><b>Si NO lo recuperás</b> (monotributista, o tu venta final no está gravada): ese IVA es plata que sale y no vuelve. Es costo real.<br>→ <b>Cargá el precio CON IVA incluido</b>, los $121.000.</li>
+        </ul>
+        <div class="g-warn">⚠ Lo más importante: <b>ser consistente</b>. Si cargás neto en el APU, el Gasto Real también neto. Si cargás con IVA, todo con IVA. Mezclar criterios rompe cualquier comparación entre presupuestado y real.</div>
+        <p><b>El campo "IVA %" del Presupuesto</b> es solo para el caso de facturarle obra a un cliente: agrega el IVA como línea aparte al final, sobre el total. No toca ningún cálculo interno (EVM, certificados, pozo trabajan siempre en neto).</p>
+        <p><b>Si construís para vender (pozo):</b> acá conviene que lo confirmes con tu contador, porque el IVA no grava "la venta del departamento" sino la <i>obra sobre inmueble propio</i> cuando la hace una empresa constructora. Si operás como constructora inscripta, tenés débito contra el cual descontar → cargá neto. Si es un fideicomiso al costo con adjudicación a beneficiarios, o vendés como particular, probablemente no tengas contra qué descontarlo → ese IVA es costo puro y va dentro de los precios del APU. Que vendas en dólares no cambia nada de esto.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>💰 Presupuesto — cantidades, IVA y exportaciones</summary><div class="g-body">
+        <ul>
+          <li><b>Cantidad:</b> editable salvo que el ítem tenga desglose BIM (ahí la suma la manda BIM).</li>
+          <li><b>👁 Ocultar ítem:</b> lo saca de todos los totales y vistas sin borrarlo.</li>
+          <li><b>IVA %:</b> se aplica solo a la vista y al PDF — internamente todo se calcula sin IVA.</li>
+          <li><b>📄 PDF:</b> presupuesto formal por rubro, con precios de venta (K incluido).</li>
+          <li><b>📦 Cómputo:</b> PDF solo de <b>materiales con cantidades, sin ningún precio</b> — para dárselo al cliente cuando él compra los materiales. Suma los insumos tipo M de todos los APUs × cantidades. Las cantidades son netas: recordá sumar desperdicio (5–10% áridos y ladrillos, 10–15% cerámicos).</li>
+        </ul>
+      </div></details>
+
+      <details class="g-sec"><summary>🏗️ BIM / Desglose — partir un ítem en zonas</summary><div class="g-body">
+        <p>Permite desglosar un ítem del presupuesto en <b>nivel + zona</b> (ej: "Mampostería → PB / Sector Norte"). Sirve para obras grandes donde controlás el avance por sector.</p>
+        <ul>
+          <li>Al crear un elemento BIM de un APU que no estaba en el presupuesto, el ítem se crea solo.</li>
+          <li>Cuando un ítem tiene desglose BIM, su cantidad total, planificación y certificación se manejan <b>por zona</b> — la fila general pasa a ser de solo lectura (suma).</li>
+        </ul>
+      </div></details>
+
+      <div class="g-cat">Control de obra</div>
+
+      <details class="g-sec"><summary>📈 Planificación y Control — PB, PV, EJ y GR explicados</summary><div class="g-body">
+        <p>Cada ítem tiene 4 números <b>por mes</b>:</p>
+        <ul>
+          <li><b>PB (Plan Base):</b> lo que planificaste originalmente. No lo toques después — es tu línea de comparación histórica.</li>
+          <li><b>PV (Plan Vigente):</b> el plan actual, que puede diferir del base por reprogramaciones.</li>
+          <li><b>EJ (Ejecutado):</b> cantidad realmente hecha ese mes (en unidades físicas: m², m³...).</li>
+          <li><b>GR (Gasto Real):</b> plata realmente gastada ese mes en ese ítem, <b>sin IVA y sin K</b> — lo que salió de tu bolsillo.</li>
+        </ul>
+        <p><b>Saldo</b> = PV − EJ. Si hiciste menos de lo planificado, aparece el botón <code>↪ M+1</code> para reprogramar el saldo al mes siguiente.</p>
+        <div class="g-warn">⚠ <b>El desvío queda asentado:</b> al reprogramar, el mes cerrado no se pone verde como si nada — muestra una etiqueta naranja <code>↪ X reprog.</code> y el resumen del mes lo cuenta. La historia de que ese mes no se cumplió no se borra.</div>
+        <p>El <b>Desvío Económico</b> por ítem = (EJ × costo unitario) − GR: verde si te costó menos que lo teórico, rojo si te pasaste.</p>
+        <div class="g-warn">⚠ <b>Si acortás el plazo de obra</b> y hay datos cargados en los meses que quedan afuera, la app te avisa cuántos ítems y celdas se borran (si no, seguirían sumando en el EVM sin verse). Las tareas PAC y los conceptos de GG que caen fuera del nuevo plazo no se tocan, pero te los marca para que los revises. Ctrl+Z lo deshace.</div>
+        <p><b>Vista General (Gantt):</b> barras por rubro sobre los meses, con tooltip al pasar el mouse (plan, ejecutado y gastado del mes). Exportable a PDF apaisado.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>📑 Certificaciones — cobrar el avance</summary><div class="g-body">
+        <p>Un certificado documenta el avance de un período para facturarlo. Cargás cuántas unidades certificás de cada ítem (en modo general o por zona BIM).</p>
+        <ul>
+          <li><b>Estados:</b> Borrador (no cuenta) → Emitido (cuenta como certificado) → Cobrado (además cuenta como plata entrada).</li>
+          <li><b>Retenciones:</b> fondo de reparo (típico 5%), devolución de anticipo y otros — se descuentan del bruto para dar el neto.</li>
+          <li><b>Anti sobre-certificación:</b> la app bloquea certificar más del 100% de cualquier ítem, avisándote cuáles se pasan.</li>
+          <li>La numeración es automática y no se repite aunque borres certificados del medio.</li>
+        </ul>
+      </div></details>
+
+      <details class="g-sec"><summary>🎯 PAC — productividad semanal (Lean Construction)</summary><div class="g-body">
+        <p>El PAC (Porcentaje de Actividades Completadas) mide qué tan confiable es tu planificación semanal: <b>tareas completadas ÷ tareas comprometidas</b>. Un equipo sano ronda 75–85%.</p>
+        <ul>
+          <li><b>Carga semanal:</b> tareas por mes/semana con rubro, contratista y fechas. Botones rápidos ✅/❌ en cada fila.</li>
+          <li><b>⚡ Desde Plan:</b> genera las tareas automáticamente desde los ítems con Plan Vigente del mes en el cronograma — no tipeás dos veces.</li>
+          <li><b>❌ No completada:</b> cargale la <b>causa</b> (clima, materiales, mano de obra...) — sin causa no entra al Pareto y perdés el análisis.</li>
+          <li><b>↪ Arrastrar:</b> mueve la tarea incumplida a la semana siguiente, pero la original queda como NO cumplida en su semana (el PAC no se maquilla). El re-compromiso lleva contador: <code>↪×2</code> en rojo = <b>tarea crónica</b> — el problema de fondo no está resuelto.</li>
+          <li><b>Dashboard:</b> donut de cumplimiento, evolución semanal, cumplimiento por rubro, causas del período, <b>Pareto histórico</b> (qué causas explican el 80% de tus incumplimientos — atacá esas) y panel de crónicas.</li>
+          <li><b>⬇ PDF:</b> reporte semanal/mensual respetando los filtros activos.</li>
+        </ul>
+      </div></details>
+
+      <details class="g-sec"><summary>📊 Dashboard y EVM — SPI, CPI y ganancia real</summary><div class="g-body">
+        <p>El bloque EVM aparece cuando hay cronograma cargado con ejecución. Las tres métricas salen de la <b>misma fuente</b> (el cronograma de Planificación):</p>
+        <ul>
+          <li><b>PV</b> (Valor Planificado): lo que deberías llevar hecho, a precio de venta.</li>
+          <li><b>EV</b> (Valor Ganado): lo que realmente hiciste, a precio de venta.</li>
+          <li><b>AC</b> (Costo Real): la suma de todos los GR — lo que te costó.</li>
+        </ul>
+        <p><b>SPI = EV÷PV</b> → ¿voy en plazo? (≥1 bien). <b>CPI = EV÷AC</b> → ¿voy en costo? (≥1 = tu venta supera tu costo). <b>Ganancia Real = EV − AC</b>, con % de margen.</p>
+        <p>El "mes actual" se detecta solo: es el último mes con ejecución o gasto cargado.</p>
+      </div></details>
+
+      <div class="g-cat">Modo pozo / desarrollo</div>
+
+      <details class="g-sec"><summary>🎯 Meta m² — el costo estimado por índice</summary><div class="g-body">
+        <p>Para cuando no tenés (o no querés) el detalle completo: cargás <b>superficie × valor del m²</b> (el que publica la CAC o el ICC de INDEC) y obtenés el <b>Costo Estimado</b> de construcción.</p>
+        <ul>
+          <li><b>Costo Directo Computado:</b> cuánto de ese costo ya detallaste con APUs — comparado <b>sin K</b>, porque el valor CAC tampoco incluye ganancia. Costo contra costo.</li>
+          <li><b>Reserva sin computar:</b> lo que queda para lo que aún no definiste (terminaciones, griferías...). Si se pone roja, tu detalle ya superó la estimación.</li>
+          <li><b>Gastado real / Disponible:</b> el consumo real del costo estimado.</li>
+          <li><b>Terreno:</b> se carga aparte y NO se descuenta del costo de construcción — el valor CAC no lo incluye. La app te da la inversión total y la <b>incidencia del terreno</b> (%).</li>
+          <li><b>Historial del valor m²:</b> cada cambio queda guardado con fecha — tu base para redeterminaciones.</li>
+          <li><b>Tipo de cambio:</b> opcional, muestra el equivalente en la otra moneda.</li>
+        </ul>
+      </div></details>
+
+      <details class="g-sec"><summary>🏗️ Pozo — estructura de venta y ganancia del proyecto</summary><div class="g-body">
+        <p>El pozo real: <b>de dónde sale la plata y cuánto vas a ganar</b>. Se desglosa con "+ Desglosar Pozo" en el Dashboard.</p>
+        <ul>
+          <li><b>💰 Capital Propio Aportado:</b> plata que ponés vos, aparte de las unidades. Va en su campo propio, no se disfraza de depto.</li>
+          <li><b>🤝 Unidad vendida a tercero:</b> nombre del comprador + precio de preventa (obligatorio — es plata real que entra).</li>
+          <li><b>🏠 Unidad sin vender:</b> te queda a vos. El valor es <b>opcional</b> — podés dejarla en $0 hasta que definas o vendas. Editable después con ✏️.</li>
+        </ul>
+        <p><b>Fuentes para Financiar la Obra</b> = Capital Propio + Ventas a Terceros. Sobre ese número (plata real) se calculan:</p>
+        <ul>
+          <li><b>Ganancia Estimada</b> = Fuentes − Costo Estimado (¿me alcanza y me sobra, según el índice?)</li>
+          <li><b>Ganancia Real (hoy)</b> = Fuentes − Gastado Real (contra lo efectivamente gastado)</li>
+        </ul>
+        <div class="g-tip">💡 Las unidades sin vender aparecen aparte como <b>🎁 potencial</b> — no infla tu ganancia de hoy, porque todavía no hay plata real detrás. El día que las vendas, pasalas a "vendida" y el número se mueve solo.</div>
+      </div></details>
+
+      <details class="g-sec"><summary>🔭 Proyección de Cierre — cuánto va a terminar costando</summary><div class="g-body">
+        <p>Panel del Dashboard. Junta en un solo número lo que se sabe hoy:</p>
+        <ul>
+          <li><b>Ya gastado</b> — real: ítems + GG + imprevistos.</li>
+          <li><b>Falta de lo ya definido</b> — lo presupuestado con APU que todavía no se ejecutó. Si en lo ya hecho venís gastando, por ejemplo, 8% más que lo calculado, esa <b>tendencia</b> se aplica a lo que falta.</li>
+          <li><b>Sin definir todavía</b> — lo que el índice m² dice que debería costar el resto (necesita 🎯 Meta m²). Es la "Reserva sin computar" del panel del Meta.</li>
+          <li><b>GG que faltan</b> y <b>reserva de imprevistos sin usar</b>.</li>
+        </ul>
+        <p>Se compara contra la <b>estimación inicial</b> (el Meta m², lo que le dijiste al cliente). Verde si cierra por debajo, naranja hasta 5% arriba, rojo más allá.</p>
+        <div class="g-tip">💡 Es el número para la charla con el cliente: <i>"con lo que elegiste hasta ahora, la casa cierra en X"</i>. Cada decisión que define un ítem mueve la proyección antes de gastar la plata.</div>
+        <p><b>La tendencia recién se aplica con al menos 5% de la obra ejecutada.</b> Con menos, no hay muestra: lo que falta se proyecta al costo calculado y el panel lo avisa.</p>
+      </div></details>
+
+      <div class="g-cat">Herramientas y datos</div>
+
+      <details class="g-sec"><summary>📸 Versiones del presupuesto</summary><div class="g-body">
+        <p>Botón <b>📸 Versiones</b> en el panel izquierdo. Una versión es una foto completa de la obra con nombre y fecha — insumos, APUs, presupuesto, cronograma, pozo, todo.</p>
+        <ul>
+          <li><b>Cuándo sacar una:</b> antes de actualizar precios, antes de un cambio grande de alcance, al cerrar cada mes.</li>
+          <li><b>Comparar:</b> cada versión muestra presupuesto, costo directo y gastado real de ese momento, y cuánto cambió hasta hoy.</li>
+          <li><b>Restaurar:</b> vuelve a ese estado completo. Ctrl+Z lo deshace, y conviene guardar una versión del estado actual antes.</li>
+        </ul>
+        <div class="g-warn">⚠ Se guardan en este navegador, por obra, máximo 10. <b>No van en el export JSON</b> ni en el respaldo automático: si querés conservar una versión fuera de la máquina, restaurala y exportá.</div>
+      </div></details>
+
+      <details class="g-sec"><summary>🛠 Atajos y utilidades</summary><div class="g-body">
+        <ul>
+          <li><b>Ctrl/Cmd + K:</b> búsqueda global — insumos, APUs e ítems desde cualquier pestaña. ↑↓ para navegar, Enter para abrir.</li>
+          <li><b>Ctrl/Cmd + Z:</b> deshacer el último cambio (hasta 15 pasos). <b>Ctrl+Shift+Z</b> rehace. El historial es por obra y se descarta al cambiar de obra.</li>
+          <li><b>👁 Modo presentación:</b> oculta todos los importes en pantalla (•••) para compartir pantalla con clientes o gremios. Los PDF/CSV <b>siempre salen con valores reales</b>.</li>
+          <li><b>📊 Ocultar detalle por APU:</b> esconde la parte bottom-up del Dashboard cuando trabajás solo con el pozo m² y comparar "presupuestado vs gastado" sería redundante.</li>
+          <li><b>Multi-obra:</b> botón "Cambiar" en el sidebar. Cada obra guarda todo lo suyo (K, insumos, PAC, pozo...).</li>
+        </ul>
+      </div></details>
+
+      <details class="g-sec"><summary>🛡 Respaldo — dónde viven tus datos y cómo no perderlos</summary><div class="g-body">
+        <p>Todo se guarda <b>automáticamente</b> en el almacenamiento local del navegador, en cada cambio (fijate el "✓ Guardado" del sidebar). No hay botón de guardar. Pero atención:</p>
+        <div class="g-warn">⚠ Si limpiás los datos de navegación del navegador, usás otro perfil de Chrome u otra computadora, <b>los datos no están ahí</b>. El almacenamiento local es de ESTE navegador en ESTA máquina.</div>
+        <ul>
+          <li><b>🛡 Respaldo automático (recomendado):</b> clic en el escudo del sidebar → elegí una carpeta → cada cambio se respalda solo como JSON, con versiones diarias (guarda las últimas 10). Funciona en Chrome/Edge/Brave.</li>
+          <li><b>💡 El truco de Drive:</b> si elegís una carpeta dentro de tu Google Drive del escritorio, el respaldo se sube solo a la nube. Respaldo cloud sin que la app se conecte a nada.</li>
+          <li><b>Exportar / Importar JSON:</b> desde el selector de obras. El export incluye TODO (presupuesto, cronograma, certificados, PAC, pozo).</li>
+          <li>Si el navegador pide re-confirmar el permiso de la carpeta (escudo naranja), un clic y sigue.</li>
+        </ul>
+      </div></details>
+
+      <div class="g-cat">Preguntas frecuentes</div>
+
+      <details class="g-sec"><summary>❓ ¿Por qué "Costo Directo" no coincide con el total del Presupuesto?</summary><div class="g-body">
+        <p>Porque son bases distintas a propósito. El <b>Presupuesto</b> muestra precio de venta (costo × K). El panel del pozo compara contra el valor CAC, que es costo puro — así que usa el <b>costo directo sin K</b>. Si comparara venta contra costo CAC, la reserva se vería falsamente chica (exactamente un K más chica).</p>
+      </div></details>
+
+      <details class="g-sec"><summary>❓ Cargué ejecución pero el EVM no aparece</summary><div class="g-body">
+        <p>El EVM necesita <b>Plan Vigente</b> cargado además de la ejecución (sin plan no hay contra qué comparar). Cargá PV en los meses del cronograma de Planificación y Control y el bloque aparece solo.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>❓ ¿"Certificado" y "Ejecutado" no deberían ser iguales?</summary><div class="g-body">
+        <p>No necesariamente. <b>Ejecutado</b> es lo que hiciste físicamente. <b>Certificado</b> es lo que documentaste para cobrar. Normalmente certificás detrás de lo ejecutado (fin de mes, con demora administrativa). La brecha entre ambos es plata que trabajaste y todavía no facturaste.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>❓ Reprogramé un saldo y el mes quedó "cumplido" — ¿se perdió el atraso?</summary><div class="g-body">
+        <p>No. El Plan Vigente del mes se cierra igualándose a lo ejecutado (para que el futuro quede ordenado), pero el desvío queda <b>asentado</b>: etiqueta naranja <code>↪ X reprog.</code> en la celda de saldo, y el resumen del mes muestra cuántas unidades se pasaron al siguiente. En PAC pasa igual con las tareas arrastradas (↪×N).</p>
+      </div></details>
+
+      <details class="g-sec"><summary>❓ ¿El valor del m² de la CAC incluye el terreno? ¿Y la ganancia?</summary><div class="g-body">
+        <p>No y no. El índice CAC/ICC es <b>costo de construcción puro</b>: materiales + mano de obra + equipos, promedio nacional. No incluye terreno (varía demasiado por ubicación) ni la ganancia de nadie. Por eso en la app el terreno se suma aparte (con su % de incidencia sobre la inversión total) y la comparación con tus APUs es sin K.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>❓ Puse IVA pero los números internos no cambiaron</summary><div class="g-body">
+        <p>Correcto: el IVA es solo de presentación (vista de Presupuesto y PDF). Todo el motor interno — costos, EVM, certificados, pozo — trabaja <b>sin IVA</b>, que es como se analiza una obra. El Gasto Real también cargalo sin IVA para comparar peras con peras.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>❓ Borré algo sin querer</summary><div class="g-body">
+        <p><b>Ctrl+Z</b> al instante (hasta 15 pasos hacia atrás, por obra). Si ya es tarde y tenés respaldo automático configurado, importá el JSON de la carpeta de respaldos: selector de obras → Importar JSON → elegí el archivo <code>respaldo_[obra]_[fecha].json</code> más reciente.</p>
+      </div></details>
+
+      <details class="g-sec"><summary>❓ Salió el cartel de "almacenamiento lleno"</summary><div class="g-body">
+        <p>El navegador limita el almacenamiento local (~5MB). Si se llena: 1) <b>Exportá la obra actual a JSON ya mismo</b> (no perdés nada), 2) borrá obras viejas que ya exportaste, desde el selector de obras. Con el respaldo automático activo este riesgo prácticamente desaparece, porque siempre tenés el JSON al día en disco.</p>
+      </div></details>
+
+    </div>
   </div>
 </div>
 
@@ -761,7 +1400,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
             <th style="text-align:right;width:95px;border-right:1px solid #333;color:var(--orange)">Saldo / Reprg.</th>
             <th style="text-align:right;width:110px">Gasto Teórico</th>
             <th style="text-align:right;width:110px">Gasto Real</th>
-            <th style="text-align:right;width:100px">Desvío (€)</th>
+            <th style="text-align:right;width:100px">Desvío ($)</th>
           </tr>
         </thead>
         <tbody id="tbody-plan"></tbody>
@@ -777,7 +1416,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
     <div id="plan-gantt-rubros-wrap" style="padding:24px 4px 12px;display:none">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
         <span style="font-size:13px;color:var(--text2);font-weight:600">🏗 Cronograma por Rubro</span>
-        <span style="font-size:11px;color:var(--text3)">(altura de barra ∝ $ del período · hover para detalle · clic para expandir)</span>
+        <span style="font-size:11px;color:var(--text3)">(hover para ver plan, ejecutado y gastado del mes · clic para expandir)</span>
         <div style="display:flex;gap:16px;margin-left:auto;align-items:center;font-size:10px;color:var(--text3)"></div>
         <button onclick="exportGanttRubrosPDF()" class="btn btn-ghost btn-sm" style="margin-left:8px;color:var(--accent);border-color:rgba(200,241,53,.3);font-size:11px">⬇ PDF</button>
       </div>
@@ -809,10 +1448,6 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <canvas id="chart-curva-multi" height="200"></canvas>
     </div>
 
-    <div id="plan-resumen-chart-wrap" style="padding:16px 0 8px;border-top:1px solid var(--border);margin-top:12px">
-      <div style="font-size:13px;color:var(--text2);margin-bottom:8px;font-weight:600">📊 Resumen Visual — Todo el período</div>
-      <canvas id="chart-plan-resumen" height="160"></canvas>
-    </div>
     </div><!-- /plan-detail-wrap -->
   </div>
 </div>
@@ -829,6 +1464,7 @@ tr:hover td{background:rgba(255,255,255,.015)}
       <span style="font-size:12px;color:var(--text3);font-family:var(--mono);margin-left:8px">IVA %:</span>
       <input id="iva-pct" type="number" value="0" step="1" min="0" max="100" oninput="renderPres()" style="width:65px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-family:var(--mono);font-size:13px;color:var(--text);outline:none">
       <button class="btn btn-ghost btn-sm" onclick="openModalPresItem(null)">+ Ítem</button>
+      <button class="btn btn-ghost btn-sm" onclick="openModalPresConfig()" title="GG e imprevistos como líneas separadas, y honorarios profesionales con su IVA">⚙ Líneas</button>
       <button class="btn btn-ghost btn-sm" onclick="exportPresPDF()">📄 PDF</button>
       <button class="btn btn-ghost btn-sm" onclick="exportComputoPDF()" title="Lista de materiales con cantidades totales, sin precios — para entregar al cliente que compra los materiales">📦 Cómputo</button>
       <button class="btn btn-ghost btn-sm" onclick="exportPres()">↓ CSV</button>
@@ -1120,17 +1756,84 @@ tr:hover td{background:rgba(255,255,255,.015)}
 </div>
 
 <!-- ========== MODAL: K ========== -->
+<!-- MODAL: LÍNEAS DEL PRESUPUESTO (GG, imprevistos, honorarios) -->
+<div class="modal-overlay" id="modal-pres-config">
+<div class="modal" style="max-width:600px">
+  <div class="modal-title">⚙ Líneas del presupuesto para el cliente</div>
+  <p style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">Lo que va al pie del presupuesto y del PDF. Regla de oro: <b>GG e imprevistos van dentro del K o como línea, nunca las dos cosas</b> — la app te avisa si se están contando dos veces.</p>
+  <label style="display:flex;align-items:flex-start;gap:9px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer;margin-bottom:8px">
+    <input type="checkbox" id="pc-gg" style="margin-top:2px"><span style="font-size:12px;line-height:1.5;color:var(--text2)"><b style="color:var(--text)">Gastos Generales como línea separada</b><br>Usa el detalle cargado en 💸 Gastos de Obra (o el % del K si no hay detalle). Visible para el cliente y atado al plazo.</span>
+  </label>
+  <label style="display:flex;align-items:flex-start;gap:9px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer;margin-bottom:14px">
+    <input type="checkbox" id="pc-imp" style="margin-top:2px"><span style="font-size:12px;line-height:1.5;color:var(--text2)"><b style="color:var(--text)">Imprevistos como línea separada</b><br>Usa el % de reserva del módulo de Imprevistos.</span>
+  </label>
+  <div id="pc-aviso-doble" style="margin-bottom:14px"></div>
+  <div style="border-top:1px solid var(--border);padding-top:12px">
+    <label style="display:flex;align-items:center;gap:9px;cursor:pointer;margin-bottom:10px"><input type="checkbox" id="pc-hon" onchange="togglePcHon()"><b style="font-size:13px;color:var(--text)">Incluir honorarios profesionales</b></label>
+    <div id="pc-hon-wrap" style="display:none">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Cómo se calculan</label><select class="form-input" id="pc-hon-modo" onchange="togglePcHon()"><option value="pct">% sobre subtotal de obra</option><option value="monto">Monto fijo</option></select></div>
+        <div class="form-group" id="pc-hon-pct-wrap"><label class="form-label">Porcentaje</label><input type="number" class="form-input" id="pc-hon-pct" step="0.1" min="0" placeholder="Ej: 10"></div>
+        <div class="form-group" id="pc-hon-monto-wrap" style="display:none"><label class="form-label">Monto</label><input type="number" class="form-input" id="pc-hon-monto" step="0.01" min="0"></div>
+      </div>
+      <div class="form-group"><label class="form-label">IVA sobre honorarios (%) <span style="font-weight:400;color:var(--text3)">— 21 si sos responsable inscripto, 0 si monotributista</span></label><input type="number" class="form-input" id="pc-hon-iva" step="0.5" min="0" value="21"></div>
+      <div style="font-size:10px;color:var(--text3);line-height:1.5">Es un IVA distinto del de obra: los materiales que compra el cliente ya traen el suyo adentro. Por eso van separados.</div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-ghost" onclick="closeModal('modal-pres-config')">Cancelar</button>
+    <button class="btn btn-primary" onclick="savePresConfig()">Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: VERSIONES / SNAPSHOTS -->
+<div class="modal-overlay" id="modal-snaps">
+<div class="modal" style="max-width:680px">
+  <div class="modal-title">📸 Versiones del presupuesto</div>
+  <p style="font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6">Una versión es una foto completa de la obra en un momento (insumos, APUs, presupuesto, cronograma, todo). Sacá una antes de actualizar precios o de un cambio grande, y después compará o volvé atrás. Se guardan en este navegador, por obra (máx. 10).</p>
+  <div style="display:flex;gap:8px;margin-bottom:14px">
+    <input class="form-input" id="snap-nombre" placeholder="Nombre — ej: Antes de actualizar precios abril" style="flex:1">
+    <button class="btn btn-primary" onclick="crearSnapshot()">📸 Guardar versión</button>
+  </div>
+  <div id="snap-lista" style="max-height:340px;overflow:auto;border:1px solid var(--border);border-radius:8px"></div>
+  <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modal-snaps')">Cerrar</button></div>
+</div>
+</div>
+
 <div class="modal-overlay" id="modal-k">
 <div class="modal">
   <div class="modal-title">📐 Coeficiente K</div>
-  <p style="font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.6">K convierte el costo directo en precio de venta. K = 1 + GG% + Beneficio% + Imprevistos% + C.Financiero%. Típico en Argentina: 1.35–1.60.</p>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.6">K convierte el costo directo en precio de venta: <b>K = 1 + GG + Beneficio + Imprevistos + Financiero + Impuestos</b>. Típico para obra a terceros: 1.35–1.60. Para obra propia o venta en pozo, poné <b>Beneficio en 0</b> (tu ganancia sale de la venta, no del margen por ítem).</p>
   <div class="form-row">
-    <div class="form-group"><label class="form-label">Gastos Generales %</label><input class="form-input" id="k-gg" type="number" value="12" oninput="updateKPreview()"></div>
-    <div class="form-group"><label class="form-label">Beneficio %</label><input class="form-input" id="k-ben" type="number" value="12" oninput="updateKPreview()"></div>
+    <div class="form-group">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+        <span class="form-label" title="Costos reales de gestión que no están en ningún ítem: obrador, vallado, seguros, permisos, tu tiempo coordinando" style="margin:0">Gastos Generales % <span style="color:var(--text3);font-weight:400">ⓘ</span></span>
+        <button type="button" onclick="closeModal('modal-k');showTab('gastos')" style="margin-left:auto;background:transparent;border:1px solid var(--border);border-radius:5px;color:var(--accent);font-size:10px;padding:2px 7px;cursor:pointer;font-family:var(--sans)">🏢 Detallar</button>
+      </div>
+      <input class="form-input" id="k-gg" type="number" value="12" oninput="updateKPreview()">
+      <div id="k-gg-nota" style="font-size:10px;color:var(--M);margin-top:4px;display:none"></div>
+    </div>
+    <div class="form-group"><label class="form-label" title="Tu ganancia por construir para un tercero. En obra propia o venta en pozo va en 0">Beneficio % <span style="color:var(--text3);font-weight:400">ⓘ</span></label><input class="form-input" id="k-ben" type="number" value="12" oninput="updateKPreview()"></div>
   </div>
   <div class="form-row">
-    <div class="form-group"><label class="form-label">Imprevistos %</label><input class="form-input" id="k-imp" type="number" value="5" oninput="updateKPreview()"></div>
-    <div class="form-group"><label class="form-label">Costo Financiero %</label><input class="form-input" id="k-fin" type="number" value="3" oninput="updateKPreview()"></div>
+    <div class="form-group">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+        <span class="form-label" title="Colchón para lo que no podés prever: roturas, sorpresas al excavar, errores de cómputo" style="margin:0">Imprevistos % <span style="color:var(--text3);font-weight:400">ⓘ</span></span>
+        <button type="button" onclick="closeModal('modal-k');showTab('gastos')" style="margin-left:auto;background:transparent;border:1px solid var(--border);border-radius:5px;color:var(--accent);font-size:10px;padding:2px 7px;cursor:pointer;font-family:var(--sans)">⚡ Registrar</button>
+      </div>
+      <input class="form-input" id="k-imp" type="number" value="5" oninput="updateKPreview()">
+      <div id="k-imp-nota" style="font-size:10px;color:var(--M);margin-top:4px;display:none"></div>
+    </div>
+    <div class="form-group"><label class="form-label" title="Costo de la plata en el tiempo: intereses si financiás, o pérdida por inflación si ponés capital propio">Costo Financiero % <span style="color:var(--text3);font-weight:400">ⓘ</span></label><input class="form-input" id="k-fin" type="number" value="3" oninput="updateKPreview()"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label" title="Impuestos sobre tu facturación que salen de tu bolsillo (a diferencia del IVA, que solo pasa por vos)">Impuestos % — IIBB + cheque <span style="color:var(--text3);font-weight:400">ⓘ</span></label>
+      <input class="form-input" id="k-iibb" type="number" value="0" step="0.1" oninput="updateKPreview()">
+      <div style="font-size:10px;color:var(--text3);margin-top:4px;line-height:1.4">Ingresos Brutos (1,5–3% según provincia) + impuesto al cheque (~1,2%). <b>El IVA no va acá</b> — se carga aparte en Presupuesto.</div>
+    </div>
+    <div class="form-group"></div>
   </div>
   <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:4px;display:flex;align-items:center;justify-content:space-between">
     <span style="font-size:12px;color:var(--text3);font-family:var(--mono)">K RESULTANTE</span>
@@ -1626,11 +2329,26 @@ const INIT_PRES = [
 
 // =================== STATE ===================
 let K = 1.32;
-let kComponents = { gg: 12, ben: 12, imp: 5, fin: 3 }; // componentes del K, guardados por obra
+let kComponents = { gg: 12, ben: 12, imp: 5, fin: 3, iibb: 0 }; // componentes del K, guardados por obra
+// Gastos Generales de obra. modo 'porcentaje' = usa kComponents.gg a mano.
+// modo 'detalle' = se calculan desde items reales y el % sale de dividir por el costo directo.
+// Los GG son costos de PROYECTO (dependen del tiempo), no de ítem — por eso viven acá y no en el cronograma.
+// base: sobre qué se divide el GG para sacar el %. 'estimado' usa el Costo Estimado (m² × CAC),
+//   que es estable desde el día 1 aunque el presupuesto se cargue de a poco. 'directo' usa el costo
+//   directo ya cargado, preciso solo si tenés todo el presupuesto armado.
+// aplicarAlK: si el % calculado pisa el GG del coeficiente K. Apagado por defecto para que el K
+//   nunca se mueva solo a espaldas del usuario.
+let gastosGenerales = { modo: 'porcentaje', items: [], base: 'estimado', aplicarAlK: false };
+// Imprevistos REALES ocurridos. La reserva NO se guarda acá: se deriva del % que ya está en el K,
+// para no duplicar el mismo dato en dos lugares.
+let imprevistos = { items: [], reservaPct: null }; // reservaPct null = usa el % del K
+// Líneas explícitas del presupuesto para el cliente: GG e imprevistos como renglón (en vez de
+// diluidos en el K) y honorarios profesionales con su propio IVA.
+let presupuestoConfig = { mostrarGG:false, mostrarImp:false, honorarios:{ mostrar:false, modo:'pct', pct:0, monto:0, iva:21 } };
 let insumos = [], apus = [], presItems = [], bimItems = [], certificados = [];
 let planificacion = { start_date: '', duration_months: 6, periods: [] };
 // Presupuesto Meta ("modo pozo"): control top-down por m² × valor del m² (CAC)
-let presupuestoMeta = { activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0 };
+let presupuestoMeta = { activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0, unidades:[], capitalPropio:0 };
 let modoPresentacion = false; // oculta importes en pantalla (para compartir con cliente/subcontratista)
 let ocultarDetalleApu = false; // oculta la sección de presupuesto bottom-up (por APU) — para cuando se trabaja solo con el pozo m²
 let pacTareas = [];   // Sistema PAC — tareas semanales de productividad
@@ -1722,6 +2440,7 @@ async function deleteObra(id) {
   if(!ok) return;
   obrasList = obrasList.filter(o => o.id !== id);
   localStorage.removeItem('pob_v52_data_' + id);
+  localStorage.removeItem('pob_v52_snap_' + id);
   if(obrasList.length === 0) {
     createNewObra('Nueva Obra');
   } else if(currentObraId === id) {
@@ -1741,7 +2460,21 @@ function load(){
     if(s){
       const d=JSON.parse(s);
       K=d.K||1.32;
-      kComponents=d.kComponents||{ gg:12, ben:12, imp:5, fin:3 };
+      kComponents=d.kComponents||{ gg:12, ben:12, imp:5, fin:3, iibb:0 };
+      if(kComponents.iibb===undefined) kComponents.iibb=0; // obras guardadas antes de este campo
+      gastosGenerales=d.gastosGenerales||{ modo:'porcentaje', items:[], base:'estimado', aplicarAlK:false };
+      gastosGenerales.items = gastosGenerales.items || [];
+      gastosGenerales.base = gastosGenerales.base || 'estimado';
+      imprevistos = d.imprevistos || { items: [], reservaPct: null };
+      imprevistos.items = imprevistos.items || [];
+      if(imprevistos.reservaPct===undefined) imprevistos.reservaPct=null;
+      presupuestoConfig = d.presupuestoConfig || { mostrarGG:false, mostrarImp:false, honorarios:{ mostrar:false, modo:'pct', pct:0, monto:0, iva:21 } };
+      presupuestoConfig.honorarios = presupuestoConfig.honorarios || { mostrar:false, modo:'pct', pct:0, monto:0, iva:21 };
+      if(gastosGenerales.aplicarAlK===undefined) gastosGenerales.aplicarAlK=false;
+      // migrar conceptos guardados con 'meses' (cantidad) al formato desde/hasta
+      gastosGenerales.items.forEach(g=>{
+        if(g.tipo==='mensual' && g.desdeMes===undefined){ g.desdeMes=1; g.hastaMes=g.meses||1; delete g.meses; }
+      });
       insumos=d.insumos||[...INIT_INSUMOS];
       apus=d.apus||[...INIT_APUS];
       presItems=d.pres||[...INIT_PRES];
@@ -1751,7 +2484,9 @@ function load(){
       planView=d.planView||'detail';
       pacTareas=d.pacTareas||[];
       pacView=d.pacView||'carga';
-      presupuestoMeta=d.presupuestoMeta||{ activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0 };
+      presupuestoMeta=d.presupuestoMeta||{ activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0, unidades:[], capitalPropio:0 };
+      presupuestoMeta.unidades = presupuestoMeta.unidades || []; // por si la obra se guardó antes de esta función
+      presupuestoMeta.capitalPropio = presupuestoMeta.capitalPropio || 0;
       ocultarDetalleApu=d.ocultarDetalleApu||false;
       // Normalizar chapters de datos persistidos (limpia variantes de formato guardadas)
       presItems=presItems.map(p=>({...p,chapter:normalizeChapter(p.chapter)}));
@@ -1774,7 +2509,7 @@ function load(){
   renderObrasUI();
 }
 
-function reset(){insumos=JSON.parse(JSON.stringify(INIT_INSUMOS));apus=JSON.parse(JSON.stringify(INIT_APUS));presItems=JSON.parse(JSON.stringify(INIT_PRES));bimItems=[];certificados=[];planificacion={start_date:'',duration_months:6,periods:[]};kComponents={gg:12,ben:12,imp:5,fin:3};pacTareas=[];pacView='carga';presupuestoMeta={activo:false,m2:0,valorM2:0,moneda:'ARS',fecha:'',historial:[],valorTerreno:0,tipoCambio:0};ocultarDetalleApu=false;}
+function reset(){insumos=JSON.parse(JSON.stringify(INIT_INSUMOS));apus=JSON.parse(JSON.stringify(INIT_APUS));presItems=JSON.parse(JSON.stringify(INIT_PRES));bimItems=[];certificados=[];planificacion={start_date:'',duration_months:6,periods:[]};kComponents={gg:12,ben:12,imp:5,fin:3,iibb:0};gastosGenerales={modo:'porcentaje',items:[],base:'estimado',aplicarAlK:false};imprevistos={items:[],reservaPct:null};presupuestoConfig={mostrarGG:false,mostrarImp:false,honorarios:{mostrar:false,modo:'pct',pct:0,monto:0,iva:21}};pacTareas=[];pacView='carga';presupuestoMeta={activo:false,m2:0,valorM2:0,moneda:'ARS',fecha:'',historial:[],valorTerreno:0,tipoCambio:0,unidades:[],capitalPropio:0};ocultarDetalleApu=false;}
 
 let _saveErrorShown = false;
 // ---- Historial de deshacer (Ctrl+Z) ----
@@ -1784,7 +2519,7 @@ const UNDO_MAX = 15;
 function save(){
   if(!currentObraId) return;
   try{
-    const payload = JSON.stringify({K,kComponents,insumos,apus,pres:presItems,bimItems,certificados,planificacion,planView,pacTareas,pacView,presupuestoMeta,ocultarDetalleApu});
+    const payload = JSON.stringify({K,kComponents,gastosGenerales,imprevistos,presupuestoConfig,insumos,apus,pres:presItems,bimItems,certificados,planificacion,planView,pacTareas,pacView,presupuestoMeta,ocultarDetalleApu});
     if(!_isRestoring && _lastSavedState!==null && payload!==_lastSavedState){
       _undoStack.push(_lastSavedState);
       if(_undoStack.length>UNDO_MAX) _undoStack.shift();
@@ -1900,6 +2635,13 @@ function updateBackupUI(state){
   const s = states[state] || states.off;
   el.textContent = s.txt;
   el.style.color = s.color;
+  // El estado también se ve sin abrir el modal: punto de color en "Ajustes de obra"
+  const dot = document.getElementById('sf-backup-dot');
+  if(dot){
+    const cls = {ok:'ok', sinrespaldo:'warn', pendiente:'warn', error:'err'}[state] || '';
+    dot.className = 'sf-dot' + (cls ? ' ' + cls : '');
+    dot.title = 'Respaldo: ' + s.txt;
+  }
 }
 
 async function configurarRespaldo(){
@@ -2003,6 +2745,7 @@ function updateBadges(){
   set('bdg-pres',presItems.length);
   set('bdg-cert',certificados.length);
   set('bdg-pac',pacTareas.length);
+  set('bdg-gastos',(gastosGenerales.items||[]).length+(imprevistos.items||[]).length);
   if(typeof updateIssuesSummary === 'function') updateIssuesSummary();
 }
 
@@ -2071,6 +2814,19 @@ function updateIssuesSummary(){
 
   const summary=document.getElementById('issues-summary');
   const detail=document.getElementById('issues-detail');
+  // Pill compacta del sidebar: sólo el conteo. El detalle vive en el modal de ajustes.
+  const pill=document.getElementById('sf-issues-pill');
+  const okBox=document.getElementById('issues-ok');
+  if(pill){
+    if(errs+warns===0){ pill.style.display='none'; }
+    else{
+      pill.style.display='inline-flex';
+      pill.className='sf-pill '+(errs>0?'err':'warn');
+      pill.textContent='⚠ '+(errs+warns);
+      pill.title=(errs?errs+' error(es), ':'')+warns+' aviso(s) — clic para ver el detalle';
+    }
+  }
+  if(okBox) okBox.style.display = (errs+warns===0) ? 'block' : 'none';
   if(!summary||!detail) return;
   if(errs+warns===0){summary.style.display='none';return;}
   summary.style.display='block';
@@ -2116,7 +2872,7 @@ function showTab(tab){
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active-tab'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active-tab');
-  const tabs=['guia','insumos','apu','indice','bim','oldschool','plan','presupuesto','cert','pac'];
+  const tabs=['guia','insumos','apu','indice','bim','oldschool','plan','presupuesto','gastos','cert','pac','ayuda'];
   const navItem=document.querySelectorAll('.nav-item')[tabs.indexOf(tab)];
   if(navItem) navItem.classList.add('active');
   currentTab=tab;
@@ -2130,6 +2886,7 @@ function showTab(tab){
   if(tab==='presupuesto')renderPres();
   if(tab==='cert')renderCertificadosTab();
   if(tab==='pac')renderPAC();
+  if(tab==='gastos')renderGastosTab();
   document.getElementById('bdg-cert').textContent=certificados.length;
 }
 
@@ -2584,13 +3341,21 @@ function renderPres(){
   });
 
   const directo = Math.round(totalBruto/K*100)/100;
-  const ivaPct = parseFloat(document.getElementById('iva-pct')?.value)||0;
-  const totalCliente = Math.round(totalBruto*(1+ivaPct/100)*100)/100;
+  const T = calcPresTotales(totalBruto);
+  const totalCliente = T.totalCliente;
+  const row=(lbl,val,color)=>`<tr class="tr-total"><td colspan="6"${color?` style="color:${color}"`:''}>${lbl}</td><td style="text-align:right;${color?`color:${color}`:''}">${fmt(val)}</td><td></td></tr>`;
   html += `<tr class="tr-total"><td colspan="7">SUBTOTAL — Costo Directo sin K</td><td></td></tr>`;
-  html += `<tr class="tr-total"><td colspan="6" style="color:var(--accent3)">Costo Directo</td><td style="text-align:right;color:var(--accent3)">${fmt(directo)}</td><td></td></tr>`;
-  html += `<tr class="tr-total"><td colspan="6">► TOTAL BRUTO (precio de venta, K = ${K})</td><td style="text-align:right;color:var(--accent)">${fmt(totalBruto)}</td><td></td></tr>`;
-  if(ivaPct>0) html += `<tr class="tr-total"><td colspan="6" style="color:var(--yellow)">IVA (${ivaPct}%)</td><td style="text-align:right;color:var(--yellow)">${fmt(totalBruto*ivaPct/100)}</td><td></td></tr>`;
-  html += `<tr class="tr-total"><td colspan="6" style="color:var(--green)">► TOTAL A COBRAR AL CLIENTE</td><td style="text-align:right;color:var(--green)">${fmt(totalCliente)}</td><td></td></tr>`;
+  html += row('Costo Directo', directo, 'var(--accent3)');
+  html += row(`► TOTAL BRUTO ÍTEMS (precio de venta, K = ${K})`, totalBruto, 'var(--accent)');
+  if(presupuestoConfig.mostrarGG)  html += row(`Gastos Generales de obra${T.ggDoble?' <span title="También están dentro del K: se cuentan dos veces">⚠</span>':''}`, T.ggLinea, 'var(--text2)');
+  if(presupuestoConfig.mostrarImp) html += row(`Imprevistos (${impReservaPct()}%)${T.impDoble?' <span title="También están dentro del K: se cuentan dos veces">⚠</span>':''}`, T.impLinea, 'var(--text2)');
+  if(presupuestoConfig.mostrarGG||presupuestoConfig.mostrarImp) html += row('SUBTOTAL OBRA', T.subtotalObra, 'var(--accent)');
+  if(T.ivaPct>0) html += row(`IVA sobre obra (${T.ivaPct}%)`, T.ivaObra, 'var(--yellow)');
+  if(presupuestoConfig.honorarios.mostrar){
+    html += row(`Honorarios profesionales${presupuestoConfig.honorarios.modo==='pct'?' ('+presupuestoConfig.honorarios.pct+'% s/ obra)':''}`, T.honorarios, 'var(--MO)');
+    if(T.ivaHon>0) html += row(`IVA sobre honorarios (${presupuestoConfig.honorarios.iva}%)`, T.ivaHon, 'var(--yellow)');
+  }
+  html += row('► TOTAL A COBRAR AL CLIENTE', totalCliente, 'var(--green)');
 
   document.getElementById('tbody-pres').innerHTML = html;
   document.getElementById('sum-dir').textContent = fmt(directo);
@@ -2602,9 +3367,17 @@ function togglePresItem(ii){
   presItems[ii].visible=presItems[ii].visible===false?true:false;
   save();renderPres();
 }
-function deletePres(ii){
-  if(!confirm('¿Eliminar ítem '+presItems[ii].code+'?'))return;
-  presItems.splice(ii,1);save();updateBadges();renderPres();toast('Ítem eliminado');
+async function deletePres(ii){
+  const p = presItems[ii]; if(!p) return;
+  const bims = bimItems.filter(b=>b.code===p.code);
+  const body = `Ítem <strong>${p.code}</strong> — ${p.desc}`
+    + (bims.length ? `<br><span style="color:var(--red);font-size:12px">⚠ Tiene ${bims.length} zona(s) BIM que se borran con él.</span>` : '')
+    + `<br><span style="color:var(--text3);font-size:12px">Se pierde también su cronograma. Ctrl+Z lo recupera.</span>`;
+  const ok = await confirmAction({title:'Eliminar ítem del presupuesto', body, okText:'Eliminar', danger:true});
+  if(!ok) return;
+  bimItems = bimItems.filter(b=>b.code!==p.code); // antes quedaban zonas huérfanas invisibles
+  presItems.splice(ii,1);
+  save(); updateBadges(); renderPres(); toast('Ítem eliminado');
 }
 
 // =================== PRESUPUESTO ITEM MODAL ===================
@@ -2676,6 +3449,7 @@ function savePresItem(){
     presItems.push(item);
     presItems.sort((a,b)=>{ const cc=a.chapter.localeCompare(b.chapter); return cc!==0?cc:a.code.localeCompare(b.code); });
   }
+  recalcGGIfDetalle(); // cambió el costo directo → el % de GG se recalcula
   save();updateBadges();closeModal('modal-pres-item');renderPres();toast(editingPresIdx!==null?'Ítem actualizado':'Ítem agregado al presupuesto');
 }
 
@@ -2686,11 +3460,31 @@ function openModalK(){
   document.getElementById('k-ben').value=kComponents.ben??12;
   document.getElementById('k-imp').value=kComponents.imp??5;
   document.getElementById('k-fin').value=kComponents.fin??3;
+  document.getElementById('k-iibb').value=kComponents.iibb??0;
+  // Si los GG se calculan desde el detalle, el campo pasa a ser de solo lectura
+  const ggInput = document.getElementById('k-gg'), nota = document.getElementById('k-gg-nota');
+  const esDet = gastosGenerales.modo === 'detalle';
+  const mandaDetalle = esDet && gastosGenerales.aplicarAlK; // si no se aplica al K, el % manual sigue siendo editable
+  ggInput.readOnly = mandaDetalle;
+  ggInput.style.opacity = mandaDetalle ? '.65' : '1';
+  if(esDet){
+    nota.style.display='block';
+    nota.innerHTML = `🏢 ${gastosGenerales.items.length} concepto(s) · ${fmt(ggTotalPlan(gastosGenerales.items))} de GG${gastosGenerales.aplicarAlK?'':' <span style="color:var(--text3)">(informativo, no toca el K)</span>'}`;
+  } else nota.style.display='none';
+  // Nota de imprevistos consumidos
+  const impNota = document.getElementById('k-imp-nota');
+  const impCons = impTotalConsumido(imprevistos.items);
+  if(impCons>0){
+    const res = impReserva();
+    impNota.style.display='block';
+    impNota.innerHTML = `⚡ ${imprevistos.items.length} registrado(s) · ${fmt(impCons)} consumido${res>0?' de '+fmt(res)+' ('+Math.round(impCons/res*100)+'%)':''}`;
+    impNota.style.color = (res>0 && impCons>res) ? 'var(--red)' : 'var(--M)';
+  } else impNota.style.display='none';
   updateKPreview();
   openModal('modal-k');
 }
 function updateKPreview(){
-  const kNew=1+(parseFloat(document.getElementById('k-gg').value||0)+parseFloat(document.getElementById('k-ben').value||0)+parseFloat(document.getElementById('k-imp').value||0)+parseFloat(document.getElementById('k-fin').value||0))/100;
+  const kNew=1+(parseFloat(document.getElementById('k-gg').value||0)+parseFloat(document.getElementById('k-ben').value||0)+parseFloat(document.getElementById('k-imp').value||0)+parseFloat(document.getElementById('k-fin').value||0)+parseFloat(document.getElementById('k-iibb').value||0))/100;
   document.getElementById('k-preview').textContent=kNew.toFixed(2);
   // Simulador: recalcular total con K actual vs K nuevo
   let costoDirecto=0;
@@ -2719,7 +3513,8 @@ function saveK(){
     gg:parseFloat(document.getElementById('k-gg').value)||0,
     ben:parseFloat(document.getElementById('k-ben').value)||0,
     imp:parseFloat(document.getElementById('k-imp').value)||0,
-    fin:parseFloat(document.getElementById('k-fin').value)||0
+    fin:parseFloat(document.getElementById('k-fin').value)||0,
+    iibb:parseFloat(document.getElementById('k-iibb').value)||0
   };
   document.getElementById('k-display').textContent=K;
   syncAll();save();closeModal('modal-k');
@@ -2744,6 +3539,21 @@ function syncAll(){
     const apu=apus.find(a=>a.code===pi.code);
     if(apu){pi.desc=apu.desc;pi.unit=apu.unit;}
   });
+  recalcGGIfDetalle(); // el % de GG depende del costo directo: si cambió, hay que recalcularlo
+}
+
+// Si los GG se calculan desde el detalle, su % depende del costo directo del presupuesto.
+// Cuando ese costo cambia (precios o cantidades), el % y el K tienen que seguirlo.
+function recalcGGIfDetalle(){
+  if(typeof gastosGenerales==='undefined' || gastosGenerales.modo!=='detalle') return;
+  if(!gastosGenerales.aplicarAlK) return; // el K solo se toca si el usuario lo pidió explícitamente
+  const b = ggBaseMonto();
+  if(b.monto <= 0) return; // sin base no se puede prorratear: se deja el último valor válido
+  const pct = Math.round((ggTotalPlan(gastosGenerales.items)/b.monto*100)*100)/100;
+  if(pct === kComponents.gg) return;
+  kComponents.gg = pct;
+  K = Math.round((1 + (pct + (kComponents.ben||0) + (kComponents.imp||0) + (kComponents.fin||0) + (kComponents.iibb||0))/100)*1000)/1000;
+  const kd = document.getElementById('k-display'); if(kd) kd.textContent = K;
 }
 
 // =================== BIM EXTRACTION ===================
@@ -3901,7 +4711,7 @@ function exportGanttRubrosPDF() {
   <div class="legend">
     ${chapNames.slice(0,6).map((ch,ci)=>{const c=PALETTE[ci%PALETTE.length];const s=ch.replace(/^\d+\s*[—\-–]+\s*/,'');return `<div class="legend-item"><div class="legend-dot" style="-webkit-print-color-adjust:exact;print-color-adjust:exact;background:${c};"></div><span>${s}</span></div>`;}).join('')}
     ${chapNames.length>6?`<div class="legend-item" style="color:#aaa;">+${chapNames.length-6} rubros más</div>`:''}
-    <div class="legend-item" style="margin-left:auto;color:#aaa;font-size:8px;">Altura de barra ∝ monto planificado · Mes actual destacado en amarillo</div>
+    <div class="legend-item" style="margin-left:auto;color:#aaa;font-size:8px;">Barras de igual altura · Mes actual destacado en amarillo</div>
   </div>
   <button class="no-print" onclick="window.print()" style="margin-bottom:14px;padding:7px 18px;background:#1a1a1a;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;">🖨 Imprimir / Guardar como PDF</button>
   <table>
@@ -4200,6 +5010,16 @@ function onBimApuKeydown(e){
   else if(e.key==='Escape')document.getElementById('bim-apu-dropdown').style.display='none';
 }
 
+// Un ítem con desglose BIM toma su cantidad de la suma de sus zonas. Antes eso solo se
+// sincronizaba en memoria al abrir Presupuesto; PDF, Curva S y Certificados podían leer un
+// valor viejo. Ahora se persiste apenas cambia una zona.
+function syncPresCantidadDesdeBim(code){
+  const bims = bimItems.filter(b=>b.code===code);
+  const p = presItems.find(x=>x.code===code);
+  if(!p || bims.length===0) return; // sin zonas, la cantidad vuelve a ser manual: no la tocamos
+  p.cantidad = bims.reduce((s,b)=>s+(parseFloat(b.qtyTotal)||0),0);
+}
+
 function saveBimItem(){
   if(!selectedBimApu) {toast('Seleccioná un APU primero'); return;}
   const nivel = document.getElementById('bim-nivel').value.trim();
@@ -4220,14 +5040,20 @@ function saveBimItem(){
     }
   } catch(e) { console.error('Error al auto-crear presItem desde BIM:', e); }
 
+  syncPresCantidadDesdeBim(b.code);
   save(); updateBadges(); closeModal('modal-bim-item'); renderBIM(); 
   if(currentTab==='presupuesto') renderPres();
   toast(editingBimIdx!==null?'BIM actualizado':'Elemento BIM agregado');
 }
 
-function deleteBimItem(idx){
-  if(!confirm('¿Eliminar este registro BIM?'))return;
-  bimItems.splice(idx,1); save(); updateBadges(); renderBIM(); 
+async function deleteBimItem(idx){
+  const b = bimItems[idx]; if(!b) return;
+  const ok = await confirmAction({title:'Eliminar zona BIM', body:`<strong>${b.code}</strong> · ${b.nivel} / ${b.zona}<br><span style="color:var(--text3);font-size:12px">Se pierde también su cronograma. Ctrl+Z lo recupera.</span>`, okText:'Eliminar', danger:true});
+  if(!ok) return;
+  const code = b.code;
+  bimItems.splice(idx,1);
+  syncPresCantidadDesdeBim(code);
+  save(); updateBadges(); renderBIM();
   if(currentTab==='presupuesto') renderPres();
   toast('Registro BIM eliminado');
 }
@@ -4238,11 +5064,13 @@ function renderDashboard() {
   if(!container) return;
 
   let totalPres = 0;
+  let totalCostoDirecto = 0; // sin K — para comparar contra el pozo m² (el valor CAC es costo puro, sin ganancia)
   let totalExec = 0;
   let chapData = {};
 
   presItems.filter(i=>i.visible!==false).forEach(pi => {
     const pu = getPU(pi.code);
+    const costoU = getApuCostU(pi.code);
 
     const bItems = bimItems.filter(b=>b.code===pi.code);
     const qty = bItems.length > 0 ? bItems.reduce((s,b)=>s+(parseFloat(b.qtyTotal)||0),0) : (pi.cantidad||0);
@@ -4259,6 +5087,7 @@ function renderDashboard() {
     const subtotalCert = pu * certU;
 
     totalPres += subtotal;
+    totalCostoDirecto += costoU * qty;
     totalExec += subtotalExec;
 
     const chapKey = normalizeChapter(pi.chapter) || 'Sin Rubro';
@@ -4312,6 +5141,41 @@ function renderDashboard() {
       }
     });
   });
+  // Los GG reales son costo de proyecto: no están en el gr de ningún ítem (ahí va solo costo
+  // directo), así que se suman acá. Sin esto la ganancia real saldría inflada.
+  const ggReal = ggTotalReal(gastosGenerales.items);
+  const impReal = impTotalConsumido(imprevistos.items);
+  AC += ggReal + impReal;
+
+  // --- Series mensuales para la curva (mismo origen que los KPI: el cronograma) ---
+  // Ojo: acá el AC es sólo el gasto real de los ítems. Los GG y los imprevistos no
+  // tienen mes asignado (los GG guardan un total, los imprevistos una fecha suelta),
+  // así que no se pueden repartir por período sin inventar. Van aclarados al pie del
+  // gráfico para no mezclar dos bases distintas en la misma curva.
+  const nMeses = Math.max(planificacion.duration_months||0, mesActual, 0);
+  const pvMes = new Array(nMeses).fill(0);
+  const evMes = new Array(nMeses).fill(0);
+  const acMes = new Array(nMeses).fill(0);
+  presItems.filter(i=>i.visible!==false).forEach(pi => {
+    const pu = getPU(pi.code);
+    const bims = bimItems.filter(b => b.code === pi.code);
+    const objs = bims.length>0 ? bims : [pi];
+    objs.forEach(o => {
+      for(let m=0; m<nMeses; m++){
+        const per = o.cronograma?.[String(m)];
+        if(!per) continue;
+        pvMes[m] += (per.pv||0) * pu;
+        evMes[m] += (per.ej||0) * pu;
+        acMes[m] += (per.gr||0);
+      }
+    });
+  });
+  // Acumulados. EV y AC se cortan en el mes actual: más adelante todavía no hay realidad.
+  const acumular = (arr, hasta) => { let s=0; return arr.map((v,i)=>{ s+=v; return (hasta!==null && i>=hasta) ? null : s; }); };
+  const seriePV = acumular(pvMes, null);
+  const serieEV = acumular(evMes, mesActual>0 ? mesActual : null);
+  const serieAC = acumular(acMes, mesActual>0 ? mesActual : null);
+  const hayCurva = nMeses > 0 && (seriePV.some(v=>v>0) || serieEV.some(v=>v>0));
 
   const SPI = PV > 0 ? (EV / PV) : null;
   const CPI = AC > 0 ? (EV / AC) : null;
@@ -4327,7 +5191,8 @@ function renderDashboard() {
 
   if(ocultarDetalleApu){
     container.innerHTML = `
-      ${renderMetaPanel(totalPres, AC)}
+      ${renderMetaPanel(totalCostoDirecto, AC)}
+    ${renderProyeccionPanel()}
       <div style="padding:0 20px 20px">
         <div style="background:var(--surface);border:1px dashed var(--border);border-radius:12px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
           <div style="font-size:12px;color:var(--text3)">📊 El detalle de presupuesto por APU (venta bruto, ejecutado, EVM, avance por rubro) está oculto — útil mientras trabajás solo con el pozo m² y todavía no cargaste todo al detalle.</div>
@@ -4337,54 +5202,90 @@ function renderDashboard() {
     return;
   }
 
+  // Obra recién creada: mostrar por dónde empezar en vez de una grilla de ceros y guiones
+  if(totalPres===0 && AC===0 && totalEmitidoBruto===0){
+    container.innerHTML = `
+      ${renderMetaPanel(totalCostoDirecto, AC)}
+      ${renderProyeccionPanel()}
+      <div style="padding:20px">
+        <div class="dash-empty">
+          <h3>Todavía no hay números para mostrar</h3>
+          <p>El panel se llena solo a medida que cargás la obra: precios en Insumos, los APU que los combinan, las cantidades en el Presupuesto y el avance mes a mes en Planificación.</p>
+          <div class="dash-steps">
+            <span>1 · Insumos</span><i>→</i><span>2 · APU</span><i>→</i><span>3 · Presupuesto</span><i>→</i><span>4 · Planificación</span>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+
   let html = `
-    ${renderMetaPanel(totalPres, AC)}
-    <div class="dash-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
-      <div class="dash-card">
-        <div class="dash-card-lbl">Presupuesto Venta Bruto</div>
-        <div class="dash-card-val">${fmt(totalPres)}</div>
-        ${ivaPct>0 ? `<div style="font-size:11px;color:var(--text3);margin-top:-4px;font-family:var(--mono)">(c/ IVA: ${fmt(totalCliente)})</div>` : ''}
+    ${renderMetaPanel(totalCostoDirecto, AC)}
+    ${renderProyeccionPanel()}
+    <div style="padding:20px 20px 0">
+      <h3 class="dash-sec-t">Estado económico</h3>
+      <div class="dash-hero">
+        <div class="dash-card is-primary">
+          <div class="dash-card-lbl">Presupuesto Venta Bruto</div>
+          <div class="dash-card-val">${fmt(totalPres)}</div>
+          ${ivaPct>0 ? `<div class="dash-card-sub">c/ IVA: ${fmt(totalCliente)}</div>` : ''}
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-lbl">Ejecutado (EV)</div>
+          <div class="dash-card-val" style="color:var(--accent3)">${fmt(totalExec)}</div>
+          <div class="dash-card-sub">${pctGlobal.toFixed(1)}% del presupuesto</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-lbl">Gasto Real (AC)</div>
+          <div class="dash-card-val" style="color:var(--orange)">${fmt(AC)}</div>
+          <div class="dash-card-sub">Costo real s/ IVA — cronograma</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-lbl">Ganancia Real (EV−AC)</div>
+          <div class="dash-card-val" style="color:${CV>=0?'var(--green)':'var(--red)'}">${signStr(CV)}${fmt(CV)}</div>
+          <div class="dash-card-sub">${EV>0?((CV/EV)*100).toFixed(1)+'% margen':'—'}</div>
+        </div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-lbl">Ejecutado (EV)</div>
-        <div class="dash-card-val" style="color:var(--accent3)">${fmt(totalExec)}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:4px">${pctGlobal.toFixed(1)}% del presupuesto</div>
+    </div>
+
+    ${hayCurva ? `
+    <div style="padding:20px 20px 0">
+      <h3 class="dash-sec-t">Curva de avance — plan vs. ejecutado vs. gasto</h3>
+      <div class="dash-chart-card">
+        <div style="height:260px"><canvas id="chart-dash-evm"></canvas></div>
+        <div class="dash-chart-note">El gasto real de la curva es sólo el de los ítems del cronograma. Los GG (${fmt(ggReal)}) y los imprevistos (${fmt(impReal)}) no tienen mes asignado, así que suman en el AC de arriba pero no se reparten acá.</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-lbl">Certificado Emitido</div>
-        <div class="dash-card-val" style="color:var(--accent)">${fmt(totalEmitidoBruto)}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:4px">${certsEmitidos.length} certif. — ${pctCertif.toFixed(1)}% del total</div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-card-lbl">Ya Cobrado (Neto)</div>
-        <div class="dash-card-val" style="color:var(--green)">${fmt(totalCobradoNeto)}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:4px">${certsCobrados.length} certif. cobrados</div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-card-lbl">Avance Global</div>
-        <div class="dash-card-val">${pctGlobal.toFixed(1)}%</div>
-        <div class="dash-bar-wrap" style="margin-top:8px"><div class="dash-bar-fill" style="width:${Math.min(pctGlobal,100)}%"></div></div>
-      </div>
-      ${mesesRestantes !== null ? `<div class="dash-card">
-        <div class="dash-card-lbl">Meses Restantes</div>
-        <div class="dash-card-val" style="color:${mesesRestantes<=1?'var(--red)':mesesRestantes<=3?'var(--M)':'var(--text)'}">${mesesRestantes}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:4px">de ${mesesTotales} totales</div>
-      </div>` : ''}
-      <div class="dash-card">
-        <div class="dash-card-lbl">Gasto Real (AC)</div>
-        <div class="dash-card-val" style="color:rgba(251,146,60,0.95)">${fmt(AC)}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:4px">Costo real s/ IVA — cronograma</div>
-      </div>
-      <div class="dash-card">
-        <div class="dash-card-lbl">Ganancia Real (EV−AC)</div>
-        <div class="dash-card-val" style="color:${CV>=0?'var(--green)':'var(--red)'}">${signStr(CV)}${fmt(CV)}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:4px">${EV>0?((CV/EV)*100).toFixed(1)+'% margen':'—'}</div>
+    </div>` : ''}
+
+    <div style="padding:20px 20px 0">
+      <h3 class="dash-sec-t">Certificación y plazo</h3>
+      <div class="dash-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));padding:0">
+        <div class="dash-card">
+          <div class="dash-card-lbl">Certificado Emitido</div>
+          <div class="dash-card-val" style="font-size:20px;color:var(--accent)">${fmt(totalEmitidoBruto)}</div>
+          <div class="dash-card-sub">${certsEmitidos.length} certif. — ${pctCertif.toFixed(1)}% del total</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-lbl">Ya Cobrado (Neto)</div>
+          <div class="dash-card-val" style="font-size:20px;color:var(--green)">${fmt(totalCobradoNeto)}</div>
+          <div class="dash-card-sub">${certsCobrados.length} certif. cobrados</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-lbl">Avance Global</div>
+          <div class="dash-card-val" style="font-size:20px">${pctGlobal.toFixed(1)}%</div>
+          <div class="dash-bar-wrap" style="margin-top:8px"><div class="dash-bar-fill" style="width:${Math.min(pctGlobal,100)}%"></div></div>
+        </div>
+        ${mesesRestantes !== null ? `<div class="dash-card">
+          <div class="dash-card-lbl">Meses Restantes</div>
+          <div class="dash-card-val" style="font-size:20px;color:${mesesRestantes<=1?'var(--red)':mesesRestantes<=3?'var(--M)':'var(--text)'}">${mesesRestantes}</div>
+          <div class="dash-card-sub">de ${mesesTotales} totales</div>
+        </div>` : ''}
       </div>
     </div>
 
     ${PV > 0 ? `
     <div style="padding:0 20px; margin-top:8px">
-      <h3 style="font-size:13px;color:var(--text3);text-transform:uppercase;margin:0 0 12px 0;letter-spacing:1px">📊 Control EVM — Mes ${mesActual} de ${mesesTotales}</h3>
+      <h3 class="dash-sec-t">Control EVM — Mes ${mesActual} de ${mesesTotales}</h3>
       <div style="display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:12px">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center">
           <div style="font-size:11px;color:var(--text3);margin-bottom:6px">SPI (Schedule Perf. Index)</div>
@@ -4410,7 +5311,7 @@ function renderDashboard() {
     </div>` : ''}
 
     <div style="padding:0 20px; margin-top:20px">
-      <h3 style="font-size:14px;color:var(--text3);text-transform:uppercase;margin:0 0 16px 0;letter-spacing:1px">Avance por Rubro</h3>
+      <h3 class="dash-sec-t">Avance por Rubro</h3>
       <div style="display:flex;flex-direction:column;gap:12px;">
   `;
 
@@ -4448,6 +5349,44 @@ function renderDashboard() {
 
   html += `</div></div>`;
   container.innerHTML = html;
+  if(hayCurva) renderDashEVMChart(seriePV, serieEV, serieAC);
+}
+
+// Curva de avance del dashboard: PV, EV y AC acumulados mes a mes.
+// Las tres salen del cronograma, igual que los KPI de arriba.
+function renderDashEVMChart(pv, ev, ac){
+  const ctx = document.getElementById('chart-dash-evm');
+  if(!ctx || typeof Chart === 'undefined') return;
+  if(chartDashEVM){ chartDashEVM.destroy(); chartDashEVM = null; }
+
+  const labels = pv.map((_,i)=>`Mes ${i+1}`);
+  const g = ctx.getContext('2d');
+  const areaEV = g.createLinearGradient(0,0,0,260);
+  areaEV.addColorStop(0,'rgba(56,189,248,.26)');
+  areaEV.addColorStop(1,'rgba(56,189,248,0)');
+  const fmtTick = v => v>=1000000 ? '$'+(v/1000000).toFixed(1)+'M' : v>=1000 ? '$'+(v/1000).toFixed(0)+'k' : '$'+v;
+
+  chartDashEVM = new Chart(ctx, {
+    type:'line',
+    data:{ labels, datasets:[
+      { label:'Plan vigente (PV)', data:pv, borderColor:'#c8f135', backgroundColor:'rgba(200,241,53,.06)', borderWidth:2, borderDash:[5,4], fill:false, tension:.35, pointRadius:0, pointHoverRadius:4 },
+      { label:'Ejecutado (EV)', data:ev, borderColor:'#38bdf8', backgroundColor:areaEV, borderWidth:2.5, fill:true, tension:.35, pointRadius:0, pointHoverRadius:4, spanGaps:false },
+      { label:'Gasto real de ítems (AC)', data:ac, borderColor:'#fb923c', backgroundColor:'transparent', borderWidth:2, fill:false, tension:.35, pointRadius:0, pointHoverRadius:4, spanGaps:false }
+    ]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      scales:{
+        y:{ beginAtZero:true, border:{display:false}, grid:{ color:'rgba(255,255,255,.05)' }, ticks:{ color:'#5a5a72', maxTicksLimit:6, font:{family:"'IBM Plex Mono',monospace", size:10}, callback:fmtTick } },
+        x:{ border:{display:false}, grid:{ display:false }, ticks:{ color:'#5a5a72', font:{family:"'IBM Plex Mono',monospace", size:10} } }
+      },
+      plugins:{
+        legend:{ position:'bottom', labels:{ color:'#9090a8', boxWidth:10, boxHeight:10, usePointStyle:true, pointStyle:'circle', padding:16, font:{family:"'Space Grotesk',sans-serif", size:11} } },
+        tooltip:{ backgroundColor:'#18181c', borderColor:'#2a2a35', borderWidth:1, titleColor:'#e8e8f0', bodyColor:'#9090a8', padding:10, displayColors:true, usePointStyle:true,
+          callbacks:{ label: c => ' '+c.dataset.label+': '+fmt(c.parsed.y) } }
+      }
+    }
+  });
 }
 
 // =================== EXPORT BIM ===================
@@ -4560,7 +5499,7 @@ function promptNewObra() {
 }
 
 function exportCurrentObra() {
-  const data = { K, kComponents, insumos, apus, pres: presItems, bimItems, certificados, planificacion, planView, pacTareas, pacView, presupuestoMeta, ocultarDetalleApu, name: currentObraName };
+  const data = { K, kComponents, gastosGenerales, imprevistos, presupuestoConfig, insumos, apus, pres: presItems, bimItems, certificados, planificacion, planView, pacTareas, pacView, presupuestoMeta, ocultarDetalleApu, name: currentObraName };
   const dStr = JSON.stringify(data, null, 2);
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([dStr], {type: 'application/json'}));
@@ -4589,6 +5528,9 @@ function importObraJSON(e) {
       localStorage.setItem('pob_v52_data_' + id, JSON.stringify({
         K: data.K || 1.32,
         kComponents: data.kComponents || null,
+        gastosGenerales: data.gastosGenerales || { modo:'porcentaje', items:[], base:'estimado', aplicarAlK:false },
+        imprevistos: data.imprevistos || { items:[], reservaPct:null },
+        presupuestoConfig: data.presupuestoConfig || { mostrarGG:false, mostrarImp:false, honorarios:{ mostrar:false, modo:'pct', pct:0, monto:0, iva:21 } },
         insumos: data.insumos,
         apus: data.apus,
         pres: data.pres,
@@ -4598,7 +5540,7 @@ function importObraJSON(e) {
         planView: data.planView || 'detail',
         pacTareas: data.pacTareas || [],
         pacView: data.pacView || 'carga',
-        presupuestoMeta: data.presupuestoMeta || { activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0 },
+        presupuestoMeta: data.presupuestoMeta || { activo:false, m2:0, valorM2:0, moneda:'ARS', fecha:'', historial:[], valorTerreno:0, tipoCambio:0, unidades:[], capitalPropio:0 },
         ocultarDetalleApu: data.ocultarDetalleApu || false
       }));
       saveObrasList();
@@ -4775,34 +5717,26 @@ function exportPresPDF() {
     }
   });
   
-  const ivaPct = parseFloat(document.getElementById('iva-pct')?.value) || 0;
-  const ivaTotal = totalPresupuesto * (ivaPct / 100);
-  const totalCliente = totalPresupuesto + ivaTotal;
-  
+  const T = calcPresTotales(totalPresupuesto);
+  const line=(lbl,val,bold)=>`<tr><td style="border:none; padding:4px;${bold?'font-weight:700':''}" class="print-desc">${lbl}</td><td class="print-number" style="border:none; padding:4px;${bold?'font-weight:700':''}">${fmt(val)}</td></tr>`;
   html += `
       </tbody>
     </table>
-    <div style="width: 320px; margin-left: auto; margin-top: 20px;">
-      <table class="print-table" style="border:none">
-        <tr>
-          <td style="border:none; padding:4px;" class="print-desc">Subtotal ${ivaPct > 0 ? 'Sin IVA' : ''}:</td>
-          <td class="print-number" style="border:none; padding:4px;">${fmt(totalPresupuesto)}</td>
-        </tr>
-  `;
-  
-  if (ivaPct > 0) {
-    html += `
-        <tr>
-          <td style="border:none; padding:4px;" class="print-desc">IVA (${ivaPct}%):</td>
-          <td class="print-number" style="border:none; padding:4px;">${fmt(ivaTotal)}</td>
-        </tr>
-    `;
+    <div style="width: 340px; margin-left: auto; margin-top: 20px;">
+      <table class="print-table" style="border:none">`;
+  html += line('Subtotal ítems:', totalPresupuesto);
+  if(presupuestoConfig.mostrarGG)  html += line('Gastos generales de obra:', T.ggLinea);
+  if(presupuestoConfig.mostrarImp) html += line(`Imprevistos (${impReservaPct()}%):`, T.impLinea);
+  if(presupuestoConfig.mostrarGG||presupuestoConfig.mostrarImp) html += line('SUBTOTAL OBRA:', T.subtotalObra, true);
+  if(T.ivaPct>0) html += line(`IVA sobre obra (${T.ivaPct}%):`, T.ivaObra);
+  if(presupuestoConfig.honorarios.mostrar){
+    html += line(`Honorarios profesionales${presupuestoConfig.honorarios.modo==='pct'?' ('+presupuestoConfig.honorarios.pct+'%)':''}:`, T.honorarios);
+    if(T.ivaHon>0) html += line(`IVA sobre honorarios (${presupuestoConfig.honorarios.iva}%):`, T.ivaHon);
   }
-  
   html += `
         <tr class="print-total-row">
           <td style="border:none;" class="print-desc">MONTO TOTAL:</td>
-          <td class="print-number" style="border:none; font-size:14px; font-weight:800;">${fmt(totalCliente)}</td>
+          <td class="print-number" style="border:none; font-size:14px; font-weight:800;">${fmt(T.totalCliente)}</td>
         </tr>
       </table>
     </div>
@@ -4840,8 +5774,27 @@ function exportPres(){
 }
 
 // =================== MODAL HELPERS ===================
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
+// Si se abre un modal sobre otro, hay que elevarlo: todos comparten z-index en el CSS y,
+// a igual z-index, gana el que va último en el HTML — así un modal nuevo podía quedar tapado.
+function openModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const abiertos = document.querySelectorAll('.modal-overlay.open').length;
+  if(abiertos > 0) el.style.zIndex = 100 + abiertos*10;
+  el.classList.add('open');
+}
+function closeModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.remove('open');
+  el.style.zIndex = ''; // volver al z-index del CSS
+}
+// Panel único de ajustes: respaldo, vistas, control económico y problemas detectados.
+// Antes vivían sueltos en el pie del sidebar y le comían el alto al menú.
+function openModalAjustes(){
+  updateIssuesSummary();
+  openModal('modal-ajustes');
+}
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
 // =================== TOAST ===================
@@ -4854,6 +5807,7 @@ let editingCertId = null;
 let currentCertItems = []; 
 let currentCertMode = 'general';
 let chartCurvaS = null;
+let chartDashEVM = null;
 let chartPlanResumen = null;
 let chartCurvaRubro = null;
 let chartCurvaMulti = null;
@@ -4918,7 +5872,7 @@ function renderPlanInputs() {
   container.innerHTML = html;
 }
 
-function savePlanificacion() {
+async function savePlanificacion() {
   const months = parseInt(document.getElementById('plan-months').value) || 6;
   let periods = [];
   let prevVal = 0;
@@ -4932,9 +5886,34 @@ function savePlanificacion() {
     prevVal = raw;
   }
   if(errors.length) alert('⚠ Advertencias corregidas automáticamente:\n\n' + errors.join('\n'));
+  // Al ACORTAR el plazo, los meses que quedan afuera seguirían sumando en el EVM aunque ya no se
+  // vean. Se avisa qué hay ahí y se limpia con confirmación.
+  const prev = planificacion.duration_months || 6;
+  if(months < prev){
+    const objs = [...presItems, ...bimItems];
+    let itemsAfectados = 0, celdas = 0;
+    objs.forEach(o=>{
+      const conDatos = Object.keys(o.cronograma||{}).filter(k=>parseInt(k)>=months && (()=>{const m=o.cronograma[k];return (m.pb||0)||(m.pv||0)||(m.ej||0)||(m.gr||0);})());
+      if(conDatos.length){ itemsAfectados++; celdas += conDatos.length; }
+    });
+    const pacFuera = pacTareas.filter(t=>t.mes>months).length;
+    const ggFuera = (gastosGenerales.items||[]).filter(g=>g.tipo==='mensual' && (g.hastaMes||0)>months).length;
+    if(itemsAfectados || pacFuera || ggFuera){
+      const body = `Estás bajando el plazo de <b>${prev}</b> a <b>${months}</b> meses.<br><br>`
+        + (itemsAfectados ? `📈 <b>${itemsAfectados}</b> ítem(s) tienen plan, ejecución o gasto en los meses que quedan afuera (${celdas} celdas). <span style="color:var(--red)">Esos datos se borran</span> — si no, seguirían contando en el EVM sin verse.<br>` : '')
+        + (pacFuera ? `🎯 <b>${pacFuera}</b> tarea(s) PAC quedan en meses fuera del plazo. No se borran: revisalas.<br>` : '')
+        + (ggFuera ? `🏢 <b>${ggFuera}</b> concepto(s) de Gastos Generales terminan después del mes ${months}. No se recortan solos: ajustá su rango.<br>` : '')
+        + `<br><span style="color:var(--text3);font-size:12px">Ctrl+Z deshace todo esto.</span>`;
+      const ok = await confirmAction({title:'Acortar plazo de obra', body, okText:'Acortar y limpiar', danger:true});
+      if(!ok) return;
+      objs.forEach(o=>{ Object.keys(o.cronograma||{}).forEach(k=>{ if(parseInt(k)>=months) delete o.cronograma[k]; }); });
+      if(currentPlanMes >= months) currentPlanMes = months - 1;
+    }
+  }
   planificacion.duration_months = months;
   planificacion.periods = periods;
   save(); toast('Planificación actualizada'); closeModal('modal-plan'); renderCurvaS();
+  if(currentTab==='plan') renderPlanControl();
 }
 
 function getPresupuestoTotal() { return presItems.filter(p=>p.visible!==false).reduce((sum, p) => sum + (getPU(p.code) * p.cantidad), 0); }
@@ -6341,7 +7320,7 @@ function saveMeta(){
   const h = presupuestoMeta.historial || [];
   const ult = h[h.length-1];
   if(!ult || ult.valorM2 !== v || ult.moneda !== moneda) h.push({fecha, valorM2:v, moneda});
-  presupuestoMeta = { activo:true, m2, valorM2:v, moneda, fecha, historial:h, tipoCambio, valorTerreno };
+  presupuestoMeta = { activo:true, m2, valorM2:v, moneda, fecha, historial:h, tipoCambio, valorTerreno, unidades: presupuestoMeta.unidades||[], capitalPropio: presupuestoMeta.capitalPropio||0 };
   save(); closeModal('modal-meta');
   if(currentTab==='guia') renderDashboard();
   toast('🎯 Presupuesto Meta actualizado');
@@ -6356,24 +7335,179 @@ async function desactivarMeta(){
   toast('Presupuesto Meta desactivado');
 }
 
-// Calcula los números del pozo. totalPres = presupuesto bottom-up (con K), AC = gasto real
-// "meta" es el costo de construcción puro (m² × valor m², igual que publica la CAC — no incluye terreno).
-// El terreno se suma aparte para la inversión total; no se resta del pozo de construcción.
-function getMetaNums(totalPres, AC){
-  const meta = (presupuestoMeta.m2||0) * (presupuestoMeta.valorM2||0);
+// ---- Desglose del Pozo: unidades a vender ----
+let modalPozoUnidadesTemp = [];
+let editingPuIdx = null;
+
+function openModalPozoUnidades(){
+  modalPozoUnidadesTemp = JSON.parse(JSON.stringify(presupuestoMeta.unidades||[]));
+  document.getElementById('pu-capital-propio').value = presupuestoMeta.capitalPropio || '';
+  editingPuIdx = null;
+  _resetPozoUnidadForm();
+  renderPozoUnidadesLista();
+  openModal('modal-pozo-unidades');
+}
+
+function togglePuTercero(){
+  const v = document.getElementById('pu-inversor').value;
+  // '' restaura el display:grid de la clase .form-row (poner 'flex' rompía las 2 columnas)
+  document.getElementById('pu-tercero-wrap').style.display = v==='tercero' ? '' : 'none';
+  document.getElementById('pu-propio-wrap').style.display = v==='propio' ? '' : 'none';
+}
+
+function _resetPozoUnidadForm(){
+  ['pu-nombre','pu-m2','pu-valorm2','pu-valorm2-propio','pu-nombre-tercero'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';});
+  document.getElementById('pu-cantidad').value = 1;
+  document.getElementById('pu-inversor').value = 'propio';
+  togglePuTercero();
+  document.getElementById('pu-form-title').textContent = 'NUEVA UNIDAD';
+  document.getElementById('pu-btn-add').textContent = '+ Agregar Unidad';
+  document.getElementById('pu-btn-cancel').style.display = 'none';
+}
+
+function editPozoUnidadTemp(idx){
+  const u = modalPozoUnidadesTemp[idx];
+  if(!u) return;
+  editingPuIdx = idx;
+  document.getElementById('pu-nombre').value = u.nombre;
+  document.getElementById('pu-cantidad').value = u.cantidad||1;
+  document.getElementById('pu-m2').value = u.m2||'';
+  document.getElementById('pu-inversor').value = u.inversor;
+  togglePuTercero();
+  if(u.inversor==='tercero'){
+    document.getElementById('pu-nombre-tercero').value = u.nombreTercero||'';
+    document.getElementById('pu-valorm2').value = u.valorM2||'';
+  } else {
+    document.getElementById('pu-valorm2-propio').value = u.valorM2||'';
+  }
+  document.getElementById('pu-form-title').textContent = 'EDITANDO UNIDAD';
+  document.getElementById('pu-btn-add').textContent = '💾 Guardar Cambios';
+  document.getElementById('pu-btn-cancel').style.display = 'inline-flex';
+}
+
+function cancelEditPozoUnidad(){
+  editingPuIdx = null;
+  _resetPozoUnidadForm();
+}
+
+function addPozoUnidad(){
+  const nombre = document.getElementById('pu-nombre').value.trim();
+  const cantidad = parseInt(document.getElementById('pu-cantidad').value)||1;
+  const m2 = parseFloat(document.getElementById('pu-m2').value)||0;
+  const inversor = document.getElementById('pu-inversor').value;
+  const nombreTercero = document.getElementById('pu-nombre-tercero').value.trim();
+  // Vendida a tercero: el valor es obligatorio (es plata real que entra). Sin vender: opcional, default 0.
+  const valorM2 = inversor==='tercero'
+    ? parseFloat(document.getElementById('pu-valorm2').value)||0
+    : parseFloat(document.getElementById('pu-valorm2-propio').value)||0;
+  if(!nombre || m2<=0){ toast('Completá nombre y m²'); return; }
+  if(inversor==='tercero' && valorM2<=0){ toast('Una unidad vendida a tercero necesita el precio de venta'); return; }
+
+  const unidad = {id: editingPuIdx!==null ? modalPozoUnidadesTemp[editingPuIdx].id : 'pu_'+Date.now(), nombre, cantidad, m2, valorM2, inversor, nombreTercero};
+  if(editingPuIdx!==null) modalPozoUnidadesTemp[editingPuIdx] = unidad;
+  else modalPozoUnidadesTemp.push(unidad);
+
+  editingPuIdx = null;
+  _resetPozoUnidadForm();
+  renderPozoUnidadesLista();
+}
+
+function deletePozoUnidadTemp(idx){
+  modalPozoUnidadesTemp.splice(idx,1);
+  if(editingPuIdx===idx){ editingPuIdx=null; _resetPozoUnidadForm(); }
+  else if(editingPuIdx!==null && editingPuIdx>idx){ editingPuIdx--; } // la lista se corrió: ajustar el puntero de edición
+  renderPozoUnidadesLista();
+}
+
+function renderPozoUnidadesLista(){
+  const el = document.getElementById('pu-lista');
+  const sim = presupuestoMeta.moneda==='USD' ? 'US$ ' : '$ ';
+  if(modalPozoUnidadesTemp.length===0){
+    el.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text3);font-size:12px">Sin unidades cargadas todavía.</div>';
+  } else {
+    el.innerHTML = modalPozoUnidadesTemp.map((u,i)=>{
+      const subtotal = (u.cantidad||1)*(u.m2||0)*(u.valorM2||0);
+      const esTercero = u.inversor==='tercero';
+      const estadoLabel = esTercero ? '🤝 Vendida — '+(u.nombreTercero||'sin nombre') : (u.valorM2>0 ? '🏠 Sin vender · valor cargado' : '🏠 Sin vender');
+      const valorTxt = u.valorM2>0 ? `${u.m2}m² × ${sim}${Number(u.valorM2).toLocaleString('es-AR')}/m²` : `${u.m2}m² · sin valor cargado`;
+      return `<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);${editingPuIdx===i?'background:rgba(200,241,53,.06)':''}">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600">${u.cantidad>1?u.cantidad+'× ':''}${u.nombre} <span style="color:var(--text3);font-weight:400">— ${valorTxt}</span></div>
+          <div style="font-size:10px;color:${esTercero?'var(--accent3)':'var(--text3)'}">${estadoLabel}</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:${u.valorM2>0?'var(--accent)':'var(--text3)'};white-space:nowrap">${sim}${Math.round(subtotal).toLocaleString('es-AR')}</div>
+        <button class="btn-icon" onclick="editPozoUnidadTemp(${i})" title="Editar">✏️</button>
+        <button class="btn-icon" onclick="deletePozoUnidadTemp(${i})" title="Eliminar" style="color:var(--red)">🗑</button>
+      </div>`;
+    }).join('');
+  }
+  const capitalPropio = parseFloat(document.getElementById('pu-capital-propio').value)||0;
+  const terceros = modalPozoUnidadesTemp.filter(u=>u.inversor==='tercero').reduce((s,u)=>s+(u.cantidad||1)*(u.m2||0)*(u.valorM2||0),0);
+  const propiasUnidades = modalPozoUnidadesTemp.filter(u=>u.inversor==='propio');
+  const propiasValor = propiasUnidades.reduce((s,u)=>s+(u.cantidad||1)*(u.m2||0)*(u.valorM2||0),0);
+  const propiasCant = propiasUnidades.reduce((s,u)=>s+(u.cantidad||1),0);
+
+  document.getElementById('pu-total-fuentes').textContent = sim+Math.round(capitalPropio+terceros).toLocaleString('es-AR');
+  document.getElementById('pu-total-propias').textContent = sim+Math.round(propiasValor).toLocaleString('es-AR');
+  document.getElementById('pu-total-propias-detail').textContent = propiasCant+' unidad(es)'+(propiasValor===0&&propiasCant>0?' · valor a definir':'');
+}
+
+function savePozoUnidades(){
+  presupuestoMeta.unidades = JSON.parse(JSON.stringify(modalPozoUnidadesTemp));
+  presupuestoMeta.capitalPropio = parseFloat(document.getElementById('pu-capital-propio').value)||0;
+  save();
+  closeModal('modal-pozo-unidades');
+  if(currentTab==='guia') renderDashboard();
+  toast('🏗️ Desglose del pozo actualizado');
+}
+
+// Calcula los números del "Costo Estimado" (índice m² CAC/ICC). costoDirecto = presupuesto bottom-up
+// SIN K (costo puro), AC = gasto real. Comparamos costo contra costo: si acá entrara un valor CON K,
+// la reserva se vería falsamente más chica.
+// El terreno se suma aparte para la inversión total; no se resta del costo de construcción.
+//
+// "Pozo" es un concepto DISTINTO: la estructura de VENTA (unidades × m² × valor de venta), cargada
+// aparte por el usuario. No es el mismo número que el Costo Estimado — comparar uno contra el otro
+// es justamente lo que da la ganancia del proyecto.
+function getMetaNums(costoDirecto, AC){
+  const meta = (presupuestoMeta.m2||0) * (presupuestoMeta.valorM2||0); // Costo Estimado (índice m²)
   const terreno = presupuestoMeta.valorTerreno||0;
   const inversionTotal = meta + terreno;
   const incidenciaTerreno = (terreno>0 && inversionTotal>0) ? (terreno/inversionTotal*100) : null;
-  const reserva = meta - totalPres;          // lo que queda sin computar al detalle
-  const disponible = meta - AC;              // lo que queda del pozo de construcción
-  const pctComputado = meta>0 ? (totalPres/meta)*100 : 0;
+  const reserva = meta - costoDirecto;          // lo que queda sin computar al detalle
+  const disponible = meta - AC;                 // lo que queda del costo estimado de construcción
+  const pctComputado = meta>0 ? (costoDirecto/meta)*100 : 0;
   const pctGastado   = meta>0 ? (AC/meta)*100 : 0;
-  return { meta, terreno, inversionTotal, incidenciaTerreno, reserva, disponible, pctComputado, pctGastado };
+
+  // Desglose del Pozo — estructura de venta (unidades cargadas por el usuario)
+  // "Fuentes de financiamiento" = plata REAL disponible para pagar la obra: lo que el usuario pone de
+  // su bolsillo (capitalPropio, aparte de cualquier unidad) + lo que ya se vendió a terceros. Las
+  // unidades "sin vender" con valor $0 NO entran acá (todavía no hay plata real detrás de ellas).
+  const unidades = presupuestoMeta.unidades || [];
+  const subtotalU = u => (u.cantidad||1) * (u.m2||0) * (u.valorM2||0);
+  const capitalPropio = presupuestoMeta.capitalPropio || 0;
+  const pozoTerceros = unidades.filter(u=>u.inversor==='tercero').reduce((s,u)=>s+subtotalU(u), 0);
+  const unidadesPropias = unidades.filter(u=>u.inversor==='propio');
+  const pozoPropioValor = unidadesPropias.reduce((s,u)=>s+subtotalU(u), 0); // solo las que ya tienen valor cargado
+  const pozoPropioCant = unidadesPropias.reduce((s,u)=>s+(u.cantidad||1), 0);
+  const fuentesFinanciamiento = capitalPropio + pozoTerceros;
+  const pozoVenta = fuentesFinanciamiento + pozoPropioValor; // valor total proyectado, incluye upside sin vender
+
+  const gananciaEstimada = fuentesFinanciamiento - meta; // plata real recaudada vs. costo estimado por índice
+  const gananciaReal = fuentesFinanciamiento - AC;       // plata real recaudada vs. gasto real ya ejecutado
+  const margenEstimado = fuentesFinanciamiento>0 ? (gananciaEstimada/fuentesFinanciamiento*100) : null;
+  const margenReal = fuentesFinanciamiento>0 ? (gananciaReal/fuentesFinanciamiento*100) : null;
+
+  return { meta, terreno, inversionTotal, incidenciaTerreno, reserva, disponible, pctComputado, pctGastado,
+    pozoVenta, capitalPropio, pozoPropioValor, pozoPropioCant, pozoTerceros, fuentesFinanciamiento,
+    gananciaEstimada, gananciaReal, margenEstimado, margenReal };
 }
 
-function renderMetaPanel(totalPres, AC){
+// costoDirecto = suma de APUs SIN K (costo puro) — el valor CAC/ICC del m² tampoco tiene K,
+// así que ambos lados de la comparación quedan en la misma base (costo, sin ganancia del constructor).
+function renderMetaPanel(costoDirecto, AC){
   if(!presupuestoMeta.activo) return '';
-  const n = getMetaNums(totalPres, AC);
+  const n = getMetaNums(costoDirecto, AC);
   const sim = presupuestoMeta.moneda==='USD' ? 'US$ ' : '$ ';
   const money = v => _oculto() ? '•••' : sim + Math.round(v).toLocaleString('es-AR');
   // Notación compacta para las cards: un pozo de 9 dígitos no entra y se lee peor
@@ -6387,16 +7521,47 @@ function renderMetaPanel(totalPres, AC){
   const sobrepasado = n.reserva < 0;
   const alerta = sobrepasado
     ? `<div style="background:rgba(248,113,113,.1);border-left:3px solid var(--red);padding:9px 12px;border-radius:6px;margin-top:12px;font-size:12px">
-         <strong style="color:var(--red)">⚠ El detalle superó la meta.</strong> Lo computado por APU excede el pozo en <strong>${money(Math.abs(n.reserva))}</strong>. O la obra se encareció, o el valor del m² quedó viejo.
+         <strong style="color:var(--red)">⚠ El detalle superó el costo estimado.</strong> El costo directo de los APU (sin K) lo excede en <strong>${money(Math.abs(n.reserva))}</strong>. O la obra se encareció, o el valor del m² quedó viejo.
        </div>`
     : (n.pctComputado>85
       ? `<div style="background:rgba(251,146,60,.1);border-left:3px solid var(--orange);padding:9px 12px;border-radius:6px;margin-top:12px;font-size:12px">
-           <strong style="color:var(--orange)">⚠ Reserva ajustada.</strong> Ya computaste el ${n.pctComputado.toFixed(0)}% del pozo. Queda poco margen para lo que falta definir (terminaciones, griferías, etc.).
+           <strong style="color:var(--orange)">⚠ Reserva ajustada.</strong> Ya computaste el ${n.pctComputado.toFixed(0)}% del costo estimado. Queda poco margen para lo que falta definir (terminaciones, griferías, etc.).
          </div>`
       : '');
 
   const pctComp = Math.min(100, Math.max(0, n.pctComputado));
   const pctGast = Math.min(100, Math.max(0, n.pctGastado));
+
+  // ---- Sección Pozo: Estructura de Venta (unidades cargadas por el usuario) ----
+  const tieneUnidades = (presupuestoMeta.unidades||[]).length > 0;
+  const gEstColor = n.gananciaEstimada>=0 ? 'var(--green)' : 'var(--red)';
+  const gRealColor = n.gananciaReal>=0 ? 'var(--green)' : 'var(--red)';
+  const seccionPozo = `
+    <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--border)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h3 style="margin:0;font-size:13px;color:var(--text)">🏗️ Pozo — Estructura de Venta</h3>
+        <button class="btn btn-ghost btn-sm" onclick="openModalPozoUnidades()">${tieneUnidades?'Editar unidades':'+ Desglosar Pozo'}</button>
+      </div>
+      ${(!tieneUnidades && n.capitalPropio===0) ? `
+      <div style="text-align:center;padding:18px;color:var(--text3);font-size:12px;border:1px dashed var(--border);border-radius:8px">
+        Todavía no cargaste cómo financiás la obra. Desglosalo (capital propio, unidades vendidas a terceros, unidades sin vender) para ver tu <b>ganancia real del proyecto</b>, no solo el costo.
+      </div>` : `
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:6px">
+        <div class="dash-card" title="${money(n.capitalPropio)}"><div class="dash-card-lbl">💰 Capital Propio Aportado</div><div class="dash-card-val" style="font-size:18px">${moneyC(n.capitalPropio)}</div></div>
+        <div class="dash-card" title="${money(n.pozoTerceros)}"><div class="dash-card-lbl">🤝 Ventas a Terceros</div><div class="dash-card-val" style="font-size:18px">${moneyC(n.pozoTerceros)}</div><div style="font-size:10px;color:var(--text3);margin-top:3px">precio de preventa</div></div>
+        <div class="dash-card" title="${money(n.fuentesFinanciamiento)}" style="border-color:rgba(200,241,53,.3)"><div class="dash-card-lbl">Fuentes para Financiar la Obra</div><div class="dash-card-val" style="font-size:20px;color:var(--accent)">${moneyC(n.fuentesFinanciamiento)}</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:10px">
+        <div class="dash-card" title="${money(n.gananciaEstimada)}"><div class="dash-card-lbl">Ganancia Estimada</div><div class="dash-card-val" style="font-size:19px;color:${gEstColor}">${moneyC(n.gananciaEstimada)}</div><div style="font-size:10px;color:var(--text3);margin-top:3px">${n.margenEstimado!==null?n.margenEstimado.toFixed(1)+'% margen':''} · Fuentes − Costo Estimado</div></div>
+        <div class="dash-card" title="${money(n.gananciaReal)}"><div class="dash-card-lbl">Ganancia Real (hoy)</div><div class="dash-card-val" style="font-size:19px;color:${gRealColor}">${moneyC(n.gananciaReal)}</div><div style="font-size:10px;color:var(--text3);margin-top:3px">${n.margenReal!==null?n.margenReal.toFixed(1)+'% margen':''} · Fuentes − Gastado Real</div></div>
+      </div>
+      ${n.pozoPropioCant>0 ? `
+      <div style="background:rgba(56,189,248,.06);border:1px dashed rgba(56,189,248,.3);border-radius:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div style="font-size:11px;color:var(--text2)">🎁 <b>${n.pozoPropioCant} unidad(es) sin vender</b> — te quedan a vos. ${n.pozoPropioValor>0?'Valor cargado, potencial adicional:':'Todavía sin valor cargado — cuando decidas venderlas o definas su valor, va a sumar acá.'}</div>
+        ${n.pozoPropioValor>0?`<span style="font-family:var(--mono);font-weight:700;color:var(--M)">${moneyC(n.pozoPropioValor)}</span>`:''}
+      </div>`:''}
+      `}
+    </div>`;
 
   return `
   <div style="padding:0 20px;margin-bottom:20px">
@@ -6411,15 +7576,15 @@ function renderMetaPanel(totalPres, AC){
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px">
         <div class="dash-card">
-          <div class="dash-card-lbl">Pozo total (Meta)</div>
+          <div class="dash-card-lbl">Costo Estimado (índice m²)</div>
           <div class="dash-card-val" style="font-size:21px;color:var(--accent)">${moneyC(n.meta)}</div>
           <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${money(n.meta)}</div>
           ${presupuestoMeta.tipoCambio>0 ? `<div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${presupuestoMeta.moneda==='USD' ? '≈ $ '+Math.round(n.meta*presupuestoMeta.tipoCambio).toLocaleString('es-AR') : '≈ US$ '+Math.round(n.meta/presupuestoMeta.tipoCambio).toLocaleString('es-AR')}</div>` : ''}
         </div>
-        <div class="dash-card"><div class="dash-card-lbl">Computado por APU</div><div class="dash-card-val" style="font-size:21px">${moneyC(totalPres)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${n.pctComputado.toFixed(1)}% del pozo</div></div>
+        <div class="dash-card" title="Suma de los APU cargados a costo directo, sin K/ganancia — misma base que el valor CAC"><div class="dash-card-lbl">Costo Directo Computado</div><div class="dash-card-val" style="font-size:21px">${moneyC(costoDirecto)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${n.pctComputado.toFixed(1)}% · sin K</div></div>
         <div class="dash-card"><div class="dash-card-lbl">Reserva sin computar</div><div class="dash-card-val" style="font-size:21px;color:${sobrepasado?'var(--red)':'var(--M)'}">${moneyC(n.reserva)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${sobrepasado?'excedido':'para lo no definido'}</div></div>
-        <div class="dash-card"><div class="dash-card-lbl">Gastado real</div><div class="dash-card-val" style="font-size:21px;color:rgba(251,146,60,.95)">${moneyC(AC)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${n.pctGastado.toFixed(1)}% del pozo</div></div>
-        <div class="dash-card"><div class="dash-card-lbl">Disponible del pozo</div><div class="dash-card-val" style="font-size:21px;color:${n.disponible>=0?'var(--green)':'var(--red)'}">${moneyC(n.disponible)}</div></div>
+        <div class="dash-card"><div class="dash-card-lbl">Gastado real</div><div class="dash-card-val" style="font-size:21px;color:rgba(251,146,60,.95)">${moneyC(AC)}</div><div style="font-size:11px;color:var(--text3);margin-top:3px">${n.pctGastado.toFixed(1)}%</div></div>
+        <div class="dash-card"><div class="dash-card-lbl">Disponible del Costo Estimado</div><div class="dash-card-val" style="font-size:21px;color:${n.disponible>=0?'var(--green)':'var(--red)'}">${moneyC(n.disponible)}</div></div>
       </div>
 
       ${n.terreno>0 ? `
@@ -6430,17 +7595,18 @@ function renderMetaPanel(totalPres, AC){
       </div>` : ''}
 
       <div style="font-size:10px;color:var(--text3);font-family:var(--mono);margin-bottom:5px;display:flex;justify-content:space-between">
-        <span>CONSUMO DEL POZO</span><span>${money(n.meta)}</span>
+        <span>CONSUMO DEL COSTO ESTIMADO</span><span>${money(n.meta)}</span>
       </div>
       <div style="position:relative;background:rgba(255,255,255,.06);height:22px;border-radius:6px;overflow:hidden">
-        <div style="position:absolute;left:0;top:0;height:100%;width:${pctComp}%;background:rgba(200,241,53,.28)" title="Computado por APU"></div>
+        <div style="position:absolute;left:0;top:0;height:100%;width:${pctComp}%;background:rgba(200,241,53,.28)" title="Costo Directo Computado"></div>
         <div style="position:absolute;left:0;top:0;height:100%;width:${pctGast}%;background:rgba(251,146,60,.85)" title="Gastado real"></div>
       </div>
       <div style="display:flex;gap:16px;margin-top:7px;font-size:10px;color:var(--text3)">
-        <span><span style="display:inline-block;width:9px;height:9px;background:rgba(200,241,53,.28);border-radius:2px;margin-right:4px"></span>Computado por APU</span>
+        <span><span style="display:inline-block;width:9px;height:9px;background:rgba(200,241,53,.28);border-radius:2px;margin-right:4px"></span>Costo Directo Computado</span>
         <span><span style="display:inline-block;width:9px;height:9px;background:rgba(251,146,60,.85);border-radius:2px;margin-right:4px"></span>Gastado real</span>
       </div>
       ${alerta}
+      ${seccionPozo}
     </div>
   </div>`;
 }
@@ -6472,7 +7638,7 @@ function toggleModoPresentacion(){
 }
 
 // Los export deben mostrar siempre los importes reales, aunque el modo presentación esté activo
-['exportPresPDF','exportComputoPDF','printCertificado','exportGanttPDF','exportGanttRubrosPDF','exportPres','exportBIM','exportPacPDF']
+['exportPresPDF','exportComputoPDF','printCertificado','exportGanttPDF','exportGanttRubrosPDF','exportPres','exportBimPDF','exportBimCSV','exportPacPDF']
 .forEach(fnName => {
   const orig = window[fnName];
   if(typeof orig !== 'function') return;
@@ -6484,9 +7650,581 @@ function toggleModoPresentacion(){
   };
 });
 
+// =================== GASTOS GENERALES DE OBRA ===================
+// Los GG son costo de PROYECTO (dependen del plazo), no de ítem. Por eso NO se prorratean
+// en el Gasto Real de cada ítem del cronograma: ahí va solo costo directo. El GG real se
+// suma aparte al costo total (AC) para que la ganancia no salga inflada.
+let editingGGIdx = null;
+
+// Cantidad de meses que cubre un concepto mensual, según su rango desde/hasta
+function ggMesesDe(g){
+  if(g.tipo!=='mensual') return 0;
+  const d = g.desdeMes||1, h = g.hastaMes||d;
+  return Math.max(0, h - d + 1);
+}
+function ggTotalPlan(items){
+  return (items||[]).reduce((s,g)=> s + (g.tipo==='mensual' ? (g.monto||0)*ggMesesDe(g) : (g.monto||0)), 0);
+}
+function ggTotalReal(items){
+  return (items||[]).reduce((s,g)=> s + (g.real||0), 0);
+}
+// Costo directo total del presupuesto (sin K) — base para calcular el % de incidencia de los GG
+function costoDirectoTotal(){
+  let t = 0;
+  presItems.filter(p=>p.visible!==false).forEach(p=>{
+    const bims = bimItems.filter(b=>b.code===p.code);
+    const qty = bims.length>0 ? bims.reduce((s,b)=>s+(parseFloat(b.qtyTotal)||0),0) : (p.cantidad||0);
+    t += getApuCostU(p.code) * qty;
+  });
+  return t;
+}
+// Base sobre la que se prorratean los GG. Devuelve el monto y de dónde salió.
+// El Costo Estimado (m² × CAC) es estable desde el día 1: no se mueve porque cargues más presupuesto.
+// El costo directo cargado es preciso, pero solo si ya tenés el presupuesto completo.
+function ggBaseMonto(){
+  const estimado = (presupuestoMeta.activo ? (presupuestoMeta.m2||0)*(presupuestoMeta.valorM2||0) : 0);
+  const directo  = costoDirectoTotal();
+  if(gastosGenerales.base === 'estimado' && estimado > 0) return {monto:estimado, origen:'estimado'};
+  if(gastosGenerales.base === 'estimado' && estimado <= 0) return {monto:directo, origen:'directo-fallback'};
+  return {monto:directo, origen:'directo'};
+}
+
+// % de GG que efectivamente usa el K: calculado si está en modo detalle, manual si no
+function ggPorcentajeEfectivo(){
+  if(gastosGenerales.modo !== 'detalle') return kComponents.gg ?? 0;
+  const b = ggBaseMonto();
+  if(b.monto <= 0) return kComponents.gg ?? 0; // sin base no se puede prorratear
+  return (ggTotalPlan(gastosGenerales.items) / b.monto) * 100;
+}
+
+function renderGastosTab(){
+  document.getElementById('gg-base').value = gastosGenerales.base || 'estimado';
+  document.getElementById('gg-aplicar-k').checked = !!gastosGenerales.aplicarAlK;
+  document.getElementById('imp-reserva-pct').value = impReservaPct();
+  const selR = document.getElementById('imp-rubro');
+  const chaps = [...new Set(presItems.map(p=>normalizeChapter(p.chapter)).filter(Boolean))].sort();
+  selR.innerHTML = '<option value="">— Sin rubro —</option>'+chaps.map(c=>`<option value="${c}">${c}</option>`).join('');
+  if(editingGGIdx===null) _resetGGForm();
+  if(editingImpIdx===null) _resetImpForm();
+  setGGModo(gastosGenerales.modo || 'porcentaje', true);
+  renderImprevistosLista();
+  renderGastosResumen();
+}
+
+// Resumen de arriba: junta GG e imprevistos para ver el total de indirectos de un vistazo
+function renderGastosResumen(){
+  const el = document.getElementById('gx-resumen');
+  if(!el) return;
+  const ggPlan = ggTotalPlan(gastosGenerales.items), ggReal = ggTotalReal(gastosGenerales.items);
+  const impRes = impReserva(), impCons = impTotalConsumido(imprevistos.items);
+  const totPrev = ggPlan + impRes, totReal = ggReal + impCons;
+  const card=(lbl,val,color,sub)=>`<div class="dash-card"><div class="dash-card-lbl">${lbl}</div><div class="dash-card-val" style="font-size:19px;${color?'color:'+color:''}">${val}</div>${sub?`<div style="font-size:10px;color:var(--text3);margin-top:3px">${sub}</div>`:''}</div>`;
+  el.innerHTML =
+    card('🏢 GG Planificado', fmt(ggPlan), 'var(--accent)') +
+    card('🏢 GG Real', fmt(ggReal), 'rgba(251,146,60,.95)') +
+    card('⚡ Reserva Imprevistos', impRes>0?fmt(impRes):'—', 'var(--M)') +
+    card('⚡ Consumido', fmt(impCons), 'rgba(251,146,60,.95)', impRes>0?Math.round(impCons/impRes*100)+'% de la reserva':'') +
+    card('Total indirectos previstos', fmt(totPrev), 'var(--text)') +
+    card('Total indirectos reales', fmt(totReal), totReal>totPrev&&totPrev>0?'var(--red)':'var(--green)', 'suma al costo de la obra');
+}
+
+function onGGConfigChange(){
+  gastosGenerales.base = document.getElementById('gg-base').value;
+  gastosGenerales.aplicarAlK = document.getElementById('gg-aplicar-k').checked;
+  aplicarGGalK();
+  save(); renderGGLista(); renderGastosResumen();
+}
+
+// Si el usuario lo pidió, el % calculado pasa a mandar sobre el K
+function aplicarGGalK(){
+  if(gastosGenerales.modo!=='detalle' || !gastosGenerales.aplicarAlK) return;
+  const pct = ggPorcentajeEfectivo();
+  kComponents.gg = Math.round(pct*100)/100;
+  K = Math.round((1 + (kComponents.gg + (kComponents.ben||0) + (kComponents.imp||0) + (kComponents.fin||0) + (kComponents.iibb||0))/100)*1000)/1000;
+  const kd = document.getElementById('k-display'); if(kd) kd.textContent = K;
+  syncAll();
+}
+
+function setGGModo(modo, soloVista){
+  if(!soloVista){ gastosGenerales.modo = modo; aplicarGGalK(); save(); }
+  const esDet = modo === 'detalle';
+  const bP = document.getElementById('gg-modo-pct'), bD = document.getElementById('gg-modo-det');
+  if(bP){ bP.style.background = !esDet?'rgba(200,241,53,.15)':'transparent'; bP.style.color = !esDet?'var(--accent)':'var(--text3)'; }
+  if(bD){ bD.style.background =  esDet?'rgba(200,241,53,.15)':'transparent'; bD.style.color =  esDet?'var(--accent)':'var(--text3)'; }
+  document.getElementById('gg-detalle-wrap').style.display = esDet ? 'block' : 'none';
+  document.getElementById('gg-porcentaje-wrap').style.display = esDet ? 'none' : 'block';
+  if(esDet) renderGGLista();
+  renderGastosResumen();
+}
+
+function toggleGGTipo(){
+  const t = document.getElementById('gg-tipo').value;
+  document.getElementById('gg-meses-wrap').style.display = t==='mensual' ? '' : 'none';
+  document.getElementById('gg-monto-lbl').textContent = t==='mensual' ? 'Monto por mes' : 'Monto total';
+  if(t==='mensual' && !document.getElementById('gg-hasta').value){
+    document.getElementById('gg-desde').value = 1;
+    document.getElementById('gg-hasta').value = planificacion.duration_months || 6;
+  }
+}
+
+function _resetGGForm(){
+  ['gg-concepto','gg-monto','gg-real'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';});
+  document.getElementById('gg-tipo').value='mensual';
+  document.getElementById('gg-desde').value = 1;
+  document.getElementById('gg-hasta').value = planificacion.duration_months || 6;
+  toggleGGTipo();
+  document.getElementById('gg-form-title').textContent='NUEVO CONCEPTO';
+  document.getElementById('gg-btn-add').textContent='+ Agregar Concepto';
+  document.getElementById('gg-btn-cancel').style.display='none';
+}
+
+function addGGItem(){
+  const concepto = document.getElementById('gg-concepto').value.trim();
+  const tipo = document.getElementById('gg-tipo').value;
+  const monto = parseFloat(document.getElementById('gg-monto').value)||0;
+  const desdeMes = tipo==='mensual' ? (parseInt(document.getElementById('gg-desde').value)||1) : 0;
+  const hastaMes = tipo==='mensual' ? (parseInt(document.getElementById('gg-hasta').value)||desdeMes) : 0;
+  const real  = parseFloat(document.getElementById('gg-real').value)||0;
+  if(!concepto || monto<=0){ toast('Completá concepto y monto'); return; }
+  if(tipo==='mensual' && hastaMes<desdeMes){ toast('El mes final no puede ser anterior al inicial'); return; }
+  const item = {id: editingGGIdx!==null ? gastosGenerales.items[editingGGIdx].id : 'gg_'+Date.now(), concepto, tipo, monto, desdeMes, hastaMes, real};
+  if(editingGGIdx!==null) gastosGenerales.items[editingGGIdx]=item; else gastosGenerales.items.push(item);
+  editingGGIdx=null; _resetGGForm();
+  aplicarGGalK(); save(); updateBadges(); renderGGLista(); renderGastosResumen();
+  toast('Concepto guardado');
+}
+
+function editGGItem(idx){
+  const g = gastosGenerales.items[idx]; if(!g) return;
+  editingGGIdx = idx;
+  document.getElementById('gg-concepto').value=g.concepto;
+  document.getElementById('gg-tipo').value=g.tipo;
+  toggleGGTipo();
+  document.getElementById('gg-monto').value=g.monto;
+  document.getElementById('gg-desde').value=g.desdeMes||1;
+  document.getElementById('gg-hasta').value=g.hastaMes||g.desdeMes||1;
+  document.getElementById('gg-real').value=g.real||'';
+  document.getElementById('gg-form-title').textContent='EDITANDO CONCEPTO';
+  document.getElementById('gg-btn-add').textContent='💾 Guardar Cambios';
+  document.getElementById('gg-btn-cancel').style.display='inline-flex';
+  renderGGLista();
+}
+
+function cancelEditGGItem(){ editingGGIdx=null; _resetGGForm(); renderGGLista(); }
+
+function deleteGGItem(idx){
+  gastosGenerales.items.splice(idx,1);
+  if(editingGGIdx===idx){ editingGGIdx=null; _resetGGForm(); }
+  else if(editingGGIdx!==null && editingGGIdx>idx){ editingGGIdx--; }
+  aplicarGGalK(); save(); updateBadges(); renderGGLista(); renderGastosResumen();
+}
+
+function renderGGLista(){
+  const el = document.getElementById('gg-lista');
+  if(!el) return;
+  const items = gastosGenerales.items;
+  if(items.length===0){
+    el.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text3);font-size:12px">Sin conceptos cargados.<br>Ej: capataz, sereno, luz y agua de obra, seguros, obrador, permisos.</div>';
+  } else {
+    el.innerHTML = items.map((g,i)=>{
+      const nm = ggMesesDe(g);
+      const total = g.tipo==='mensual' ? (g.monto||0)*nm : (g.monto||0);
+      const detalle = g.tipo==='mensual' ? `${fmt(g.monto)}/mes · meses ${g.desdeMes} a ${g.hastaMes} (${nm})` : 'Único';
+      const realTxt = (g.real||0)>0 ? `<span style="color:rgba(251,146,60,.95)">real: ${fmt(g.real)}</span>` : '<span style="color:var(--text3)">sin gasto real</span>';
+      return `<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);${editingGGIdx===i?'background:rgba(200,241,53,.06)':''}">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600">${g.tipo==='mensual'?'📅':'1️⃣'} ${g.concepto}</div>
+          <div style="font-size:10px;color:var(--text3)">${detalle} · ${realTxt}</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap">${fmt(total)}</div>
+        <button class="btn-icon" onclick="editGGItem(${i})" title="Editar">✏️</button>
+        <button class="btn-icon" onclick="deleteGGItem(${i})" title="Eliminar" style="color:var(--red)">🗑</button>
+      </div>`;
+    }).join('');
+  }
+  const plan = ggTotalPlan(items), real = ggTotalReal(items);
+  const baseSel = document.getElementById('gg-base')?.value || gastosGenerales.base || 'estimado';
+  const estimado = presupuestoMeta.activo ? (presupuestoMeta.m2||0)*(presupuestoMeta.valorM2||0) : 0;
+  const directo = costoDirectoTotal();
+  const usaEstimado = baseSel==='estimado' && estimado>0;
+  const base = usaEstimado ? estimado : directo;
+  const baseLbl = usaEstimado ? 'Costo Estimado (m²)' : 'costo directo cargado';
+
+  document.getElementById('gg-total-plan').textContent = fmt(plan);
+  document.getElementById('gg-total-real').textContent = fmt(real);
+  document.getElementById('gg-pct-calc').textContent = base>0 ? (plan/base*100).toFixed(1)+'%' : '—';
+
+  const av = document.getElementById('gg-aviso');
+  const aplicaK = document.getElementById('gg-aplicar-k')?.checked;
+  if(base<=0){
+    av.innerHTML = '<div style="background:rgba(251,146,60,.08);border-left:3px solid var(--orange);padding:8px 11px;border-radius:6px;font-size:11px">⚠ Todavía no hay base para calcular el %: configurá el <b>🎯 Meta m²</b> o cargá cantidades en Presupuesto. Los GG igual se cuentan como costo real.</div>';
+    return;
+  }
+  const pct = plan/base*100;
+  let html = '';
+  if(baseSel==='estimado' && estimado<=0){
+    html += `<div style="background:rgba(251,146,60,.08);border-left:3px solid var(--orange);padding:8px 11px;border-radius:6px;font-size:11px;margin-bottom:6px">⚠ Elegiste calcular sobre el Costo Estimado, pero el <b>🎯 Meta m²</b> no está configurado. Por ahora se usa el costo directo cargado.</div>`;
+  }
+  if(!usaEstimado && pct > 40){
+    html += `<div style="background:rgba(248,113,113,.09);border-left:3px solid var(--red);padding:8px 11px;border-radius:6px;font-size:11px">
+      ⚠ El GG da <b>${pct.toFixed(1)}%</b> sobre ${fmt(base)} — muy alto (lo normal ronda 10–25%).
+      Lo más probable es que <b>todavía no tengas todo el presupuesto cargado</b>. Pasá la base a <b>Costo Estimado (m²)</b>, que no se mueve mientras cargás.</div>`;
+  } else {
+    const dif = pct - (kComponents.gg||0);
+    html += `<div style="background:rgba(56,189,248,.07);border-left:3px solid var(--M);padding:8px 11px;border-radius:6px;font-size:11px">
+      Tus GG son <b>${pct.toFixed(1)}%</b> sobre ${baseLbl} de ${fmt(base)}.
+      ${aplicaK ? `Se está aplicando al K (GG del K: <b>${kComponents.gg}%</b>).` : 'Es informativo: el K no se toca. Los GG reales igual se suman al costo del proyecto.'}
+    </div>`;
+  }
+  av.innerHTML = html;
+}
+
+// =================== IMPREVISTOS ===================
+// Los imprevistos reales son costo de PROYECTO: no se cargan en el gr de ningún ítem, porque
+// si no el desvío de esa tarea queda mintiendo. La RESERVA no se guarda: se deriva del % del K.
+let editingImpIdx = null;
+
+function impTotalConsumido(items){ return (items||[]).reduce((s,i)=>s+(i.monto||0),0); }
+// % de reserva efectivo: el propio del módulo si se definió, si no el del K
+function impReservaPct(){
+  return (imprevistos.reservaPct !== null && imprevistos.reservaPct !== undefined)
+    ? imprevistos.reservaPct : (kComponents.imp||0);
+}
+// Reserva = % efectivo aplicado sobre la misma base que usan los GG
+function impReserva(){
+  const b = ggBaseMonto();
+  return b.monto>0 ? b.monto * (impReservaPct()/100) : 0;
+}
+
+function _resetImpForm(){
+  document.getElementById('imp-fecha').value = new Date().toISOString().split('T')[0];
+  ['imp-monto','imp-concepto'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('imp-causa').value='SORPRESA DE OBRA';
+  document.getElementById('imp-rubro').value='';
+  document.getElementById('imp-form-title').textContent='NUEVO IMPREVISTO';
+  document.getElementById('imp-btn-add').textContent='+ Registrar Imprevisto';
+  document.getElementById('imp-btn-cancel').style.display='none';
+}
+
+function addImprevisto(){
+  const concepto = document.getElementById('imp-concepto').value.trim();
+  const monto = parseFloat(document.getElementById('imp-monto').value)||0;
+  const fecha = document.getElementById('imp-fecha').value;
+  const causa = document.getElementById('imp-causa').value;
+  const rubro = document.getElementById('imp-rubro').value;
+  if(!concepto || monto<=0){ toast('Completá concepto y monto'); return; }
+  const item = {id: editingImpIdx!==null ? imprevistos.items[editingImpIdx].id : 'imp_'+Date.now(), fecha, concepto, monto, causa, rubro};
+  if(editingImpIdx!==null) imprevistos.items[editingImpIdx]=item; else imprevistos.items.push(item);
+  editingImpIdx=null; _resetImpForm();
+  save(); updateBadges(); renderImprevistosLista(); renderGastosResumen();
+  toast('Imprevisto registrado');
+}
+
+function editImprevisto(idx){
+  const i = imprevistos.items[idx]; if(!i) return;
+  editingImpIdx = idx;
+  document.getElementById('imp-fecha').value=i.fecha||'';
+  document.getElementById('imp-monto').value=i.monto;
+  document.getElementById('imp-concepto').value=i.concepto;
+  document.getElementById('imp-causa').value=i.causa||'OTROS';
+  document.getElementById('imp-rubro').value=i.rubro||'';
+  document.getElementById('imp-form-title').textContent='EDITANDO IMPREVISTO';
+  document.getElementById('imp-btn-add').textContent='💾 Guardar Cambios';
+  document.getElementById('imp-btn-cancel').style.display='inline-flex';
+  renderImprevistosLista();
+}
+
+function cancelEditImprevisto(){ editingImpIdx=null; _resetImpForm(); renderImprevistosLista(); }
+
+function deleteImprevisto(idx){
+  imprevistos.items.splice(idx,1);
+  if(editingImpIdx===idx){ editingImpIdx=null; _resetImpForm(); }
+  else if(editingImpIdx!==null && editingImpIdx>idx){ editingImpIdx--; }
+  save(); updateBadges(); renderImprevistosLista(); renderGastosResumen();
+}
+
+function onImpReservaChange(){
+  const v = document.getElementById('imp-reserva-pct').value.trim();
+  imprevistos.reservaPct = v==='' ? null : (parseFloat(v)||0);
+  save(); renderImprevistosLista(); renderGastosResumen();
+}
+
+function renderImprevistosLista(){
+  const el = document.getElementById('imp-lista');
+  if(!el) return;
+  const items = imprevistos.items;
+  const consumido = impTotalConsumido(items);
+  const reserva = impReserva();
+  const disp = reserva - consumido;
+  const pct = reserva>0 ? (consumido/reserva*100) : 0;
+  const col = pct>100 ? 'var(--red)' : pct>80 ? 'var(--orange)' : 'var(--green)';
+
+  document.getElementById('imp-reserva-panel').innerHTML = `
+    <div class="gx-box"><div class="gx-mini">RESERVA (${impReservaPct()}%)</div><div class="gx-val" style="font-size:16px;color:var(--accent)">${reserva>0?fmt(reserva):'—'}</div></div>
+    <div class="gx-box"><div class="gx-mini">CONSUMIDO</div><div class="gx-val" style="font-size:16px;color:rgba(251,146,60,.95)">${fmt(consumido)}</div><div style="font-size:10px;color:var(--text3);margin-top:2px">${reserva>0?pct.toFixed(0)+'%':''}</div></div>
+    <div class="gx-box"><div class="gx-mini">DISPONIBLE</div><div class="gx-val" style="font-size:16px;color:${col}">${reserva>0?fmt(disp):'—'}</div></div>`;
+
+  const av = document.getElementById('imp-alerta');
+  if(reserva<=0){
+    av.innerHTML = '<div style="background:rgba(251,146,60,.08);border-left:3px solid var(--orange);padding:8px 11px;border-radius:6px;font-size:11px">⚠ Sin reserva calculable: falta el % arriba, o falta la base (🎯 Meta m² o cantidades en Presupuesto). Los imprevistos igual suman al costo real.</div>';
+  } else if(pct>100){
+    av.innerHTML = `<div style="background:rgba(248,113,113,.09);border-left:3px solid var(--red);padding:8px 11px;border-radius:6px;font-size:11px">🔴 <b>Reserva agotada.</b> Te pasaste ${fmt(Math.abs(disp))}. Todo lo que venga sale directo de tu ganancia.</div>`;
+  } else if(pct>80){
+    av.innerHTML = `<div style="background:rgba(251,146,60,.09);border-left:3px solid var(--orange);padding:8px 11px;border-radius:6px;font-size:11px">⚠ Consumiste el <b>${pct.toFixed(0)}%</b> de la reserva y la obra no terminó.</div>`;
+  } else av.innerHTML='';
+
+  if(items.length===0){
+    el.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text3);font-size:12px">Sin imprevistos registrados. Ojalá siga así.</div>';
+  } else {
+    el.innerHTML = items.map((i,idx)=>({i,idx})).sort((a,b)=>(b.i.fecha||'').localeCompare(a.i.fecha||'')).map(({i,idx})=>
+      `<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);${editingImpIdx===idx?'background:rgba(200,241,53,.06)':''}">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600">${i.concepto}</div>
+          <div style="font-size:10px;color:var(--text3)">${i.fecha||'sin fecha'} · <span style="color:var(--orange)">${i.causa||'—'}</span>${i.rubro?' · '+i.rubro:''}</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:rgba(251,146,60,.95);white-space:nowrap">${fmt(i.monto)}</div>
+        <button class="btn-icon" onclick="editImprevisto(${idx})" title="Editar">✏️</button>
+        <button class="btn-icon" onclick="deleteImprevisto(${idx})" title="Eliminar" style="color:var(--red)">🗑</button>
+      </div>`).join('');
+  }
+
+  const cel = document.getElementById('imp-causas');
+  const cnt = {};
+  items.forEach(i=>{ cnt[i.causa||'OTROS'] = (cnt[i.causa||'OTROS']||0) + (i.monto||0); });
+  const pares = Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+  if(pares.length===0){ cel.innerHTML=''; return; }
+  const tot = pares.reduce((s,[,v])=>s+v,0);
+  cel.innerHTML = `<div class="gx-mini" style="margin-bottom:6px;letter-spacing:.04em">DÓNDE SE TE VA LA PLATA</div>`+
+    pares.map(([k,v])=>{
+      const p = tot>0 ? v/tot*100 : 0;
+      return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span style="font-size:10px;color:var(--text2);width:120px;flex-shrink:0">${k}</span>
+        <div style="flex:1;background:rgba(255,255,255,.06);height:8px;border-radius:4px;overflow:hidden"><div style="width:${p}%;height:100%;background:rgba(251,146,60,.8);border-radius:4px"></div></div>
+        <span style="font-size:10px;font-family:var(--mono);color:var(--text3);width:92px;text-align:right">${fmt(v)} · ${p.toFixed(0)}%</span>
+      </div>`;
+    }).join('');
+}
+
+// =================== PROYECCIÓN DE CIERRE ===================
+// Junta en un solo número: lo ya gastado (real), lo definido que falta ejecutar (ajustado por
+// la tendencia de lo ya hecho), lo que aún no se definió (por índice m²), los GG que faltan y
+// la reserva de imprevistos sin usar. Se compara contra lo que se le dijo al cliente al inicio.
+function getProyeccionCierre(){
+  let costoDef=0, teoEj=0, grItems=0;
+  presItems.filter(p=>p.visible!==false).forEach(p=>{
+    const cu=getApuCostU(p.code);
+    const bims=bimItems.filter(b=>b.code===p.code);
+    const objs=bims.length?bims:[p];
+    const qty=bims.length?bims.reduce((s,b)=>s+(parseFloat(b.qtyTotal)||0),0):(p.cantidad||0);
+    costoDef+=cu*qty;
+    objs.forEach(o=>Object.values(o.cronograma||{}).forEach(m=>{ teoEj+=(m.ej||0)*cu; grItems+=(m.gr||0); }));
+  });
+  const factor = teoEj>0 ? grItems/teoEj : 1;
+  const factorAplicable = teoEj>0 && costoDef>0 && teoEj >= costoDef*0.05; // con menos del 5% hecho no hay muestra
+  const faltaDefBase = Math.max(0, costoDef - teoEj);
+  const faltaDef = factorAplicable ? faltaDefBase*factor : faltaDefBase;
+  const meta = presupuestoMeta.activo ? (presupuestoMeta.m2||0)*(presupuestoMeta.valorM2||0) : 0;
+  const sinDefinir = meta>0 ? Math.max(0, meta - costoDef) : 0;
+  const ggPlan=ggTotalPlan(gastosGenerales.items), ggReal=ggTotalReal(gastosGenerales.items);
+  const ggFalta=Math.max(0, ggPlan-ggReal);
+  const impRes=impReserva(), impCons=impTotalConsumido(imprevistos.items);
+  const impRestante=Math.max(0, impRes-impCons);
+  const gastado = grItems + ggReal + impCons;
+  const proyeccion = gastado + faltaDef + sinDefinir + ggFalta + impRestante;
+  const referencia = meta>0 ? meta : (costoDef + ggPlan + impRes);
+  const pctDefinido = meta>0 ? Math.min(100, costoDef/meta*100) : (costoDef>0?100:0);
+  return { costoDef, teoEj, grItems, factor, factorAplicable, faltaDef, faltaDefBase, meta, sinDefinir,
+           ggPlan, ggReal, ggFalta, impRes, impCons, impRestante, gastado, proyeccion, referencia, pctDefinido };
+}
+
+function renderProyeccionPanel(){
+  const n = getProyeccionCierre();
+  if(n.costoDef<=0 && n.meta<=0 && n.gastado<=0) return ''; // nada cargado todavía
+  const diff = n.proyeccion - n.referencia;
+  const col = diff<=0 ? 'var(--green)' : (diff <= n.referencia*0.05 ? 'var(--orange)' : 'var(--red)');
+  const sg = diff>0?'+':'';
+  const fila=(lbl,val,note,color)=>`<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px dashed var(--border)"><span style="font-size:12px;color:var(--text2)">${lbl}${note?` <span style="font-size:10px;color:var(--text3)">${note}</span>`:''}</span><span style="font-family:var(--mono);font-size:13px;font-weight:600;color:${color||'var(--text)'};white-space:nowrap">${fmt(val)}</span></div>`;
+  const tend = n.factorAplicable ? `<div style="font-size:11px;color:${n.factor>1.02?'var(--orange)':n.factor<0.98?'var(--green)':'var(--text3)'};margin-top:8px">📐 Tendencia: en lo ya ejecutado gastás <b>${((n.factor-1)*100).toFixed(1)}%</b> ${n.factor>=1?'más':'menos'} que lo calculado — se aplicó a lo que falta de lo definido.</div>` : `<div style="font-size:10px;color:var(--text3);margin-top:8px">Todavía hay poca obra ejecutada para detectar una tendencia; lo que falta se proyecta al costo calculado.</div>`;
+  const sinMeta = n.meta<=0 ? `<div style="background:rgba(251,146,60,.08);border-left:3px solid var(--orange);padding:8px 11px;border-radius:6px;font-size:11px;margin-top:10px">⚠ Sin <b>🎯 Meta m²</b> configurado, la proyección solo abarca lo que ya detallaste. Lo que falta definir no se estima.</div>` : '';
+  return `
+  <div style="padding:0 20px;margin-bottom:20px">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+        <div>
+          <h3 style="margin:0;font-size:14px;color:var(--text)">🔭 Proyección de Cierre</h3>
+          <div style="font-size:11px;color:var(--text3);margin-top:3px">Cuánto va a terminar costando, con lo que se sabe hoy · ${n.pctDefinido.toFixed(0)}% de la obra definida al detalle</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">PROYECCIÓN DE CIERRE</div>
+          <div style="font-family:var(--display);font-size:26px;font-weight:800;color:${col};line-height:1.1">${fmt(n.proyeccion)}</div>
+          <div style="font-size:11px;color:${col};font-family:var(--mono)">${sg}${fmt(diff)} vs ${n.meta>0?'estimación inicial':'presupuesto detallado'} ${fmt(n.referencia)}</div>
+        </div>
+      </div>
+      ${fila('Ya gastado (real)', n.gastado, 'ítems + GG + imprevistos', 'rgba(251,146,60,.95)')}
+      ${fila('+ Falta de lo ya definido', n.faltaDef, n.factorAplicable?`calculado ${fmt(n.faltaDefBase)} × ${n.factor.toFixed(2)}`:'', 'var(--text)')}
+      ${n.meta>0 ? fila('+ Sin definir todavía', n.sinDefinir, 'según índice m²', 'var(--M)') : ''}
+      ${fila('+ Gastos generales que faltan', n.ggFalta, `plan ${fmt(n.ggPlan)} − real ${fmt(n.ggReal)}`, 'var(--text)')}
+      ${fila('+ Reserva de imprevistos sin usar', n.impRestante, `reserva ${fmt(n.impRes)} − consumido ${fmt(n.impCons)}`, 'var(--text)')}
+      ${tend}${sinMeta}
+    </div>
+  </div>`;
+}
+
+// =================== LÍNEAS DEL PRESUPUESTO (GG / imprevistos / honorarios) ===================
+// Una sola función alimenta la vista de Presupuesto y el PDF, así nunca difieren.
+function calcPresTotales(totalBrutoItems){
+  const cfg = presupuestoConfig;
+  const directo = costoDirectoTotal();
+  const ggDet = ggTotalPlan(gastosGenerales.items);
+  const ggLinea = cfg.mostrarGG ? (ggDet>0 ? ggDet : directo*((kComponents.gg||0)/100)) : 0;
+  const impLinea = cfg.mostrarImp ? directo*(impReservaPct()/100) : 0;
+  const subtotalObra = totalBrutoItems + ggLinea + impLinea;
+  const ivaPct = parseFloat(document.getElementById('iva-pct')?.value)||0;
+  const ivaObra = subtotalObra*ivaPct/100;
+  const h = cfg.honorarios||{};
+  const honorarios = h.mostrar ? (h.modo==='monto' ? (h.monto||0) : subtotalObra*((h.pct||0)/100)) : 0;
+  const ivaHon = honorarios*((h.iva||0)/100);
+  const totalCliente = subtotalObra + ivaObra + honorarios + ivaHon;
+  // doble conteo: la misma cosa dentro del K y además como línea
+  const ggDoble  = cfg.mostrarGG  && (kComponents.gg||0)>0;
+  const impDoble = cfg.mostrarImp && (kComponents.imp||0)>0;
+  return { directo, ggLinea, impLinea, subtotalObra, ivaPct, ivaObra, honorarios, ivaHon, totalCliente, ggDoble, impDoble };
+}
+
+function openModalPresConfig(){
+  const c = presupuestoConfig, h = c.honorarios||{};
+  document.getElementById('pc-gg').checked = !!c.mostrarGG;
+  document.getElementById('pc-imp').checked = !!c.mostrarImp;
+  document.getElementById('pc-hon').checked = !!h.mostrar;
+  document.getElementById('pc-hon-modo').value = h.modo||'pct';
+  document.getElementById('pc-hon-pct').value = h.pct||'';
+  document.getElementById('pc-hon-monto').value = h.monto||'';
+  document.getElementById('pc-hon-iva').value = (h.iva===undefined?21:h.iva);
+  togglePcHon();
+  renderPcAvisoDoble();
+  document.getElementById('pc-gg').onchange = renderPcAvisoDoble;
+  document.getElementById('pc-imp').onchange = renderPcAvisoDoble;
+  openModal('modal-pres-config');
+}
+function togglePcHon(){
+  const on = document.getElementById('pc-hon').checked;
+  document.getElementById('pc-hon-wrap').style.display = on?'block':'none';
+  const modo = document.getElementById('pc-hon-modo').value;
+  document.getElementById('pc-hon-pct-wrap').style.display = modo==='pct'?'':'none';
+  document.getElementById('pc-hon-monto-wrap').style.display = modo==='monto'?'':'none';
+}
+function renderPcAvisoDoble(){
+  const av = document.getElementById('pc-aviso-doble');
+  const msgs=[];
+  if(document.getElementById('pc-gg').checked && (kComponents.gg||0)>0) msgs.push(`GG: tenés <b>${kComponents.gg}%</b> dentro del K y además la línea → <b>se cuenta dos veces</b>. Poné GG en 0 en el K.`);
+  if(document.getElementById('pc-imp').checked && (kComponents.imp||0)>0) msgs.push(`Imprevistos: tenés <b>${kComponents.imp}%</b> dentro del K y además la línea → <b>se cuenta dos veces</b>. Poné Imprevistos en 0 en el K (la reserva del módulo sigue funcionando).`);
+  av.innerHTML = msgs.length ? `<div style="background:rgba(248,113,113,.09);border-left:3px solid var(--red);padding:8px 11px;border-radius:6px;font-size:11px;line-height:1.5">⚠ ${msgs.join('<br>')}</div>` : '';
+}
+function savePresConfig(){
+  presupuestoConfig = {
+    mostrarGG: document.getElementById('pc-gg').checked,
+    mostrarImp: document.getElementById('pc-imp').checked,
+    honorarios: {
+      mostrar: document.getElementById('pc-hon').checked,
+      modo: document.getElementById('pc-hon-modo').value,
+      pct: parseFloat(document.getElementById('pc-hon-pct').value)||0,
+      monto: parseFloat(document.getElementById('pc-hon-monto').value)||0,
+      iva: parseFloat(document.getElementById('pc-hon-iva').value)||0
+    }
+  };
+  save(); closeModal('modal-pres-config');
+  if(currentTab==='presupuesto') renderPres();
+  toast('Líneas del presupuesto actualizadas');
+}
+
+// =================== VERSIONES (SNAPSHOTS) ===================
+// Fotos completas del estado de la obra, con nombre. Viven aparte del estado principal para no
+// engordar cada guardado ni el historial de deshacer.
+const SNAP_MAX = 10;
+function _snapKey(){ return 'pob_v52_snap_' + currentObraId; }
+function loadSnapshots(){ try{ return JSON.parse(localStorage.getItem(_snapKey())||'[]'); }catch(e){ return []; } }
+function _resumenActual(){
+  let ac=0; [...presItems,...bimItems].forEach(o=>Object.values(o.cronograma||{}).forEach(m=>ac+=(m.gr||0)));
+  ac += ggTotalReal(gastosGenerales.items) + impTotalConsumido(imprevistos.items);
+  return { total:getPresupuestoTotal(), directo:costoDirectoTotal(), items:presItems.filter(p=>p.visible!==false).length, insumos:insumos.length, K, ac };
+}
+function openModalSnapshots(){
+  document.getElementById('snap-nombre').value='';
+  renderSnapsLista();
+  openModal('modal-snaps');
+}
+function crearSnapshot(){
+  const nombre = document.getElementById('snap-nombre').value.trim() || ('Versión '+new Date().toLocaleString('es-AR'));
+  const state = localStorage.getItem('pob_v52_data_'+currentObraId);
+  if(!state){ toast('No hay estado guardado todavía'); return; }
+  const snaps = loadSnapshots();
+  if(snaps.length >= SNAP_MAX){ toast(`Máximo ${SNAP_MAX} versiones por obra — borrá alguna vieja`); return; }
+  snaps.push({ id:'snap_'+Date.now(), nombre, fecha:new Date().toISOString(), resumen:_resumenActual(), state });
+  try{ localStorage.setItem(_snapKey(), JSON.stringify(snaps)); }
+  catch(e){ alert('No entró en el almacenamiento del navegador. Borrá versiones viejas o exportá la obra a JSON.'); return; }
+  document.getElementById('snap-nombre').value='';
+  renderSnapsLista(); toast('📸 Versión guardada: '+nombre);
+}
+async function restaurarSnapshot(id){
+  const sn = loadSnapshots().find(x=>x.id===id); if(!sn) return;
+  const ok = await confirmAction({title:'Restaurar versión', body:`Volver a <b>${sn.nombre}</b> (${new Date(sn.fecha).toLocaleString('es-AR')}).<br><span style="color:var(--text3);font-size:12px">Reemplaza TODO el estado actual de la obra. Ctrl+Z lo deshace, y podés guardar una versión del estado actual antes.</span>`, okText:'Restaurar', danger:true});
+  if(!ok) return;
+  if(_lastSavedState!==null){ _undoStack.push(_lastSavedState); if(_undoStack.length>UNDO_MAX) _undoStack.shift(); _redoStack.length=0; }
+  _applyState(sn.state);
+  closeModal('modal-snaps'); toast('↩ Versión restaurada: '+sn.nombre);
+}
+async function borrarSnapshot(id){
+  const sn = loadSnapshots().find(x=>x.id===id); if(!sn) return;
+  const ok = await confirmAction({title:'Borrar versión', body:`<b>${sn.nombre}</b> se elimina definitivamente.`, okText:'Borrar', danger:true});
+  if(!ok) return;
+  localStorage.setItem(_snapKey(), JSON.stringify(loadSnapshots().filter(x=>x.id!==id)));
+  renderSnapsLista();
+}
+function renderSnapsLista(){
+  const el = document.getElementById('snap-lista');
+  const snaps = loadSnapshots().slice().reverse();
+  const cur = _resumenActual();
+  if(snaps.length===0){ el.innerHTML='<div style="text-align:center;padding:24px;color:var(--text3);font-size:12px">Todavía no guardaste ninguna versión.</div>'; return; }
+  const d=(a,b)=>{ const x=a-b; if(Math.abs(x)<0.5) return '<span style="color:var(--text3)">=</span>'; return `<span style="color:${x>0?'var(--red)':'var(--green)'}">${x>0?'+':''}${fmt(x)}</span>`; };
+  el.innerHTML = snaps.map(sn=>`<div style="padding:10px 12px;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:600">${sn.nombre}</div><div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${new Date(sn.fecha).toLocaleString('es-AR')} · K ${sn.resumen.K} · ${sn.resumen.items} ítems · ${sn.resumen.insumos} insumos</div></div>
+      <button class="btn btn-ghost btn-sm" onclick="restaurarSnapshot('${sn.id}')" style="font-size:11px">↩ Restaurar</button>
+      <button class="btn-icon" onclick="borrarSnapshot('${sn.id}')" title="Borrar" style="color:var(--red)">🗑</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;font-size:10px;font-family:var(--mono)">
+      <div><span style="color:var(--text3)">Presupuesto:</span> ${fmt(sn.resumen.total)}<br>hoy ${d(cur.total, sn.resumen.total)}</div>
+      <div><span style="color:var(--text3)">Costo directo:</span> ${fmt(sn.resumen.directo)}<br>hoy ${d(cur.directo, sn.resumen.directo)}</div>
+      <div><span style="color:var(--text3)">Gastado real:</span> ${fmt(sn.resumen.ac)}<br>hoy ${d(cur.ac, sn.resumen.ac)}</div>
+    </div>
+  </div>`).join('');
+}
+
+// =================== GUÍA DE USO ===================
+function guiaFiltrar(){
+  const q = (document.getElementById('g-buscar')?.value||'').toLowerCase().trim();
+  document.querySelectorAll('#tab-ayuda .g-sec').forEach(sec=>{
+    if(!q){ sec.style.display=''; sec.removeAttribute('open'); return; }
+    const match = sec.textContent.toLowerCase().includes(q);
+    sec.style.display = match ? '' : 'none';
+    if(match) sec.setAttribute('open',''); // abrir las que matchean para ver el contenido
+  });
+  // con búsqueda vacía, dejar abierta solo la primera sección (estado inicial)
+  if(!q){ const first=document.querySelector('#tab-ayuda .g-sec'); if(first) first.setAttribute('open',''); }
+  // ocultar títulos de categoría sin secciones visibles debajo
+  document.querySelectorAll('#tab-ayuda .g-cat').forEach(cat=>{
+    let el=cat.nextElementSibling, any=false;
+    while(el && !el.classList.contains('g-cat')){ if(el.classList.contains('g-sec') && el.style.display!=='none') any=true; el=el.nextElementSibling; }
+    cat.style.display = any ? '' : 'none';
+  });
+}
+
 // =================== INIT ===================
 loadObrasList();
 load();syncAll();renderInsumos();
+// La pestaña visible al arrancar es el Dashboard: sin esto currentTab quedaba en
+// 'insumos' y el panel salía vacío hasta que cambiabas de pestaña y volvías.
+showTab('guia');
 initBackup();
 
 // Advertencia al cerrar tab — sólo si el último save falló (quota, etc)
